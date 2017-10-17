@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  merchant_id: 1
+  inventory: 1
+  price: 1.5
+  description: MyText
+  visible: false
+
+two:
+  merchant_id: 1
+  inventory: 1
+  price: 1.5
+  description: MyText
+  visible: false
