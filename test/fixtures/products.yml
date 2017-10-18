@@ -17,7 +17,7 @@ aloe_vera:
   name: Aloe vera
   inventory: 2
   price: 5.50
-  description: A small Echeveria plant
+  description: A small aloe vera plant
   visible: true
   image_url: https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg
   category: succulents
