@@ -10,17 +10,17 @@ spider_plant:
   description: A full grown spider plant with some babies growing off it.
   visible: true
   image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
-  category: House Plants
+  category: house_plants
 
 echeveria:
-  merchant: tamira 
+  merchant: tamira
   name: Echeveria
   inventory: 2
   price: 5.50
   description: A small Echeveria plant
   visible: true
   image_url: https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg
-  category: Succulents
+  category: succulents
 
 
 red_cap_cactus:
@@ -31,7 +31,7 @@ red_cap_cactus:
   description: A cactus with a pink flower at the top.
   visible: true
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
-  category: Cactus
+  category: cactus
 
 audrey_ficus:
   merchant: diane
@@ -41,4 +41,4 @@ audrey_ficus:
   description: A small tree with large leaves
   visible: true
   image_url: https://www.plantshed.com//media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/s/ps20008_1_1.jpg
-  category: House Plants
+  category: house_plants
