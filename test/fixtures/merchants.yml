@@ -1,4 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# need to add a username for the merchnt! need to add it to our model too. Need to desicde if we want 'name' and 'username' or just 'username'
 
 tamira:
   name: Tamira

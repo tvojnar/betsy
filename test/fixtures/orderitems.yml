@@ -8,7 +8,7 @@ one:
   shipped_status: false
 
 two:
-  product: Echeveria
+  product: aloe_vera
   order: pending
   quantity: 1
   cost: 8.75

@@ -12,9 +12,9 @@ spider_plant:
   image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
   category: house_plants
 
-echeveria:
+aloe_vera:
   merchant: tamira
-  name: Echeveria
+  name: Aloe vera
   inventory: 2
   price: 5.50
   description: A small Echeveria plant
