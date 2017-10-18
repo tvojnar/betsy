@@ -21,7 +21,10 @@ resources :merchants
 resources :categories
 resources :reviews
 
-get '/auth/:provider/callback', to: 'merchants#login'
+resources :merchants do
+  resources :products
+end
 
+get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
 end

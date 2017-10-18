@@ -7,10 +7,26 @@ class ProductsController < ApplicationController
   def new
     if find_merchant
       @product = Product.new
+      @product.merchant_id = session[:merchant_id]
     else
       redirect_to root_path
     end
   end
+
+
+  def index
+    if params[:merchant_id]
+      merchant = Merchant.find_by(id: params[:merchant_id])
+      if merchant
+        @products = merchant.products
+      else
+        head :not_found
+      end
+    else
+      @products = Product.all
+    end
+  end
+
 
   def create
     if find_merchant #<<necessary? Dl
@@ -18,7 +34,7 @@ class ProductsController < ApplicationController
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
       if save_and_flash(@product) #<<defined as a method in in application controller
-        redirect_to merchant_product_path #redirect might need to be changed based on flow, but idk rn DL
+        redirect_to merchant_products_path(@product.merchant) #redirect might need to be changed based on flow, but idk rn DL
       else
         render :new, status: :bad_request
       end
