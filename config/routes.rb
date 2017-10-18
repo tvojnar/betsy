@@ -21,4 +21,7 @@ resources :merchants
 resources :categories
 resources :reviews
 
+get '/auth/:provider/callback', to: 'merchants#login'
+
+
 end
