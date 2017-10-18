@@ -30,9 +30,9 @@ private
                                   #merchants controller after verifying user is logged in as merchant DL
       @login_merchant = Merchant.find_by(id: session[:merchant_id])
     end
+
   end
 
-  def find_product
-    @
+
 
 end

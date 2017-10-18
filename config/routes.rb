@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   #resources products
 #end
 # ^^is this the right syntax? DL
-
+root 'products#root'
 resources :products
 resources :orders
 resources :orderitems

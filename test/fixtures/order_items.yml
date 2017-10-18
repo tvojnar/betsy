@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product_id: MyString
-  order_id: MyString
-  quantity: MyString
-  cost: 1.5
+  product: spider_plant
+  order: pending
+  quantity: 1
+  cost: 8.75
   shipped_status: false
 
 two:
-  product_id: MyString
-  order_id: MyString
-  quantity: MyString
-  cost: 1.5
+  product: red_cap_cactus
+  order: cancelled
+  quantity: 2
+  cost: 12.00
   shipped_status: false

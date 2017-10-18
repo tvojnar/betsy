@@ -8,6 +8,8 @@ describe ProductsController do
     end
 
     it "returns a success status when there are no products" do
+      #THIS ONE IS COMPLAINING ABOUT THERE BEING NO CATEGORIES_PRODUCTS RELATION
+      #no idea how categories are being referenced.
       Product.destroy_all
       get root_path
       must_respond_with :success
@@ -25,6 +27,7 @@ describe ProductsController do
     it "redirects to merchants_products_path when the product data is valid and adds a work" do
       product_data = {
         product: {
+          merchant: Merchant.first,
           name: "string of pearls",
           price: 30.0,
           inventory: 40,
@@ -42,7 +45,7 @@ describe ProductsController do
     it "redirects to merchants_products_path when the work data is not valid and doesn't add a work" do
       product_data = {
         product: {
-          name: nil
+          name: nil,
           price: nil,
           inventory: nil,
           image_url: nil
@@ -96,6 +99,7 @@ describe ProductsController do
   end
 
   describe "destroy" do
+    #not currently working because of merchant verification OAuth work necessary
     it "returns success and destroys the work when given a valid product ID" do
       product_id = Product.first.id
       delete product_path(product_id)

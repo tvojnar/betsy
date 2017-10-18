@@ -1,3 +1,3 @@
 class Order < ApplicationRecord
-  has_many :orderitems
+  has_many :order_items
 end
