@@ -1,4 +1,4 @@
-id,email,uid,provider
+id,name,email,uid,provider
 1,Cheryl Katz,ck@gmail.com,04242023,github
 2,Juanita Freeman,jf3@yahoo.com,05242023,github
 3,Carolina Sodje,rolinas@hotmail.com,06242023,github

@@ -43,6 +43,7 @@ CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
   category.id = row['id']
   category.name = row['name']
   puts "Created category: #{category.inspect}"
+  successful = category.save
   if !successful
     category_failures << category
   end
@@ -53,59 +54,59 @@ puts "#{category_failures.length} categories failed to save"
 
 
 
-ORDER_FILE = Rails.root.join('db', 'seed_data', 'orders.csv')
-puts "Loading raw order data from #{ORDER_FILE}"
-
-order_failures = []
-CSV.foreach(ORDER_FILE, :headers => true) do |row|
-  order = Order.new
-  order.id = row['id']
-  order.cc_name = row['cc_name']
-  order.cc_number = row['cc_number']
-  order.cc_exp = row['cc_exp']
-  order.cc_cvv = row['cc_cvv']
-  order.address = row['address']
-  order.zip = row['zip']
-  order.email = row['email']
-  order.date_submitted = Date.strptime(row['date'], '%Y-%m-%d')
-  order.status = row['status']
-  puts "Created order: #{order.inspect}"
-  successful = order.save
-  if !successful
-    order_failures << order
-  end
-end
-
-puts "Added #{Order.count} order records"
-puts "#{order_failures.length} orders failed to save"
-
-
-
-ORDERITEM_FILE = Rails.root.join('db', 'seed_data', 'trips.csv')
-puts "Loading raw order-item data from #{ORDERITEM_FILE}"
-
-orderitem_failures = []
-CSV.foreach(ORDERITEM_FILE, :headers => true) do |row|
-  orderitem = Orderitem.new
-  orderitem.id = row['id']
-  orderitem.product_id = row['product_id']
-  orderitem.order_id = row['order_id']
-  orderitem.quantity = row['quantity']
-  orderitem.cost = row['cost']
-  orderitem.shipped_status = row['shipped_status']
-  puts "Created orderitem: #{orderitem.inspect}"
-  successful = orderitem.save
-  if !successful
-    orderitem_failures << orderitem
-  end
-end
-
-puts "Added #{OrderItem.count} orderitem records"
-puts "#{orderitem_failures.length} orderitems failed to save"
+# ORDER_FILE = Rails.root.join('db', 'seed_data', 'orders.csv')
+# puts "Loading raw order data from #{ORDER_FILE}"
+#
+# order_failures = []
+# CSV.foreach(ORDER_FILE, :headers => true) do |row|
+#   order = Order.new
+#   order.id = row['id']
+#   order.cc_name = row['cc_name']
+#   order.cc_number = row['cc_number']
+#   order.cc_exp = row['cc_exp']
+#   order.cc_cvv = row['cc_cvv']
+#   order.address = row['address']
+#   order.zip = row['zip']
+#   order.email = row['email']
+#   order.date_submitted = Date.strptime(row['date'], '%Y-%m-%d')
+#   order.status = row['status']
+#   puts "Created order: #{order.inspect}"
+#   successful = order.save
+#   if !successful
+#     order_failures << order
+#   end
+# end
+#
+# puts "Added #{Order.count} order records"
+# puts "#{order_failures.length} orders failed to save"
 
 
 
-MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchant.csv')
+# ORDERITEM_FILE = Rails.root.join('db', 'seed_data', 'orderitems.csv')
+# puts "Loading raw order-item data from #{ORDERITEM_FILE}"
+#
+# orderitem_failures = []
+# CSV.foreach(ORDERITEM_FILE, :headers => true) do |row|
+#   orderitem = Orderitem.new
+#   orderitem.id = row['id']
+#   orderitem.product_id = row['product_id']
+#   orderitem.order_id = row['order_id']
+#   orderitem.quantity = row['quantity']
+#   orderitem.cost = row['cost']
+#   orderitem.shipped_status = row['shipped_status']
+#   puts "Created orderitem: #{orderitem.inspect}"
+#   successful = orderitem.save
+#   if !successful
+#     orderitem_failures << orderitem
+#   end
+# end
+#
+# puts "Added #{OrderItem.count} orderitem records"
+# puts "#{orderitem_failures.length} orderitems failed to save"
+
+
+
+MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchants.csv')
 puts "Loading raw merchant data from #{MERCHANT_FILE}"
 
 merchant_failures = []
