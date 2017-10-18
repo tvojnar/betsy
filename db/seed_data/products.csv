@@ -1,0 +1,8 @@
+id,merchant_id,inventory,price,description,visible,image_url
+1,7,24,17.99,Dahlia Cornel,true,https://phsonline.org/uploads/blog/dahlia-cornel.jpg
+2,6,36,35.23,Chelsea Stickel,true,https://www.gardendesign.com/pictures/images/477x482Exact/site_3/pink-coleus-garden-crossings_9180.jpg
+3,5,48,25.99,Tomato Soup Coneflower,true,https://i.pinimg.com/736x/5c/39/d0/5c39d04d4c7b02fff2d77179c71eb43f--tomato-soups-pretty-flowers.jpg
+4,4,60,42.99,Velvet Cactus,true,https://zimedesign.files.wordpress.com/2017/01/img_4333.jpg
+5,3,72,17.98,Hyacinth Bulbs,true,http://www.edenbrothers.com/store/media/Bulbs-Flowers/HYWH%20116-0950-1.jpg
+6,2,12,29.97,New Zealand Red Hook Sedge,true,https://i.pinimg.com/736x/a6/0d/f2/a60df23ac93f5a11bbda2f4b00fd77b9--colorful-grasses-red-grasses.jpg
+7,1,96,26.37,Petunia Belinda,true,https://s-media-cache-ak0.pinimg.com/originals/dc/cf/3a/dccf3a1ce891e593fcc0df6629d742e7.jpg
