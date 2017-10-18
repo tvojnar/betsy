@@ -4,7 +4,7 @@
 pending:
   email: dl@ada.edu
   address: Fake address for tamira
-  name: Diane
+  cc_name: Diane
   cc_number: fakenumber12345
   cc_exp: 2017-10-01
   cc_cvv: 444
@@ -15,7 +15,7 @@ pending:
 pending_2:
   email: nk@ada.edu
   address: 21 Steet that Nkiru lives at
-  name: Nkiru
+  cc_name: Nkiru
   cc_number: 1234fakenumber
   cc_exp: 2017-10-01
   cc_cvv: 222
@@ -26,7 +26,7 @@ pending_2:
 paid:
   email: kz@ada.edu
   address: 17 Steet that Kimberley lives at
-  name: Kinberly
+  cc_name: Kinberly
   cc_number: 7777fakenumber
   cc_exp: 2017-10-01
   cc_cvv: 333
@@ -37,7 +37,7 @@ paid:
 completed:
   email: tv@ada.edu
   address: 4 Steet that Tamira lives at
-  name: Tamira
+  cc_name: Tamira
   cc_number: 2121fakenumber
   cc_exp: 2017-10-01
   cc_cvv: 123
@@ -48,7 +48,7 @@ completed:
 cancelled:
   email: tv@ada.edu
   address: 4 Steet that Tamira lives at
-  name: Tamira
+  cc_name: Tamira
   cc_number: 2121fakenumber
   cc_exp: 2017-10-01
   cc_cvv: 123

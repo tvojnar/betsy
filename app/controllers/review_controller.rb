@@ -5,6 +5,8 @@ class ReviewController < ApplicationController
   end
 
   def create
+
+    #can use @login_merchant from application controller for current merchant DL
     current_merchant = Merchant.find_by(id: session[:logged_in_user])
     product_merchant = Merchant.find_by(id: params[:product][:merchant_id])
 
