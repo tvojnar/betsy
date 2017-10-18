@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+perennials:
+  name: Perennials
+
+annuals:
+  name: Annuals
+
+succulents:
+  name: Succulents
+
+cactus:
+  name: Cactus
+
+house_plants:
+  name: House Plants
+
+terrarium_plants:
+  name: Terrarium Plants
+
+flower_bulb:
+  name: Flower Bulbs 
