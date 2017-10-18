@@ -3,12 +3,13 @@
 
 <main class = "row">
   <section class = "row ">
-    <%# @products.each do |product| %>
+    <p>Products</p>
+    <% @products.each do |product| %>
       <div>
-        <%#= link_to image_tag(product.product_url), products_path(product.id)%>
-        <p> <%#= product.name %> </p>
-        <p> <%#= product.price %></p>
+        <%#= link_to image_tag(product.image_url), products_path(product.id)%>
+        <p> <%= product.name %> </p>
+        <p> <%= product.price %></p>
       </div>
-      <%# end %>
+      <% end %>
     </section>
 </main>
