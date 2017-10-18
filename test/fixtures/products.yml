@@ -10,7 +10,7 @@ spider_plant:
   description: A full grown spider plant with some babies growing off it.
   visible: true
   image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
-  category: house_plants
+  # category: house_plants
 
 aloe_vera:
   merchant: tamira
@@ -41,4 +41,4 @@ audrey_ficus:
   description: A small tree with large leaves
   visible: true
   image_url: https://www.plantshed.com//media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/s/ps20008_1_1.jpg
-  category: house_plants
+  # category: house_plants

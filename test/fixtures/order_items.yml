@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: spider_plant
+  order: pending
+  quantity: 1
+  cost: 8.75
+  shipped_status: false
+
+two:
+  product: aloe_vera
+  order: pending
+  quantity: 1
+  cost: 8.75
+  shipped_status: false
+
+three:
+  product: red_cap_cactus
+  order: cancelled
+  quantity: 2
+  cost: 12.00
+  shipped_status: false
+
+four:
+  product: audrey_ficus
+  order: paid
+  quantity: 2
+  cost: 160.00
+  shipped_status: false
