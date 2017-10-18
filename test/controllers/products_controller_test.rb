@@ -61,9 +61,10 @@ describe "logged in users (merchants)" do
 
     describe "create" do
       it "redirects to merchant_products_path when the product data is valid and adds a work" do
+        diane = merchants(:diane)
         product_data = {
           product: {
-            merchant: Merchant.first,
+            merchant: diane,
             name: "string of pearls",
             price: 30.0,
             inventory: 40,
