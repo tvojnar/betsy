@@ -17,6 +17,5 @@
 /yarn-error.log
 
 .byebug_history
-
-# Ignore DS_Store
+.env
 .DS_Store

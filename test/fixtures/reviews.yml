@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  product_id: 1
-  description: MyText
-  rating: 1
+good:
+  product: spider_plant
+  description: This is an exelent spider plant that produced a lot od babies that I planted later. Now my house is covered in spide plants! Oh my!
+  rating: 5
 
-two:
-  product_id: 1
-  description: MyText
+bad:
+  product: audrey_ficus
+  description: This tree lost most of its leaves and now it looks sad.
   rating: 1

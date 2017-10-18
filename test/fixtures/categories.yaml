@@ -1,5 +1,3 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 perennials:
   name: Perennials
 
@@ -19,4 +17,4 @@ terrarium_plants:
   name: Terrarium Plants
 
 flower_bulb:
-  name: Flower Bulbs 
+  name: Flower Bulbs

@@ -1,23 +1,57 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# I wasn't sure what to do about the date submitted. Do we leave it blank for now?
+# I wasn't sure what to do about the credit cad expiration date. I read somewhere that it is custom to have the experiation date be the first day of the month, so I did that.
+pending:
+  email: dl@ada.edu
+  address: Fake address for tamira
+  cc_name: Diane
+  cc_number: fakenumber12345
+  cc_exp: 2017-10-01
+  cc_cvv: 444
+  zip: 11111
+  status: pending
+  date_submitted:
 
-one:
-  email: MyString
-  address: MyString
-  name: MyString
-  cc_number: MyString
-  cc_exp: 2017-10-17
-  cc_cvv: MyString
-  zip: MyString
-  status: MyString
-  date_submitted: 2017-10-17
+pending_2:
+  email: nk@ada.edu
+  address: 21 Steet that Nkiru lives at
+  cc_name: Nkiru
+  cc_number: 1234fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 222
+  zip: 22222
+  status: pending
+  date_submitted:
 
-two:
-  email: MyString
-  address: MyString
-  name: MyString
-  cc_number: MyString
-  cc_exp: 2017-10-17
-  cc_cvv: MyString
-  zip: MyString
-  status: MyString
-  date_submitted: 2017-10-17
+paid:
+  email: kz@ada.edu
+  address: 17 Steet that Kimberley lives at
+  cc_name: Kinberly
+  cc_number: 7777fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 333
+  zip: 33333
+  status: paid
+  date_submitted:
+
+completed:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Tamira
+  cc_number: 2121fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  zip: 44444
+  status: completed
+  date_submitted:
+
+cancelled:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Tamira
+  cc_number: 2121fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  zip: 44444
+  status: cancelled
+  date_submitted:
