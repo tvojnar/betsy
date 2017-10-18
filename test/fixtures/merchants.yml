@@ -1,25 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# need to add a username for the merchnt! need to add it to our model too. Need to desicde if we want 'name' and 'username' or just 'username'
 
 tamira:
   name: Tamira
   email: tv@ada.edu
   uid: 1111111111111111
-  provider: Github
+  provider: github
 
 diane:
   name: Diane
   email: dl@ada.edu
   uid: 2222222222222222
-  provider: MyString
+  provider: github
 
 kimberley:
   name: Kimberley
   email: kz@ada.edu
   uid: 3333333333333333
-  provider: Github
+  provider: github
 
 nkiru:
   name: Nkiru
   email: nk@ada.edu
   uid: 4444444444444444
-  provider: Github
+  provider: github
