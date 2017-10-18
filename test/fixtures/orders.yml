@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 # I wasn't sure what to do about the date submitted. Do we leave it blank for now?
 # I wasn't sure what to do about the credit cad expiration date. I read somewhere that it is custom to have the experiation date be the first day of the month, so I did that.
-one:
+pending:
   email: dl@ada.edu
   address: Fake address for tamira
   name: Diane
@@ -12,7 +12,7 @@ one:
   status: pending
   date_submitted:
 
-two:
+pending_2:
   email: nk@ada.edu
   address: 21 Steet that Nkiru lives at
   name: Nkiru
@@ -23,7 +23,7 @@ two:
   status: pending
   date_submitted:
 
-three:
+paid:
   email: kz@ada.edu
   address: 17 Steet that Kimberley lives at
   name: Kinberly
@@ -34,7 +34,7 @@ three:
   status: paid
   date_submitted:
 
-four:
+completed:
   email: tv@ada.edu
   address: 4 Steet that Tamira lives at
   name: Tamira
@@ -45,7 +45,7 @@ four:
   status: completed
   date_submitted:
 
-four:
+cancelled:
   email: tv@ada.edu
   address: 4 Steet that Tamira lives at
   name: Tamira
@@ -53,5 +53,5 @@ four:
   cc_exp: 2017-10-01
   cc_cvv: 123
   zip: 44444
-  status: cancelled   
+  status: cancelled
   date_submitted:
