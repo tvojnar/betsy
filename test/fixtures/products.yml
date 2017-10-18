@@ -3,7 +3,7 @@
 
 
 spider_plant:
-  merchant_id: 1
+  merchant: tamira
   name: Spider Plant
   inventory: 5
   price: 8.75
@@ -13,7 +13,7 @@ spider_plant:
   category: House Plants
 
 echeveria:
-  merchant_id: 1
+  merchant: tamira 
   name: Echeveria
   inventory: 2
   price: 5.50
@@ -24,7 +24,7 @@ echeveria:
 
 
 red_cap_cactus:
-  merchant_id: 2
+  merchant: diane
   name: Red Cap Cactus
   inventory: 10
   price: 6.00
@@ -34,7 +34,7 @@ red_cap_cactus:
   category: Cactus
 
 audrey_ficus:
-  merchant_id: 3
+  merchant: diane
   name: Audrey Ficus
   inventory: 3
   price: 80.00
