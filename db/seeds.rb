@@ -85,9 +85,6 @@ puts "#{product_failures.length} products failed to save"
 
 
 
-
-
-
 ORDER_FILE = Rails.root.join('db', 'seed_data', 'orders.csv')
 puts "Loading raw order data from #{ORDER_FILE}"
 

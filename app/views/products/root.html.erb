@@ -1,4 +1,4 @@
-<h1>THIS IS THE ROOT HOMEPAGE FOR BIODOME</h1>
+<h1>THIS IS THE ROOT HOMEPAGE </h1>
 <p>it should display all products</p>
 
 <main class = "row">
@@ -6,12 +6,20 @@
     <p>Products</p>
     <% @products.each do |product| %>
       <div>
+        Image will go here-ish
         <%#= link_to image_tag(product.image_url), products_path(product.id)%>
-        <p> <%= product.name %> </p>
-        <p> <%= product.price %></p>
+        <ul>
+          <li> Product: <%= product.name %>
+          </li>
+          <li> Price per unit: $<%=product.price%>
+          </li>
+          <li> Categories:
+            <% product.categories.each do |category|%>
+              <%=category.name%>
+            <% end %>
+          <li> Merchant: <%= Merchant.find_by(id: product.merchant_id).name %>
+          </li>
       </div>
       <% end %>
-      <p>Merchants:</p> <%= merchant = session[:merchant] %>
-      <%= @merchant.class %>
     </section>
 </main>
