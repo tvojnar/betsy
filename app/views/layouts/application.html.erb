@@ -19,7 +19,7 @@
         </h2>
           <nav class="row">
             <div class="large-8 small-12 columns button-group">
-              <%= link_to "View All Products", products_path, class: "button" %>
+              <%= link_to "View All Products", root_path, class: "button" %>
               <%= link_to "View Products by Category (dropdown)", products_path, class: "button" %>
               <%= link_to "Add a New Product", new_product_path, class: "button" %>
             </div>
@@ -29,8 +29,11 @@
               <% if session[:merchant_id] %>
                 <p class="button">
                   Logged in as
-                    <%#= Merchant.find(session[:merchant_id]).name %>
-                </p>
+                    <%= Merchant.find(session[:merchant_id]).name %>
+                  </p>
+                  <p class="button">
+                  <%= link_to "Account", merchant_path(session[:merchant_id])%>
+                  </p>
                   <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
                 <%= link_to "Log in", '/auth/github', class: "button" %>

@@ -4,6 +4,12 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
   end
 
+  def edit
+  end
+
+  def update
+  end
+  
   def login
     auth_hash = request.env['omniauth.auth']
 

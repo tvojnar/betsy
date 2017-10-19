@@ -3,28 +3,44 @@ require "test_helper"
 describe ProductsController do
   describe "all users" do
 
-    # describe "root" do
-    #   it "returns a success status for all products" do
-    #     get root_path
-    #     must_respond_with :success
-    #   end
-    #
-    #   # it "returns a success status when there are no products" do
-    #   #   #THIS ONE IS COMPLAINING ABOUT THERE BEING NO CATEGORIES_PRODUCTS RELATION
-    #   #   #no idea how categories are being referenced.
-    #   #   Product.destroy_all
-    #   #   get root_path
-    #   #   must_respond_with :success
-    #   # end
-    # end
+    describe "root" do
+      it "returns a success status for root path (all products)" do
+        get root_path
+        must_respond_with :success
+      end
+
+      it "returns a success status when there are no products" do
+        Product.destroy_all
+        get root_path
+        must_respond_with :success
+      end
+    end
+
+    describe "index" do
+      before do
+        merchant = merchants(:tamira)
+        merchant_id = merchant.id
+      end
+      it "when given a merchant id, it directs to the correct page" do
+        merchant = merchants(:tamira)
+        merchant_id = merchant.id
+        get products_path(merchant_id)
+        must_respond_with :success
+      end
+      it "when given a merchant id, it lists the products from that merchant"
+      #test failing - says doesn't recognize products in line with spider_plant. not sure why
+        spider_plant = products(:spider_plant)
+        merchant.products.must_include spider_plant
+    end
   end
 
-  # describe "guest users" do
-  #
-  #   it "cannot access new" do
-  #
-  #   end
-  #
+  describe "guest users" do
+    it "cannot create a new product" do
+      test_product = product.new
+
+
+    end
+  
   #   it "cannot access edit" do
   #
   #   end
@@ -32,10 +48,10 @@ describe ProductsController do
   # end
 
 
-describe "logged in users (merchants)" do
-  before do
-    login(merchants(:diane))
-  end
+  # describe "logged in users (merchants)" do
+  #   before do
+  #     login(merchants(:diane))
+  #   end
 
   # describe "root" do
   #   it "returns a success status for all products" do
@@ -60,7 +76,7 @@ describe "logged in users (merchants)" do
     #   end
     # end
 
-    describe "create" do
+    # describe "create" do
       # it "redirects to merchant_products_path when the product data is valid and adds a work" do
       #   diane = merchants(:diane)
       #   product_data = {
@@ -81,26 +97,26 @@ describe "logged in users (merchants)" do
       #   Product.count.must_equal product_count + 1
       # end
 
-      it "redirects to merchant_products_path when the product data is not valid and doesn't add a work" do
+      # it "redirects to merchant_products_path when the product data is not valid and doesn't add a work" do
 
-        product_data = {
-          product: {
-            image_url: nil
-          }
-        }
-        Product.new(product_data[:product]).wont_be :valid?
-        product_count = Product.count
-        post products_path, params: product_data
-        #must_redirect_to merchant_products_path
-        must_respond_with :bad_request
-        Product.count.must_equal product_count
-      end
+      #   product_data = {
+      #     product: {
+      #       image_url: nil
+      #     }
+      #   }
+      #   Product.new(product_data[:product]).wont_be :valid?
+      #   product_count = Product.count
+      #   post products_path, params: product_data
+      #   #must_redirect_to merchant_products_path
+      #   must_respond_with :bad_request
+      #   Product.count.must_equal product_count
+      # end
       #
       # it "adds at least one instance to the products category intermediary table" do
       #
       #   #ADD THIS TEST
       # end
-    end
+    # end
 
     # describe "show" do
     #   it "returns a success status when passed a valid id" do
@@ -155,6 +171,6 @@ describe "logged in users (merchants)" do
     #     Product.count.must_equal work_count
     #   end
     # end
-  end
+  # end
 
-  end
+end
