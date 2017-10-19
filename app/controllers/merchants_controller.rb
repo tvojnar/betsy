@@ -20,6 +20,8 @@ class MerchantsController < ApplicationController
         flash[:message] = "Succesfully logged in as returning merchant #{merchant.name}"
       end # if/else
 
+      session[:merchant_id] = merchant.id
+
     else
       flash[:status] = :failure
       flash[:message] = "Could not create user from data provided by Github"
