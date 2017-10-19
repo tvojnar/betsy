@@ -27,4 +27,8 @@ end
 
 get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
+get '/login', to: 'merchants#login', as: 'login'
+post '/login', to: 'merchants#login'
+post '/logout', to: 'merchants#logout', as: 'logout'
+
 end

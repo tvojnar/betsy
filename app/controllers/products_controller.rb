@@ -1,3 +1,4 @@
+
 class ProductsController < ApplicationController
 
   def root
@@ -32,9 +33,14 @@ class ProductsController < ApplicationController
     if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
+      require 'pry'
+      binding.pry
+      # puts "SESSION[:MERCHANT_ID]: #{session}"
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
+      # merchant = Merchant.find_by(id: session[:merchant_id])
       if save_and_flash(@product) #<<defined as a method in in application controller
-        redirect_to merchant_products_path(@product.merchant) #redirect might need to be changed based on flow, but idk rn DL
+        puts ">>>>>>>>>>>>>>>>> LOGIN_MERCHANT.ID #{@login_merchant.id}"
+        redirect_to merchant_products_path(@login_merchant.id) #redirect might need to be changed based on flow, but idk rn DL
       else
         render :new, status: :bad_request
       end
