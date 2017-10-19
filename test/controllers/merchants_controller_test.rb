@@ -24,28 +24,6 @@ describe MerchantsController do
     end
     #must test that user can log in to be merchant
 
-    it "won't login/create a new merchant in without a uid" do
-      # TODO
-    end # won't log in without uid
-
-    it "won't login/create a new merchant without a name" do
-      # TODO
-    end # won't log in without a name
-
-    it "won't login/create a new merchant without a unique name" do
-      # TODO
-    end # won't log in without a unique name
-
-    it "won't login/create a new merchant without an email" do
-      # TODO
-    end # won't log in without an email
-
-    it "won't login/create a new merchant without a unique email" do
-      # TODO
-    end # won't log in without a unique email
-  end # login
-
-
   describe "logout" do
     it "can log a user out" do
       # log the user in
