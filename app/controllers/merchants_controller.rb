@@ -1,8 +1,8 @@
 class MerchantsController < ApplicationController
 
-  # def show
-  #   @merchant = Merchant.find_by(id: params[:id])
-  # end
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
+  end
 
   def login
     auth_hash = request.env['omniauth.auth']
