@@ -2,5 +2,6 @@
   <%= form_tag products_path, method: :get do %>
     <%# label_tag :merchant %>
     <%= collection_select(:category, :id, Category.all, :id, :name, {:prompt => 'Search by Category'}) %>
+    <%= submit_tag %>
   <%end%>
 </section>
