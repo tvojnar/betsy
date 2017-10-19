@@ -12,15 +12,15 @@ spider_plant:
   image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
   # category: house_plants
 
-echeveria:
+aloe_vera:
   merchant: tamira
-  name: Echeveria
+  name: Aloe vera
   inventory: 2
   price: 5.50
-  description: A small Echeveria plant
+  description: A small aloe vera plant
   visible: true
   image_url: https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg
-  # category: succulents
+  category: succulents, house_plants
 
 
 red_cap_cactus:
@@ -31,8 +31,7 @@ red_cap_cactus:
   description: A cactus with a pink flower at the top.
   visible: true
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
-  # category: cactus
-
+  category: cactus, house_plants
 
 audrey_ficus:
   merchant: diane
