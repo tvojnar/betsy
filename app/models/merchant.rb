@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :products
   validates :name, presence: true, uniqueness: true
-  # valitated :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
