@@ -6,6 +6,7 @@ describe Merchant do
   let(:m_not_uniq_name) { Merchant.new(provider: "github", uid: 1111111, name: "test_user", email: "t@ada.org") }
   let(:m_no_email) {Merchant.new(provider: "github", uid: 99999, name: "no email")}
   let(:m_not_uniq_email) { Merchant.new(provider: "github", uid: 222222, name: "not uniq email", email: "test@ada.org") }
+  let(:m_without_uid) {Merchant.new(provider: "github",  name: "test_user", email: "test@ada.org") }
 
 describe "validations" do
   it "will create a new Merchant when all fields are provided" do
@@ -35,6 +36,14 @@ describe "validations" do
     m_not_uniq_email.wont_be :valid?
     m_not_uniq_email.errors.messages.must_include :email
   end # it requires a unique email
+
+  # TODO: figure out how to test this!
+  # it "won't login/create a new merchant without a uid" do
+  #   start_count = Merchant.count
+  #   m_without_uid.save.must_raise NotNullViolation
+  #
+  #   Merchant.count.must_equal start_count
+  # end # won't log in without uid
 
 end # validations
 
