@@ -3,7 +3,7 @@ require "test_helper"
 describe MerchantsController do
   it "logs in an existing merchant" do
     start_count = Merchant.count
-    merchant = merchant(:diane)
+    merchant = merchants(:diane)
 
     login(merchant)
     must_redirect_to root_path
@@ -30,7 +30,7 @@ describe MerchantsController do
   describe "logout" do
     it "can log a user out" do
       # log the user in
-      merchant = merchant(:diane)
+      merchant = merchants(:diane)
 
       login(merchant)
       must_redirect_to root_path
