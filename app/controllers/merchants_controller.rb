@@ -1,15 +1,21 @@
 class MerchantsController < ApplicationController
 
   def show
-    @merchant = Merchant.find_by(id: params[:id])
+    merchant = Merchant.find_by(id: params[:id])
+    if merchant != nil
+      @merchant = Merchant.find_by(id: params[:id])
+    else
+      render :show, status: :not_found
+    end
   end
 
   def edit
+    @merchant = Merchant.find_by(id: params[:id])
   end
 
   def update
   end
-  
+
   def login
     auth_hash = request.env['omniauth.auth']
 

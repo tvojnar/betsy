@@ -63,4 +63,44 @@ describe MerchantsController do
       session[:merchant_id].must_equal nil
     end # it can log a user out
   end # logout
+
+  describe "show" do
+      before do
+        login(merchants(:diane))
+      end
+
+    it "returns a success status when passed a valid id" do
+      merchant = merchants(:diane)
+      get merchant_path(merchant.id)
+      must_respond_with :success
+    end
+
+    it "returns not_found when given a bogus product id" do
+      merchant = merchants(:diane)
+      merchant_id = merchants(:diane).id + 1
+      get merchant_path(merchant_id)
+      must_respond_with :not_found
+    end
+
+   end
+
+  describe "edit" do
+    it "returns a success status when passed a valid id" do
+      merchant = merchants(:nkiru)
+      merchant_id = merchants(:nkiru).id
+      get edit_merchant_path(merchant_id)
+      must_respond_with :success
+    end
+
+    it "returns not_found when given a bogus product id" do
+      merchant = merchants(:nkiru)
+      merchant_id = merchants(:nkiru).id + 1
+      get edit_merchant_path(merchant_id)
+      must_respond_with :not_found
+    end
+  end
+
+  describe "update" do
+  end
+
 end
