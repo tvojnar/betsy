@@ -5,6 +5,22 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def index
+    if params[:merchant_id]
+      merchant = Merchant.find_by(id: params[:merchant_id])
+      if merchant != nil
+        @products = merchant.products
+      end
+    elsif params[:category_id]
+      category = Category.find_by(id: params[:category_id])
+      if category != nil
+        @products = merchant.products
+      end
+    else
+      @products = Product.all
+    end
+  end
+
   def new
     if find_merchant
       @product = Product.new
@@ -14,27 +30,11 @@ class ProductsController < ApplicationController
     end
   end
 
-
-  def index
-    if params[:merchant_id]
-      merchant = Merchant.find_by(id: params[:merchant_id])
-      if merchant
-        @products = merchant.products
-      else
-        head :not_found
-      end
-    else
-      @products = Product.all
-    end
-  end
-
-
   def create
     if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
-      require 'pry'
-      binding.pry
+      
       # puts "SESSION[:MERCHANT_ID]: #{session}"
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
       # merchant = Merchant.find_by(id: session[:merchant_id])
