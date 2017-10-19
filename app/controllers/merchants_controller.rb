@@ -14,7 +14,7 @@ class MerchantsController < ApplicationController
         #user has not logged in before
         #create a new record in the DB
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
-        save_and_flash(user)
+        save_and_flash(merchant)
       else
         flash[:status] = :success
         flash[:message] = "Succesfully logged in as returning merchant #{merchant.name}"
@@ -24,7 +24,7 @@ class MerchantsController < ApplicationController
       flash[:status] = :failure
       flash[:message] = "Could not create user from data provided by Github"
     end # if/else
-    redirect_to rott_path
+    redirect_to root_path
   end
 
 
