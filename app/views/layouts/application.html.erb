@@ -26,10 +26,12 @@
 
             <div class="float-right">
               <% if @login_merchant %>
-                <%= link_to "My Account: Logged in as #{@login_merchant.username}", user_path(@login_merchant), class: "button"%>
+                <%# NOTE: I commented out the link below because it was raising an error TV %>
+                <%# link_to "My Account: Logged in as #{@login_merchant.username}", user_path(@login_merchant), class: "button"%>
                 <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
               <% else %>
-                <%= link_to "Log In", login_url, class: "button float-right" %>
+              <%# NOTE: I commented out the link below because it was raising an error TV %>
+                <%# link_to "Log In", login_url, class: "button float-right" %>
                 <%= link_to "Merchant Sign up through GitHub", auth_callback_path(:github), class: "button" %>
               <%end%>
             </div>
