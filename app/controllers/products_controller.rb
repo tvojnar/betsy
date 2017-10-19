@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
   end
 
   def index
-    if params[:merchant_id]
-      merchant = Merchant.find_by(id: params[:merchant_id])
+    if merchant_id 
+      merchant = Merchant.find_by(id: merchant_id)
       if merchant != nil
         @products = merchant.products
       end
@@ -105,5 +105,9 @@ class ProductsController < ApplicationController
 
   def product_params
     return params.require(:product).permit(:name, :inventory, :price, :image_url)
+  end
+
+  def merchant_id
+    params[:merchant_id] || params[:merchant][:id]
   end
 end
