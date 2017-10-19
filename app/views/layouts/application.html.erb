@@ -24,25 +24,49 @@
               <%= link_to "Add a New Product", new_product_path, class: "button" %>
             </div>
 
+            <%# NOTE: I changed the log in and out buttons to work with the login routes that we have. I haven't added logout functionality yet so that link is NOT functional yet!%>
             <div class="float-right">
-              <% if @login_merchant %>
-                <%= link_to "My Account: Logged in as #{@login_merchant.username}", user_path(@login_merchant), class: "button"%>
-                <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
+              <% if session[:merchant_id] %>
+                <p class="button">
+                  Logged in as
+                    <%= Merchant.find(session[:merchant_id]).name %>
+                </p>
+                  <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
-                <%= link_to "Log In", login_url, class: "button float-right" %>
-                <%= link_to "Merchant Sign up through GitHub", auth_callback_path(:github), class: "button" %>
-              <%end%>
+                <%= link_to "Log in", '/auth/github', class: "button" %>
+              <% end %>
             </div>
           </nav>
         </header>
-
-      <section class="flash">
-        <% flash.each do |name, message| %>
-          <div class="<%= name %>"> <%= message %> </div>
-        <% end %>
-      </section>
-
-        <%= yield %>
+        <%# NOTE: replaced the incomplete flash section with a complete flash section TV%>
+        <main class="row">
+          <% if flash[:message] %>
+          <section class="row flash">
+            <div>
+              <% if flash[:status] == :failure %>
+                <p class="error">
+              <% else %>
+                <p>
+              <% end %>
+                <%= flash[:message] %>
+              </p>
+              <% if flash[:details] %>
+              <ul>
+                <% flash[:details].each do |field, problems| %>
+                  <% problems.each do |problem| %>
+                  <li>
+                    <strong><%=field %>:</strong>
+                    <%= problem %>
+                  </li>
+                  <% end %>
+                <%end %>
+              </ul>
+              <% end %>
+            </div>
+          </section>
+          <% end %>
+          <%= yield %>
+        </main>
       </body>
   </body>
 </html>
