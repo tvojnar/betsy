@@ -86,21 +86,81 @@ describe MerchantsController do
 
   describe "edit" do
     it "returns a success status when passed a valid id" do
-      merchant = merchants(:nkiru)
-      merchant_id = merchants(:nkiru).id
+      merchant = merchants(:diane)
+      merchant_id = merchants(:diane).id
       get edit_merchant_path(merchant_id)
       must_respond_with :success
     end
 
     it "returns not_found when given a bogus product id" do
-      merchant = merchants(:nkiru)
-      merchant_id = merchants(:nkiru).id + 1
+      merchant = merchants(:diane)
+      merchant_id = merchants(:diane).id + 1
       get edit_merchant_path(merchant_id)
       must_respond_with :not_found
     end
   end
 
   describe "update" do
-  end
+    it "returns success if the merchant ID is valid and the change is valid" do
+      merchant = merchants(:nkiru)
+      merchant_data = {
+        merchant: {
+          name: "Changed Name",
+          email: "changed@email.com"
+        }
+      }
+      merchant.update_attributes(merchant_data[:merchant])
+      merchant.must_be :valid?
+
+      patch merchant_path(merchant), params: merchant_data
+
+      must_respond_with :redirect
+      must_redirect_to  merchant_path(merchant)
+
+      # Check that the change went through
+      merchant.reload
+      merchant.name.must_equal merchant_data[:merchant][:name]
+    end
+
+    it "returns not_found if the merchant ID is not valid" do
+      merchant = merchants(:nkiru).id + 1
+      merchant_data = {
+        merchant: {
+          name: "Changed Name",
+          email: "changed@email.com"
+        }
+      }
+
+      patch merchant_path(merchant), params: merchant_data
+
+      must_respond_with :not_found
+    end
+
+#THIS TEST IS NOT CURRENTLY PASSING BUT WILL ONCE I MERGE WITH MASTER (MODEL VALIDATIONS)
+    it "returns bad_request if the change is invalid" do
+      merchant = merchants(:nkiru)
+      merchant_data = {
+        merchant: {
+          name: nil,
+          email: ""
+        }
+      }
+      merchant.update_attributes(merchant_data[:merchant])
+      merchant.wont_be :valid?
+
+      patch merchant_path(merchant), params: merchant_data
+
+
+
+      must_respond_with :bad_request
+
+      # Check that the change went through
+      merchant.reload
+      merchant.name.wont_equal merchant_data[:merchant][:name]
+    end
+
+
+
+end
 
 end

@@ -1,7 +1,14 @@
 <h1>THIS IS THE MERCHANT SHOW PAGE</h1>
 
-Name: <%#= @merchant.name %>
+Name: <%= @merchant.name %>
 <p>Total Revenue:</p> <%#= @merchant.total_revenue %>
+<%= @orderitems = OrderItem.where(merchant_id: params[:id]) %>
+<%= @orderitems.each do |orderitem| %>
+  <%= orderitem.name %>
+  <%= orderitem.price %>
+<% end %>
 <p></p>
 
-<%= link_to "Edit", edit_merchant_path, class: "button"%>
+<%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
+<%= link_to "View Products", merchant_products_path(params[:id]), class: "button"%>
+<%= link_to "Add a Category", new_category_path, class: "button"%>
