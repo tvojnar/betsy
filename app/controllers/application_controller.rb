@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  # protected
+  protected
+
   # def require_login
   #   @merchant = Merchant.find_by(id: session[:user_id])
   #   unless @merchant
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
     result = model.save
     if result
       flash[:status] = :success
-      flash[:message] = "sucessfully saved #{model.class}"
+      flash[:message] = "Sucessfully saved #{model.class}"
     else
       flash.now[:status] = :failure
       flash.now[:message] = "Failed to save #{model.class}"
