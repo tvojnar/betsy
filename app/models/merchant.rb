@@ -22,6 +22,16 @@ class Merchant < ApplicationRecord
     return total
   end
 
+  def merchant_order_items
+    @merchant_order_items = []
+    products = Product.where(merchant_id: @merchant.id)
+    products.each do |product|
+      product.order_items.each do |order_item|
+        @merchant_order_items << order_item
+      end
+    end
+  end
+
   def total_revenue_by_status
     @pending_total = 0
     @paid_total = 0
