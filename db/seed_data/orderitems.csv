@@ -1,0 +1,11 @@
+quantity,cost,shipped_status
+45,30.0,true
+100,34.56,false
+3,100.50,true
+48,345.12,false
+2,5.0,true
+90,72.34,true
+4,28.30,false
+51,90.9,false
+504,72.4,false
+125,39.4,true

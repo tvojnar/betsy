@@ -12,4 +12,31 @@ class Merchant < ApplicationRecord
 
     return merchant
   end
+
+  def total_revenue
+    total = 0
+    merchant_order_items = OrderItem.where(merchant_id: params[:id])
+    merchant_order_items.each do |item|
+      total += item.price
+    end
+    return total
+  end
+
+  def total_revenue_by_status
+    @pending_total = 0
+    @paid_total = 0
+    @shipped_total = 0
+    @completed_total = 0
+    merchant_order_items.each do |item|
+      if item.status == "pending"
+        pending_total += item.price
+      elsif item.status == "paid"
+        paid_total += item.price
+      elsif item.status == "shipped"
+        shipped_total += item.price
+      elsif item.status == "completed"
+        completed_total += item.price
+      end
+    end
+  end
 end
