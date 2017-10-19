@@ -15,7 +15,6 @@ puts "Loading raw merchant data from #{MERCHANT_FILE}"
 merchant_failures = []
 CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
   merchant = Merchant.new
-  merchant.id = row['id']
   merchant.name = row['name']
   merchant.email = row['email']
   merchant.uid = row['uid']
@@ -31,39 +30,12 @@ puts "Added #{Merchant.count} merchant records"
 puts "#{merchant_failures.length} merchants failed to save"
 
 
-
-PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
-puts "Loading raw product data from #{PRODUCT_FILE}"
-
-product_failures = []
-CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
-  product = Product.new
-  product.id = row['id']
-  product.merchant_id = Merchant.find_by("RANDOM()").limit(1)
-  product.inventory = row['inventory']
-  product.price = row['price']
-  product.description = row['description']
-  product.visible = row['visible']
-  product.image_url = row['image_url']
-  puts "Created product: #{product.inspect}"
-  successful = product.save
-  if !successful
-    product_failures << product
-  end
-end
-
-puts "Added #{Product.count} product records"
-puts "#{product_failures.length} products failed to save"
-
-
-
 CATEGORY_FILE = Rails.root.join('db', 'seed_data', 'categories.csv')
 puts "Loading raw category data from #{CATEGORY_FILE}"
 
 category_failures = []
 CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
   category = Category.new
-  category.id = row['id']
   category.name = row['name']
   puts "Created category: #{category.inspect}"
   successful = category.save
@@ -74,6 +46,45 @@ end
 
 puts "Added #{Category.count} category records"
 puts "#{category_failures.length} categories failed to save"
+
+
+
+PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
+puts "Loading raw product data from #{PRODUCT_FILE}"
+
+product_failures = []
+CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
+  category = Category.find_by(name: row['category_name'])
+
+  if category.nil?
+    puts "Category does not exist: #{row['category_name']}"
+    puts "Product #{row['name']} was not created!!!"
+    next
+  end
+
+  product = Product.new
+  product.name = row['name']
+  product.merchant = Merchant.order("RANDOM()").first
+  product.inventory = row['inventory']
+  product.price = row['price']
+  product.categories << Category.find_by(name: row['category_name'])
+  product.description = row['description']
+  product.visible = row['visible']
+  product.image_url = row['image_url']
+
+  puts "Created product: #{product.inspect}"
+  successful = product.save
+
+  if !successful
+    product_failures << product
+  end
+end
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} products failed to save"
+
+
+
 
 
 

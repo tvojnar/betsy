@@ -1,8 +1,8 @@
-inventory,price,description,visible,image_url
-24,17.99,Dahlia Cornel,true,https://phsonline.org/uploads/blog/dahlia-cornel.jpg
-36,35.23,Chelsea Stickel,true,https://www.gardendesign.com/pictures/images/477x482Exact/site_3/pink-coleus-garden-crossings_9180.jpg
-48,25.99,Tomato Soup Coneflower,true,https://i.pinimg.com/736x/5c/39/d0/5c39d04d4c7b02fff2d77179c71eb43f--tomato-soups-pretty-flowers.jpg
-60,42.99,Velvet Cactus,true,https://zimedesign.files.wordpress.com/2017/01/img_4333.jpg
-72,17.98,Hyacinth Bulbs,true,http://www.edenbrothers.com/store/media/Bulbs-Flowers/HYWH%20116-0950-1.jpg
-12,29.97,New Zealand Red Hook Sedge,true,https://i.pinimg.com/736x/a6/0d/f2/a60df23ac93f5a11bbda2f4b00fd77b9--colorful-grasses-red-grasses.jpg
-96,26.37,Petunia Belinda,true,https://s-media-cache-ak0.pinimg.com/originals/dc/cf/3a/dccf3a1ce891e593fcc0df6629d742e7.jpg
+category_name,name,inventory,price,description,visible,image_url
+Perennials,Dahlia Cornel,24,17.99,"medium-sized, spherical purple-red flowers on strong stems",true,https://phsonline.org/uploads/blog/dahlia-cornel.jpg
+Perennials,Chelsea Stickel,36,35.23,"Hot-pink leaves with ruffled, variegated borders edged with a thin line of light green.",true,https://www.gardendesign.com/pictures/images/477x482Exact/site_3/pink-coleus-garden-crossings_9180.jpg
+House Plants,Aloe Vera,48,25.99,"The leaves are thick and fleshy, green to grey-green, with some varieties showing white flecks on their upper and lower stem surfaces.",true,https://images-na.ssl-images-amazon.com/images/I/51QbyJ0v%2BIL.jpg
+Cactus,Velvet Cactus,60,42.99,designer Cactus,true,https://zimedesign.files.wordpress.com/2017/01/img_4333.jpg
+Flower Bulbs,Hyacinth Bulbs,72,17.98,Loved for its intoxicating perfume.,true,http://www.edenbrothers.com/store/media/Bulbs-Flowers/HYWH%20116-0950-1.jpg
+Ornamental Grass,Red Hood Sedge,12,29.97,New Zealand ornamental grass.,true,https://i.pinimg.com/736x/a6/0d/f2/a60df23ac93f5a11bbda2f4b00fd77b9--colorful-grasses-red-grasses.jpg
+Annuals,Petunia Belinda,96,26.37,masses of vibrant color that will last all summer.,true,https://s-media-cache-ak0.pinimg.com/originals/dc/cf/3a/dccf3a1ce891e593fcc0df6629d742e7.jpg
