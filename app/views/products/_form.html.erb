@@ -1,0 +1,29 @@
+<h2>Products Details</h2>
+
+<%= form_for @PRODUCT_FILE do |f| %>
+  <%= f.label :category %>
+  <%= f.text_field :category%>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.label :merchant id %>
+  <%= f.number_field :merchant_id %>
+
+  <%= f.label :inventory%>
+  <%= f.number_field :inventory %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %>
+
+  <%= f.label :visible %>
+  <%= f.text_field :visible %>
+
+  <%= f.submit "Edit Product!" %>
+<% end %>

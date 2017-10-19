@@ -1,0 +1,32 @@
+<h2>List of Products</h2>
+
+<table>
+  <h3> Products </h3>
+  <thead>
+    <tr>
+      <th>Category </th>
+      <th>Product-Name</th>
+      <th>Description</th>
+      <th>Merchant ID</th>
+      <th>Inventory</th>
+      <th>Price</th>
+      <th>Image_Url</th>
+      <th>Visible</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @products.each do |product| %>
+      <tr>
+        <td><% product.categories.each do |category| %> <%= link_to category.name, category_path(category.id) %> <% end %></td>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td><%= link_to product.description, product_path(product.id) %></td>
+        <td><%= link_to product.merchant.id, merchant_path(product.merchant) %></td>
+        <td><%= link_to product.inventory, product_path(product.id) %></td>
+        <td><%= link_to product.price, product_path(product.id) %></td>
+        <td><%= link_to product.image_url, product_path(product.id) %></td>
+        <td><%= link_to product.visible, product_path(product.id) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
