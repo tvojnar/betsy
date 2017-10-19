@@ -10,21 +10,37 @@ describe ProductsController do
       end
 
       it "returns a success status when there are no products" do
-        #THIS ONE IS COMPLAINING ABOUT THERE BEING NO CATEGORIES_PRODUCTS RELATION
-        #no idea how categories are being referenced.
         Product.destroy_all
         get root_path
         must_respond_with :success
       end
     end
+
+    describe "index" do
+      before do
+        merchant = merchants(:tamira)
+        merchant_id = merchant.id
+      end
+      it "when given a merchant id, it directs to the correct page" do
+        merchant = merchants(:tamira)
+        merchant_id = merchant.id
+        get products_path(merchant_id)
+        must_respond_with :success
+      end
+      it "when given a merchant id, it lists the products from that merchant"
+      #test failing - says doesn't recognize products in line with spider_plant. not sure why
+        spider_plant = products(:spider_plant)
+        merchant.products.must_include spider_plant
+    end
   end
 
-  # describe "guest users" do
-  #
-  #   it "cannot access new" do
-  #
-  #   end
-  #
+  describe "guest users" do
+    it "cannot create a new product" do
+      test_product = product.new
+
+
+    end
+  
   #   it "cannot access edit" do
   #
   #   end
