@@ -28,21 +28,16 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
   end
-<<<<<<< HEAD
 
-=======
->>>>>>> 2a43fc7e969bfc3477d9655f38025bfb53ce4d7d
 
   def create
     if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
-<<<<<<< HEAD
+
       # require 'pry'
       # binding.pry
-=======
-      
->>>>>>> 2a43fc7e969bfc3477d9655f38025bfb53ce4d7d
+
       # puts "SESSION[:MERCHANT_ID]: #{session}"
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
       # merchant = Merchant.find_by(id: session[:merchant_id])
