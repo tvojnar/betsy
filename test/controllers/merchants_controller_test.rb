@@ -15,8 +15,8 @@ describe MerchantsController do
 
   it "creates a new merchant" do
     start_count = Merchant.count
+    merchant = Merchant.new(provider: "github", uid: 99999, name: "test_user", email: "test@ada.org")
     login(merchant)
-    get auth_callback_path(:github)
     must_redirect_to root_path
     Merchant.count.must_equal start_count + 1
     session[:merchant_id].must_equal Merchant.last.id
