@@ -36,7 +36,7 @@ class ActiveSupport::TestCase
       uid: merchant.uid,
       info: {
         email: merchant.email,
-        name: merchant.name
+        nickname: merchant.name
       }
     }
   end
