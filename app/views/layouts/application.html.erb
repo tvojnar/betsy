@@ -29,8 +29,11 @@
               <% if session[:merchant_id] %>
                 <p class="button">
                   Logged in as
-                    <%#= Merchant.find(session[:merchant_id]).name %>
-                </p>
+                    <%= Merchant.find(session[:merchant_id]).name %>
+                  </p>
+                  <p class="button">
+                  <%= link_to "Account", merchant_path(session[:merchant_id])%>
+                  </p>
                   <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
                 <%= link_to "Log in", '/auth/github', class: "button" %>
