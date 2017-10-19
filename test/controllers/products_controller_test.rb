@@ -36,10 +36,13 @@ describe ProductsController do
         get products_path(merchant_id: @merchant_id)
         must_respond_with :success
       end
-    #   it "when given a merchant id, it lists the products from that merchant" do
-    #   spider_plant = products(:spider_plant)
-    #   Product.index(merchant_id: @merchant_id).must_include spider_plant
-    #   end
+      it "when given a merchant id, it lists the products from that merchant" do
+      spider_plant = products(:spider_plant)
+      get merchant_products_path(@merchant.id)
+
+      merchant = Merchant.find_by(id: params[:merchant_id])
+      merchant.products.must_include spider_plant
+      end
     end
 
 

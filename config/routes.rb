@@ -27,6 +27,10 @@ resources :merchants do
   resources :products
 end
 
+resources :categories do
+  resources :products
+end
+
 get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
 # NOTE: I commented out these routes because I don't think we need them since we have the login through OAuth....

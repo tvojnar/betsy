@@ -20,8 +20,10 @@
           <nav class="row">
             <div class="large-8 small-12 columns button-group">
               <%= link_to "View All Products", root_path, class: "button" %>
-              <%= link_to "View Products by Category (dropdown)", products_path, class: "button" %>
-              <%= link_to "Add a New Product", new_product_path, class: "button" %>
+              <%# f.label :category %>
+              <%= render partial: 'layouts/categorydropdown' %>
+              <%= render partial: 'layouts/merchantdropdown' %>
+
             </div>
 
             <%# NOTE: I changed the log in and out buttons to work with the login routes that we have. I haven't added logout functionality yet so that link is NOT functional yet!%>
@@ -29,14 +31,15 @@
               <% if session[:merchant_id] %>
                 <p class="button">
                   Logged in as
-                    <%= Merchant.find(session[:merchant_id]).name %>
+                  <%= Merchant.find(session[:merchant_id]).name %>
                   </p>
+                  <%= link_to "Add a New Product", new_product_path, class: "button" %>
                   <p class="button">
                   <%= link_to "Account", merchant_path(session[:merchant_id])%>
                   </p>
                   <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
-                <%= link_to "Log in", '/auth/github', class: "button" %>
+                <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
               <% end %>
             </div>
           </nav>

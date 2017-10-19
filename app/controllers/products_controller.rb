@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  def root
+  def root #not necessary as it's already in index
     @products = Product.all
   end
 
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     elsif params[:category_id]
       category = Category.find_by(id: params[:category_id])
       if category != nil
-        @products = merchant.products
+        @products = category.products
       end
     else
       @products = Product.all
