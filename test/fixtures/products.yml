@@ -20,7 +20,7 @@ aloe_vera:
   description: A small aloe vera plant
   visible: true
   image_url: https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg
-  category: succulents, house_plants
+  # category: succulents, house_plants
 
 
 red_cap_cactus:
@@ -31,7 +31,7 @@ red_cap_cactus:
   description: A cactus with a pink flower at the top.
   visible: true
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
-  category: cactus, house_plants
+  # category: cactus, house_plants
 
 audrey_ficus:
   merchant: diane
