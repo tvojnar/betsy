@@ -1,6 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  helper_method :current_order
 
+  def current_order
+    if session[:order_id]
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end # if/else
+  end
   protected
 
   # def require_login
@@ -12,14 +20,8 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-# When current_order is called it checks if there is a order_id associated with the session. If there is, it will find that order, if there isn't then it will make a new order 
-  def current_order
-    if session[:order_id]
-      Order.find(session[:order_id])
-    else
-      Order.new
-    end # if/else
-  end
+# When current_order is called it checks if there is a order_id associated with the session. If there is, it will find that order, if there isn't then it will make a new order
+
 
 
   def save_and_flash(model)

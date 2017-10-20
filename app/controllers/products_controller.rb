@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
       require 'pry'
-      binding.pry
+      # binding.pry
       # puts "SESSION[:MERCHANT_ID]: #{session}"
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
       # merchant = Merchant.find_by(id: session[:merchant_id])

@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
    @item = @order.order_items.new(item_params)
    @order.save
    session[:order_id] = @order.id
-   # TODO: later we will want to redirect to a differnt path 
+   # TODO: later we will want to redirect to a differnt path
    redirect_to root_path
  end # create
 
