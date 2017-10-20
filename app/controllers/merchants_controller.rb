@@ -4,6 +4,9 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
     if @merchant #!= nil
       @merchant = Merchant.find_by(id: params[:id])
+      @merchant_order_items = @merchant.merchant_order_items(@merchant)
+      @total_revenue = @merchant.total_revenue(@merchant)
+      @total_revenue_by_status = @merchant.total_revenue_by_status(@merchant)
     else
       render :show, status: :not_found
     end

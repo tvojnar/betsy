@@ -51,31 +51,37 @@ describe "custom methods" do
 
   end
 
-  describe "total revenue" do
-    before do
-      login(merchants(:diane))
-    end
+    describe "merchant_order_items" do
 
     it "returns an array that contains instances of order_items" do
       merchant = merchants(:diane)
-      order_items = merchant.merchant_order_items
+      order_items = merchant.merchant_order_items(merchant)
       order_items.each do |oi|
         oi.must_be_instance_of OrderItem
       end
-
     end
 
     it "returns all order_items that have product_ids that belong to the merchant" do
+      merchant = merchants(:diane)
+      order_items = merchant.merchant_order_items(merchant)
+      order_items.each do |oi|
+        Product.find_by(id: oi.product_id).merchant_id.must_equal merchant.id
+      end
+    end
+
+  end
+
+  describe "total revenue" do
+    it "returns total revenue regardless of order status for a given merchant" do
 
     end
 
-
+    it "returns 0 when there are no orders for the given merchant" do
+      
+    end
   end
 
   describe "total_revenue_by_status" do
-
-  end
-  describe "merchant_order_items" do
 
   end
 end

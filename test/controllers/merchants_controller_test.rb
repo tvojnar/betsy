@@ -24,10 +24,7 @@ describe MerchantsController do
       session[:merchant_id].must_equal Merchant.last.id
     end
     #must test that user can log in to be merchant
-<<<<<<< HEAD
-  end # logout
-=======
->>>>>>> 71469abd8a5c1dda6881dce4dd29e5a56ae881db
+
 
   describe "logout" do
     it "can log a user out" do
@@ -47,9 +44,7 @@ describe MerchantsController do
     end # it can log a user out
   end # logout
 
-<<<<<<< HEAD
-end # MerchantsController
-=======
+
   describe "show" do
       before do
         login(merchants(:diane))
