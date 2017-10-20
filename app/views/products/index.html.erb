@@ -19,6 +19,9 @@
   </thead>
   <tbody>
 
+    <% if @products == nil %>
+    <h4> Sorry, there are not yet any products listed. </h4>
+    <%else%>
     <% @products.each do |product| %>
       <tr>
         <td><%= link_to product.name, product_path(product.id) %></td>
