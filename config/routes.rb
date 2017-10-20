@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 root 'products#root'
 resources :products
 resources :orders
-resources :orderitems
+resources :order_items
 resources :merchants
 resources :categories
 resources :reviews
