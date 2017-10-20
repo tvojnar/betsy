@@ -1,26 +1,33 @@
 <h2>List of Products</h2>
 
-<%= form_tag("/category", method: "get") do %>
-    <%= label_tag(:category_id, "Find Product by Category:") %>
-    <%= collection_select(:category, :id, Category.all, :id, :name) %>
-    <%= submit_tag("GO") %>
-<% end %>
+<%# form_tag("/category", method: "get") do %>
+    <%# label_tag(:category_id, "Find Product by Category:") %>
+    <%# collection_select(:category, :id, Category.all, :id, :name) %>
+    <%# submit_tag("GO") %>
+<%# end %>
 
 <table>
   <h3> Products </h3>
   <thead>
     <tr>
-      <th>Category </th>
-      <th>Product-Name</th>
+      <th>Product Name</th>
+      <th>Description</th>
+      <th>Merchant Name</th>
+      <th>Inventory</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
-      <% @products.each do |product| %>
-      <tr>
-        <td><% product.categories.each do |category| %> <%= link_to category.name, category_path(category.id) %> <% end %></td>
-        <td><%= link_to product.name, product_path(product.id) %></td>
 
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td><%= product.description %></td>
+        <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
+        <td><%= product.inventory %></td>
+        <td><%= product.price%></td>
       </tr>
-      <% end %>
+    <%end%>
+
     </tbody>
   </table>
