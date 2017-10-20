@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
-
       @order_items = current_order.order_items.new
     elsif params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
       flash[:status] = :failure
