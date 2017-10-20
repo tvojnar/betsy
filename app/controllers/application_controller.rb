@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_order
 
+
+  protected
   def current_order
     if session[:order_id]
       Order.find(session[:order_id])
@@ -9,7 +11,6 @@ class ApplicationController < ActionController::Base
       Order.new
     end # if/else
   end
-  protected
 
   # def require_login
   #   @merchant = Merchant.find_by(id: session[:user_id])

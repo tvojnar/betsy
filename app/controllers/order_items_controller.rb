@@ -17,6 +17,9 @@ class OrderItemsController < ApplicationController
   end # create
 
   def destroy
+    # added this line to find the right order to delete from
+    # QUESTION: is this ok? will we ever want to not delete from the Order with id session[:order_id]
+    @order = Order.find_by(id: session[:order_id])
     @item = @order.order_items.find(params[:id])
     @item.destroy
     @order.save
