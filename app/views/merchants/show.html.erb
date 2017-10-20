@@ -4,14 +4,42 @@ Name: <%= @merchant.name %>
 </p>
 <p>Total Revenue: <%= @total_revenue %> </p>
 <p>Total Revenue by Category </p>
-<%= @total_revenue_by_status%>
+<%#= @total_revenue_by_status%>
 
 <%if @merchant_order_items %>
+<p>Pending Orders </p>
+<%= @pending
 <% @merchant_order_items.each do |orderitem| %>
-  <%= orderitem.cost %>
+<% if orderitem.order.status == "pending" %>
+  <p> Product Name: <%= orderitem.product.name %>
+   Product Price: <%= orderitem.product.price %> </p>
+  <% end %>
+<% end %>
+
+<p>Paid Orders </p>
+<% @merchant_order_items.each do |orderitem| %>
+<% if orderitem.order.status == "paid" %>
+    <p> Product Name: <%= orderitem.product.name %>
+    Product Price: <%= orderitem.product.price %> </p>
 <% end %>
 <% end %>
-<p></p>
+
+<p>Shipped Orders </p>
+<% @merchant_order_items.each do |orderitem| %>
+<% if orderitem.order.status == "shipped" %>
+    <p> Product Name: <%= orderitem.product.name %>
+    Product Price: <%= orderitem.product.price %> </p>
+<% end %>
+<% end %>
+
+<p>Completed Orders</p>
+<% @merchant_order_items.each do |orderitem| %>
+<% if orderitem.order.status == "completed" %>
+    <p> Product Name: <%= orderitem.product.name %>
+    Product Price: <%= orderitem.product.price %> </p>
+<% end %>
+<% end %>
+<% end %>
 
 <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
 <%= link_to "View Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
