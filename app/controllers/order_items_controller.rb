@@ -11,10 +11,17 @@ class OrderItemsController < ApplicationController
       # TODO: later we will want to redirect to a differnt path
       redirect_to root_path
     else
-      # QUESTION: is this the right way to check that an order_item won't be added if the product with that ID doesn't exist? 
+      # QUESTION: is this the right way to check that an order_item won't be added if the product with that ID doesn't exist?
       head :not_found
     end
   end # create
+
+  def destroy
+    @item = @order.order_items.find(params[:id])
+    @item.destroy
+    @order.save
+    redirect_to order_path(@order)
+  end
 
   private
   def item_params
