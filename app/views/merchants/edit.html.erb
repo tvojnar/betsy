@@ -1,4 +1,4 @@
-<%= form_for Merchant.find_by(id: session[:merchant_id]) do |f| %>
+<%= form_for @merchant do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>
 <%= f.label :email%>

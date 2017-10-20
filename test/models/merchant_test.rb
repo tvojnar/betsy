@@ -8,43 +8,57 @@ describe Merchant do
   let(:m_not_uniq_email) { Merchant.new(provider: "github", uid: 222222, name: "not uniq email", email: "test@ada.org") }
   let(:m_without_uid) {Merchant.new(provider: "github",  name: "test_user", email: "test@ada.org") }
 
-describe "validations" do
-  it "will create a new Merchant when all fields are provided" do
-  merchant.must_be :valid?
-  end # create Merchant when all fields are given
+  describe "validations" do
+    it "will create a new Merchant when all fields are provided" do
+      merchant.must_be :valid?
+    end # create Merchant when all fields are given
 
-  it "requires a name" do
-    is_valid = m_no_name.valid?
-    is_valid.must_equal false
-    m_no_name.errors.messages.must_include :name
-  end # it requires a name
+    it "requires a name" do
+      is_valid = m_no_name.valid?
+      is_valid.must_equal false
+      m_no_name.errors.messages.must_include :name
+    end # it requires a name
 
-  it "requires a unique name" do
-    merchant.save
-    m_not_uniq_name.wont_be :valid?
-    m_not_uniq_name.errors.messages.must_include :name
+    it "requires a unique name" do
+      merchant.save
+      m_not_uniq_name.wont_be :valid?
+      m_not_uniq_name.errors.messages.must_include :name
 
-  end # it requires a unique name
+    end # it requires a unique name
 
-  it "requires a email" do
-    m_no_email.wont_be :valid?
-    m_no_email.errors.messages.must_include :email
-  end # it requires a email
+    it "requires a email" do
+      m_no_email.wont_be :valid?
+      m_no_email.errors.messages.must_include :email
+    end # it requires a email
 
-  it "requires a unique email" do
-    merchant.save
-    m_not_uniq_email.wont_be :valid?
-    m_not_uniq_email.errors.messages.must_include :email
-  end # it requires a unique email
+    it "requires a unique email" do
+      merchant.save
+      m_not_uniq_email.wont_be :valid?
+      m_not_uniq_email.errors.messages.must_include :email
+    end # it requires a unique email
 
-  # TODO: figure out how to test this!
-  # it "won't login/create a new merchant without a uid" do
-  #   start_count = Merchant.count
-  #   m_without_uid.save.must_raise NotNullViolation
-  #
-  #   Merchant.count.must_equal start_count
-  # end # won't log in without uid
+    # TODO: figure out how to test this!
+    # it "won't login/create a new merchant without a uid" do
+    #   start_count = Merchant.count
+    #   m_without_uid.save.must_raise NotNullViolation
+    #
+    #   Merchant.count.must_equal start_count
+    # end # won't log in without uid
 
-end # validations
+  end # validations
+
+  describe "self.from_auth_hash" do
+  end
+
+  describe "total revenue" do
+
+  end
+
+  describe "total_revenue_by_status" do
+
+  end
+  describe "merchant_order_items" do
+
+  end
 
 end
