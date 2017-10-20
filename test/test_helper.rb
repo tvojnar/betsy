@@ -4,6 +4,7 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
 require 'simplecov'
+require 'pry'
 SimpleCov.start 'rails'
 
 #  For colorful output!
