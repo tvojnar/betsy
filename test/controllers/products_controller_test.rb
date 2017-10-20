@@ -48,39 +48,7 @@ describe ProductsController do
       end
     end
 
-
-
-  #
-  #
   end
-
-  describe "guest users" do
-    it "cannot create a new product" do
-      start_count = Product.count
-
-      product_data = {
-        product: {
-          merchant: "tamira",
-          name: "Fly Trap",
-          inventory: 5,
-          price: 8.75,
-          description: "It eats flies",
-          visible: true,
-          image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
-        }
-      }
-
-
-
-      start_count.must_equal Product.count
-    end
-  end
-  #   it "cannot access edit" do
-  #
-  #   end
-  #
-  # end
-
 
   # describe "logged in users (merchants)" do
   #   before do
@@ -206,5 +174,35 @@ describe ProductsController do
   #   end
   # end
   # end
+
+  describe "guest users" do
+    it "cannot create a new product" do
+      start_count = Product.count
+
+      product_data = {
+        product: {
+          merchant: "tamira",
+          name: "Fly Trap",
+          inventory: 5,
+          price: 8.75,
+          description: "It eats flies",
+          visible: true,
+          image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
+        }
+      }
+
+
+
+      start_count.must_equal Product.count
+    end
+  end
+  #   it "cannot access edit" do
+  #
+  #   end
+  #
+  # end
+
+
+
 
 end
