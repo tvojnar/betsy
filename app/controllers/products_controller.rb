@@ -8,9 +8,11 @@ class ProductsController < ApplicationController
     if merchant_id != nil
       merchant = Merchant.find_by(id: merchant_id)
       @products = merchant.products
+      @order_item = current_order.order_items.new
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
+      @order_item = current_order.order_items.new
     else
       @products = Product.all
     end
