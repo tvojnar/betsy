@@ -113,9 +113,6 @@ describe ProductsController do
     Product.count.must_equal product_count
   end
 
-
-
-
   describe "show" do
     it "returns a success status when passed a valid id" do
       product_id = Product.first.id
