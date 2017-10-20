@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    if find_merchant #<<necessary? Dl
+    # if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
 
@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
       end
     else
       redirect_to root_path
-    end
+    # end
   end
 
   def show
