@@ -46,11 +46,29 @@ describe Merchant do
     # end # won't log in without uid
 
   end # validations
-
+describe "custom methods" do
   describe "self.from_auth_hash" do
+
   end
 
   describe "total revenue" do
+    before do
+      login(merchants(:diane))
+    end
+
+    it "returns an array that contains instances of order_items" do
+      merchant = merchants(:diane)
+      order_items = merchant.merchant_order_items
+      order_items.each do |oi|
+        oi.must_be_instance_of OrderItem
+      end
+
+    end
+
+    it "returns all order_items that have product_ids that belong to the merchant" do
+
+    end
+
 
   end
 
@@ -60,5 +78,5 @@ describe Merchant do
   describe "merchant_order_items" do
 
   end
-
+end
 end

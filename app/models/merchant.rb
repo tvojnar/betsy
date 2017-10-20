@@ -26,12 +26,13 @@ class Merchant < ApplicationRecord
 
   def merchant_order_items
     @merchant_order_items = []
-    products = Product.where(merchant_id: @merchant.id)
+    products = Product.where(merchant_id: session[:merchant_id]) #params[:id])
     products.each do |product|
       product.order_items.each do |order_item|
         @merchant_order_items << order_item
       end
     end
+    return @merchant_order_items
   end
 
   def total_revenue_by_status
