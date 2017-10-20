@@ -12,7 +12,18 @@ class ProductsController < ApplicationController
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
+
       @order_items = current_order.order_items.new
+    elsif params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that merchant was not found."
+      redirect_to products_path
+      return @products = Product.all
+    elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
+    flash[:status] = :failure
+    flash[:message] = "Sorry, that category was not found."
+      redirect_to products_path
+      return @products = Product.all
     else
       @products = Product.all
     end
@@ -30,7 +41,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    if find_merchant #<<necessary? Dl
+    # if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
 
@@ -48,7 +59,7 @@ class ProductsController < ApplicationController
       end
     else
       redirect_to root_path
-    end
+    # end
   end
 
   def show

@@ -23,61 +23,32 @@ describe ProductsController do
       end
       it "returns a success status when given a valid merchant_id" do
         get merchant_products_path(Merchant.first)
-          must_respond_with :success
+          must_respond_with :ok
       end
 
       it "returns something when given a bogus merchant_id" do
           bad_merchant_id = Merchant.last.id + 1
           get merchant_products_path(bad_merchant_id)
-          must_respond_with :not_found
+          must_respond_with :redirect
+          must_redirect_to products_path
       end
 
       it "when given a merchant id, it directs to the correct page" do
         get products_path(merchant_id: @merchant_id)
-        must_respond_with :success
+        must_respond_with :ok
+        merchantid = merchants(:tamira).id
+        merchantid.must_equal @merchant_id
       end
       it "when given a merchant id, it lists the products from that merchant" do
       spider_plant = products(:spider_plant)
-      get merchant_products_path(@merchant.id)
+      get merchant_products_path(@merchant_id)
 
-      merchant = Merchant.find_by(id: params[:merchant_id])
+      merchant = Merchant.find_by(id: @merchant_id)
       merchant.products.must_include spider_plant
       end
     end
 
-
-
-  #
-  #
   end
-
-  describe "guest users" do
-    it "cannot create a new product" do
-      start_count = Product.count
-
-      product_data = {
-        product: {
-          merchant: "tamira",
-          name: "Fly Trap",
-          inventory: 5,
-          price: 8.75,
-          description: "It eats flies",
-          visible: true,
-          image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
-        }
-      }
-
-
-
-      start_count.must_equal Product.count
-    end
-  end
-  #   it "cannot access edit" do
-  #
-  #   end
-  #
-  # end
-
 
   # describe "logged in users (merchants)" do
   #   before do
@@ -203,5 +174,35 @@ describe ProductsController do
   #   end
   # end
   # end
+
+  describe "guest users" do
+    it "cannot create a new product" do
+      start_count = Product.count
+
+      product_data = {
+        product: {
+          merchant: "tamira",
+          name: "Fly Trap",
+          inventory: 5,
+          price: 8.75,
+          description: "It eats flies",
+          visible: true,
+          image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
+        }
+      }
+
+
+
+      start_count.must_equal Product.count
+    end
+  end
+  #   it "cannot access edit" do
+  #
+  #   end
+  #
+  # end
+
+
+
 
 end
