@@ -2,4 +2,14 @@
 
 Name: <%= @merchant.name %>
 <p>Total Revenue:</p> <%#= @merchant.total_revenue %>
+<%if @merchant_order_items %>
+<%= @merchant_order_items.each do |orderitem| %>
+  <%= orderitem.name %>
+  <%= orderitem.price %>
+<% end %>
+<% end %>
 <p></p>
+
+<%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
+<%= link_to "View Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
+<%= link_to "Add a Category", new_category_path, class: "button"%>

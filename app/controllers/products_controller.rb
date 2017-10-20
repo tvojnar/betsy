@@ -1,8 +1,20 @@
-
 class ProductsController < ApplicationController
 
-  def root
+  def root #not necessary as it's already in index
     @products = Product.all
+  end
+
+  def index
+    if merchant_id != nil
+      merchant = Merchant.find_by(id: merchant_id)
+      @products = merchant.products
+    elsif category_id != nil
+      category = Category.find_by(id: category_id)
+      @products = category.products
+    else
+      @products = Product.all
+    end
+    return @products
   end
 
   def new
@@ -15,26 +27,14 @@ class ProductsController < ApplicationController
   end
 
 
-  def index
-    if params[:merchant_id]
-      merchant = Merchant.find_by(id: params[:merchant_id])
-      if merchant
-        @products = merchant.products
-      else
-        head :not_found
-      end
-    else
-      @products = Product.all
-    end
-  end
-
-
   def create
     if find_merchant #<<necessary? Dl
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
-      require 'pry'
+
+      # require 'pry'
       # binding.pry
+
       # puts "SESSION[:MERCHANT_ID]: #{session}"
       # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
       # merchant = Merchant.find_by(id: session[:merchant_id])
@@ -84,24 +84,35 @@ class ProductsController < ApplicationController
     #not sure about this, change the status to retired? add a new column with a migration?
   end
 
-def destroy
-  #tests for destroy don't currently work because I figured that destroy is routed from merchant/:id/product and we don't have a way of tracking merchant without OAuth
-  if find_merchant
-    merchant_id = Merchant.find_by(id: params[:id]).product_id
-    product = Product.find_by(id: merchant_id)
-    product.destroy
-    redirect_to merchants_products_path
-    #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
+  def destroy
+    #tests for destroy don't currently work because I figured that destroy is routed from merchant/:id/product and we don't have a way of tracking merchant without OAuth
+    if find_merchant
+      merchant_id = Merchant.find_by(id: params[:id]).product_id
+      product = Product.find_by(id: merchant_id)
+      product.destroy
+      redirect_to merchants_products_path
+      #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
+    end
   end
-end
 
   #logic to make sure user is signed in as merchant to get to this page
   #if session[:merchant_id]?
 
-end
+  private
 
-private
+  def product_params
+    return params.require(:product).permit(:name, :inventory, :price, :image_url)
+  end
 
-def product_params
-  return params.require(:product).permit(:name, :inventory, :price, :image_url)
+  def merchant_id
+    if params[:merchant] != nil
+      params[:merchant_id] || params[:merchant][:id]
+    end
+  end
+
+  def category_id
+    if params[:category] != nil
+      params[:category_id] || params[:category][:id]
+    end
+  end
 end

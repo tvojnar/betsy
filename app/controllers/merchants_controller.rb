@@ -2,6 +2,38 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
+    if @merchant #!= nil
+      @merchant = Merchant.find_by(id: params[:id])
+    else
+      render :show, status: :not_found
+    end
+  end
+
+  def edit
+    @merchant = Merchant.find_by(id: params[:id])
+    # require 'pry'
+    # binding.pry
+    if @merchant != nil
+      @merchant = Merchant.find_by(id: params[:id])
+    else
+       render :show, status: :not_found
+    end
+  end
+
+  def update
+    @merchant = Merchant.find_by(id: params[:id])
+    if @merchant
+      @merchant.update_attributes(merchant_params)
+      if save_and_flash(@merchant)
+        redirect_to merchant_path(@merchant)
+        return
+      else
+        render :edit, status: :bad_request
+        return
+      end
+    else
+      render :show, status: :not_found
+    end
   end
 
   def login
@@ -36,4 +68,12 @@ class MerchantsController < ApplicationController
     flash[:message] = "You have successfully logged out"
     redirect_to root_path
   end
+
+  private
+    def merchant_params
+      return params.require(:merchant).permit(:name, :email)
+    end
+
+
+
 end

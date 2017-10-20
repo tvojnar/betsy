@@ -1,5 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :products
+  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
@@ -20,6 +22,17 @@ class Merchant < ApplicationRecord
       total += item.price
     end
     return total
+  end
+
+  def merchant_order_items
+    @merchant_order_items = []
+    products = Product.where(merchant_id: session[:merchant_id]) #params[:id])
+    products.each do |product|
+      product.order_items.each do |order_item|
+        @merchant_order_items << order_item
+      end
+    end
+    return @merchant_order_items
   end
 
   def total_revenue_by_status
