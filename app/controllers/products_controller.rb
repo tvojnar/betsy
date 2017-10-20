@@ -5,16 +5,12 @@ class ProductsController < ApplicationController
   end
 
   def index
-    if merchant_id
+    if merchant_id != nil
       merchant = Merchant.find_by(id: merchant_id)
-      if merchant != nil
-        @products = merchant.products
-      end
-    elsif category_id
+      @products = merchant.products
+    elsif category_id != nil
       category = Category.find_by(id: category_id)
-      if category != nil
-        @products = category.products
-      end
+      @products = category.products
     else
       @products = Product.all
     end
@@ -109,10 +105,14 @@ class ProductsController < ApplicationController
   end
 
   def merchant_id
-    params[:merchant_id] || params[:merchant][:id]
+    if params[:merchant] != nil
+      params[:merchant_id] || params[:merchant][:id]
+    end
   end
 
   def category_id
-    params[:category_id] || params[:category][:id]
+    if params[:category] != nil
+      params[:category_id] || params[:category][:id]
+    end
   end
 end
