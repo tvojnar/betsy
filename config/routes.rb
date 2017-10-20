@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 #end
 # ^^is this the right syntax? DL
 root 'products#root'
+
 resources :products
 resources :orders
 resources :orderitems
@@ -27,11 +28,12 @@ resources :merchants do
   resources :products
 end
 
+get '/category', to: 'categories#show', as: 'filter_category'
+
 get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
 # NOTE: I commented out these routes because I don't think we need them since we have the login through OAuth....
 # get '/login', to: 'merchants#login', as: 'login'
 # post '/login', to: 'merchants#login'
 get '/logout', to: 'merchants#logout', as: 'logout'
-
 end
