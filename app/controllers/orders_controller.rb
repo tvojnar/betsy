@@ -9,8 +9,6 @@ class OrdersController < ApplicationController
   end # index
 
   def show
-    # TODO: why is @order nil?
-     @order = Order.first
      @order_items = current_order.order_items
   end # show
 end
