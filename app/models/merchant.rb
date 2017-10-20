@@ -20,11 +20,15 @@ class Merchant < ApplicationRecord
     moi = merchant.merchant_order_items(merchant)
     # merchant_products = Product.where()
     # merchant_order_items = OrderItem.where(product_id:  #is the same as the merchant.id)
-    if moi
+    # if moi
+    puts "************************************** MOI: #{moi}"
     moi.each do |item|
-      total += 0#item.cost
+      puts "**************************************** ITEM #{item}"
+      if item.cost
+        total += item.cost
+      end
     end
-  end
+  # end
     return total
   end
 
@@ -50,16 +54,17 @@ class Merchant < ApplicationRecord
     @completed_number = 0
 
     merchant_order_items(merchant).each do |item|
-      if item.shipped_status == "pending"
+      #If the order that is contained in the order_item status is pending
+      if Order.find_by(id: item.order_id) == "pending"
         @pending_total += item.price
         @pending_number += 1
-      elsif item.shipped_status == "paid"
+      elsif Order.find_by(id: item.order_id) == "paid"
         @paid_total += item.price
         @paid_number += 1
-      elsif item.shipped_status == "shipped"
+      elsif Order.find_by(id: item.order_id) == "shipped"
         @shipped_total += item.price
         @shipped_number += 1
-      elsif item.shipped_status == "completed"
+      elsif Order.find_by(id: item.order_id) == "completed"
         @completed_total += item.price
         @completed_number += 1
       end

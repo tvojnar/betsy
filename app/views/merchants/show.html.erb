@@ -1,9 +1,13 @@
 <h1>THIS IS THE MERCHANT SHOW PAGE</h1>
 
 Name: <%= @merchant.name %>
-<p>Total Revenue:</p> <%= @merchant.total_revenue(@merchant) %>
+</p>
+<p>Total Revenue: <%= @total_revenue %> </p>
+<p>Total Revenue by Category </p>
+<%= @total_revenue_by_status%>
+
 <%if @merchant_order_items %>
-<%= @merchant_order_items.each do |orderitem| %>
+<% @merchant_order_items.each do |orderitem| %>
   <%= orderitem.cost %>
 <% end %>
 <% end %>
