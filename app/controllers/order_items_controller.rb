@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
     if Product.find_by(params[:product_id])
       @order = current_order
       @item = @order.order_items.new(item_params)
-      @item.cost = Product.find_by(params[:product_id]).price 
+      @item.cost = Product.find_by(params[:product_id]).price
       @order.save
       session[:order_id] = @order.id
       # TODO: later we will want to redirect to a differnt path
