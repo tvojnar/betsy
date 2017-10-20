@@ -10,7 +10,6 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
     <body>
         <header class="page-header row">
@@ -38,8 +37,14 @@
                   <p class="button">
                   <%= link_to "Account", merchant_path(session[:merchant_id])%>
                   </p>
+                  <% if session[:order_id] %>
+                    <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                  <% end %>
                   <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
+                <% if session[:order_id] %>
+                  <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                <% end %>
                 <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
               <% end %>
             </div>

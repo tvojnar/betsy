@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019223127) do
+
+ActiveRecord::Schema.define(version: 20171020045148) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +42,7 @@ ActiveRecord::Schema.define(version: 20171019223127) do
   create_table "order_items", force: :cascade do |t|
     t.string "product_id"
     t.string "order_id"
-    t.string "quantity"
+    t.integer "quantity"
     t.float "cost"
     t.boolean "shipped_status", default: false
     t.datetime "created_at", null: false
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171019223127) do
     t.date "date_submitted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "total_price"
   end
 
   create_table "products", force: :cascade do |t|

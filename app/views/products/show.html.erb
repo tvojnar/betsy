@@ -8,6 +8,8 @@
   <h3>Cost: $<%= sprintf("%.2f", @product.price) %></h3>
   <h3><%= @product.inventory %> in stock</h3>
 </section>
+<%= render partial: 'layouts/add_order_item_to_order' %>
+
 
 
 <div>

@@ -1,0 +1,8 @@
+<h1> Index page for Orders</h1>
+
+<% @orders.each do |order| %>
+  <%= link_to order.id, order_path(order) %>
+<% end %>
+
+<%# this will add an a order_item to the order! passing in the hidden field allows us to associate the order_item with the correct product %>
+<%# render partial: 'layouts/add_order_item_to_order' %>

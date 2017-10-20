@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe MerchantsController do
+
   describe "login" do
     it "logs in an existing merchant" do
       start_count = Merchant.count
@@ -12,7 +13,7 @@ describe MerchantsController do
 
       # Should *not* have created a new user
       Merchant.count.must_equal start_count
-    end
+    end # logs in an existing user
 
     it "creates a new merchant" do
       start_count = Merchant.count
@@ -23,6 +24,8 @@ describe MerchantsController do
       session[:merchant_id].must_equal Merchant.last.id
     end
     #must test that user can log in to be merchant
+
+  end # login
 
   describe "logout" do
     it "can log a user out" do
