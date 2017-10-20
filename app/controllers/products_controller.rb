@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
+    return @products
   end
 
   def new
