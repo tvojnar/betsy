@@ -1,19 +1,19 @@
 class ProductsController < ApplicationController
 
-  def root
+  def root #not necessary as it's already in index
     @products = Product.all
   end
 
   def index
-    if params[:merchant_id]
-      merchant = Merchant.find_by(id: params[:merchant_id])
+    if merchant_id
+      merchant = Merchant.find_by(id: merchant_id)
       if merchant != nil
         @products = merchant.products
       end
-    elsif params[:category_id]
-      category = Category.find_by(id: params[:category_id])
+    elsif category_id
+      category = Category.find_by(id: category_id)
       if category != nil
-        @products = merchant.products
+        @products = category.products
       end
     else
       @products = Product.all
@@ -105,5 +105,13 @@ class ProductsController < ApplicationController
 
   def product_params
     return params.require(:product).permit(:name, :inventory, :price, :image_url)
+  end
+
+  def merchant_id
+    params[:merchant_id] || params[:merchant][:id]
+  end
+
+  def category_id
+    params[:category_id] || params[:category][:id]
   end
 end

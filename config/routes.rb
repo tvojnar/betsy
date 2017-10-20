@@ -28,7 +28,13 @@ resources :merchants do
   resources :products
 end
 
+
 get '/category', to: 'categories#show', as: 'filter_category'
+
+resources :categories do
+  resources :products
+end
+
 
 get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
