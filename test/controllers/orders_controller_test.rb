@@ -10,6 +10,7 @@ describe OrdersController do
 
   it "will work if no order has been created yet for the session" do
   # QUESTION: why can't I use current_order in my tests??????
+  # need to do the post that is calling current_order in my test
    get order_path(current_order)
    must_respond_with :success
   end # works if an orger hasn't been created yet for the session
