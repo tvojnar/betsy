@@ -114,27 +114,7 @@ describe ProductsController do
   end
 
 
-  it "adds at least one instance to the products category intermediary table" do
-    start_count = products.categories.size
-    product_count = Product.count
-    diane = merchants(:diane)
-    product_data = {
-      product: {
-        merchant: diane,
-        name: "string of pearls",
-        price: 30.0,
-        inventory: 40,
-        image_url: 'https://img0.etsystatic.com/135/0/13063062/il_570xN.1001407668_zqhp.jpg'
-      }
-    }
-    product = Product.new(product_data[:product])
-    product.must_be :valid?
-
-    Product.count.must_equal product_count + 1
-
-    after_count = (Categories_Products.count +1)
-    start_count.must_equal after_count
-  end
+  
 end
 
   # describe "show" do
