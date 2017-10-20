@@ -11,6 +11,16 @@ class ProductsController < ApplicationController
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
+    elsif params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that merchant was not found."
+      redirect_to products_path
+      return @products = Product.all
+    elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
+    flash[:status] = :failure
+    flash[:message] = "Sorry, that category was not found."
+      redirect_to products_path
+      return @products = Product.all
     else
       @products = Product.all
     end
