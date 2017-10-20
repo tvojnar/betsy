@@ -4,6 +4,10 @@
 <main class = "row">
   <section class = "row ">
     <p>Products</p>
+    <%# if @products == nil %>
+    <%#"Products Coming Soon!" %>
+    <%#else%>
+
     <% @products.each do |product| %>
       <div>
         Image will go here-ish
@@ -20,6 +24,7 @@
           <li> Merchant: <%= Merchant.find_by(id: product.merchant_id).name %>
           </li>
       </div>
+      <%#end%>
       <% end %>
     </section>
 </main>

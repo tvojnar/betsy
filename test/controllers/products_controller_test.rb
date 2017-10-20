@@ -113,23 +113,20 @@ describe ProductsController do
     Product.count.must_equal product_count
   end
 
+  describe "show" do
+    it "returns a success status when passed a valid id" do
+      product_id = Product.first.id
+      get product_path(product_id)
+      must_respond_with :success
+    end
 
-
+    it "returns not_found when given a bogus product id" do
+      product_id = Product.last.id + 1
+      get product_path(product_id)
+      must_respond_with :not_found
+    end
+  end
 end
-
-  # describe "show" do
-  #   it "returns a success status when passed a valid id" do
-  #     product_id = Product.first.id
-  #     get product_path(product_id)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "returns not_found when given a bogus product id" do
-  #     product_id = Product.first.id + 1
-  #     get product_path(product_id)
-  #     must_respond_with :not_found
-  #   end
-  # end
   #
   # describe "edit" do
   #   it "returns a success status when passed a valid id" do
