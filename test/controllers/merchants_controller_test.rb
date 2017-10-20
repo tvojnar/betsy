@@ -24,22 +24,24 @@ describe MerchantsController do
       session[:merchant_id].must_equal Merchant.last.id
     end
     #must test that user can log in to be merchant
+  end # logout
 
-    describe "logout" do
-      it "can log a user out" do
-        # log the user in
-        merchant = merchants(:diane)
+  describe "logout" do
+    it "can log a user out" do
+      # log the user in
+      merchant = merchants(:diane)
 
-        login(merchant)
-        must_redirect_to root_path
-        session[:merchant_id].must_equal  merchant.id
+      login(merchant)
+      must_redirect_to root_path
+      session[:merchant_id].must_equal  merchant.id
 
-        # log the user out!
-        get logout_path
+      # log the user out!
+      get logout_path
 
-        # Assert that logout worked
-        must_redirect_to root_path
-        session[:merchant_id].must_equal nil
-      end # it can log a user out
-    end # logout
-  end
+      # Assert that logout worked
+      must_redirect_to root_path
+      session[:merchant_id].must_equal nil
+    end # it can log a user out
+  end # logout
+
+end # MerchantsController
