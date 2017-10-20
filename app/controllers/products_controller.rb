@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
-    @order_items = current_order.order_items
+    @order_items = current_order.order_items.new
     unless @product
       render :root, status: :not_found
     end
