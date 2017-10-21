@@ -62,7 +62,10 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @order_items = current_order.order_items.new
     unless @product
-      render :root, status: :not_found
+      flash[:status] = :failure
+      flash[:message] = "Sorry that product is not in our database."
+      redirect_to root_path
+      return
     end
   end
 
