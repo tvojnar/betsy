@@ -9,16 +9,37 @@ require "test_helper"
 # # end
 
 describe "validations" do
+  let(:p_id) {Product.first.id}
+  let(:o_id) {Order.first.id}
+  it "will create a new OrderItem when all fields meet validations" do
+    oi = OrderItem.new(product_id: p_id, quantity: 1, order_id: o_id)
+
+    oi.must_be :valid?
+  end # makes a new OrderItems when validations are met
+
   it "requires a quantity" do
-    # TODO
+    oi = OrderItem.new(product_id: p_id, order_id: o_id)
+
+    oi.wont_be :valid?
+    oi.errors.messages.must_include :quantity
+
   end # it "requires a quantity" do
 
   it "requires that quantity is an integer" do
-    # TODO
+    oi = OrderItem.new(product_id: p_id, quantity: "one", order_id: o_id)
+
+    oi.wont_be :valid?
+    oi.errors.messages.must_include :quantity
   end
 
   it "requires that quantity is greater than 0" do
-  end # greater than 0 
+    oi = OrderItem.new(product_id: p_id, quantity: 0, order_id: o_id)
+    oi_2 = OrderItem.new(product_id: p_id, quantity: -1, order_id: o_id)
+
+    oi.wont_be :valid?
+    oi_2.wont_be :valid?
+    oi.errors.messages.must_include :quantity
+  end # greater than 0
 
 end # validations
 
