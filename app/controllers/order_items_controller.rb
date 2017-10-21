@@ -13,18 +13,20 @@ class OrderItemsController < ApplicationController
       redirect_to root_path
     else
       # QUESTION: is this the right way to check that an order_item won't be added if the product with that ID doesn't exist?
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that product does not exist on our site"
+      redirect_to root_path
+
       head :not_found
     end
   end # create
 
   def destroy
-    # added this line to find the right order to delete from
-    # QUESTION: is this ok? will we ever want to not delete from the Order with id session[:order_id]
-    @order = Order.find_by(id: session[:order_id])
-    @item = @order.order_items.find(params[:id])
+    # don't need to know what order you're deleting the order_item from! Just deleting from the order_items table :)
+    @item = OrderItem.find_by(id: params[:id])
     @item.destroy
-    @order.save
-    redirect_to order_path(@order)
+    redirect_to order_path(session[:order_id])
+
   end
 
   private

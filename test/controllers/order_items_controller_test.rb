@@ -2,9 +2,6 @@ require "test_helper"
 
 describe OrderItemsController do
   describe "create" do
-    # TODO: get some pointers on how to test this better and make the test pass... QUESTION: why can't this test access the current_order method??!!
-    # just look at the numer of instances in hte order_items table before and after the post
-    # TODO: can i look at Order.last to see if it has the right product in it?
     it "will add an order_item and create a new instance of Order if the product exists" do
       start_num_itmes = OrderItem.count
       start_orders = Order.count
@@ -42,7 +39,8 @@ describe OrderItemsController do
 
       post order_items_path, params: item_params
       # QUESTION: is not_found the right way to do this?
-      # must_respond_with :not_found
+      must_respond_with :redirect
+      must_redirect_to root_path
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist
