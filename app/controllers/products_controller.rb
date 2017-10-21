@@ -42,12 +42,6 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params)
       @product.merchant_id = session[:merchant_id] #<< this will be set in the merchant controller login method
 
-      # require 'pry'
-      # binding.pry
-
-      # puts "SESSION[:MERCHANT_ID]: #{session}"
-      # ^^ or we could do @product.merchant_id = @login_merchant.id as defined in application controller find_merchant method
-      # merchant = Merchant.find_by(id: session[:merchant_id])
       if save_and_flash(@product) #<<defined as a method in in application controller
         redirect_to merchant_products_path(@login_merchant.id) #redirect might need to be changed based on flow, but idk rn DL
       else
@@ -99,14 +93,25 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    #tests for destroy don't currently work because I figured that destroy is routed from merchant/:id/product and we don't have a way of tracking merchant without OAuth
+    @product = Product.find_by(id: params[:id])
     if find_merchant
-      merchant_id = Merchant.find_by(id: params[:id]).product_id
-      product = Product.find_by(id: merchant_id)
-      product.destroy
-      redirect_to merchants_products_path
-      #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
+      if @login_merchant.id == @product.merchant_id
+        @product.destroy
+        flash[:status] = :success
+        flash[:message] = "Successfully removed #{@product.name} from your products"
+        redirect_to merchant_products_path(@login_merchant.id)
+      else
+        flash[:status] = :failure
+        flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
+        redirect_to product_path(@product.id)
+      end
+    else
+      flash[:status] = :failure
+      flash[:message] = "Sorry you must be logged in to do that!"
+      redirect_to product_path(@product.id)
     end
+      #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
+
   end
 
   #logic to make sure user is signed in as merchant to get to this page
