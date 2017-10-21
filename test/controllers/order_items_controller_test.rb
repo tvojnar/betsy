@@ -3,6 +3,7 @@ require "test_helper"
 describe OrderItemsController do
   describe "create" do
     it "will add an order_item and create a new instance of Order if the product exists" do
+      o = orders(:pending)
       start_num_itmes = OrderItem.count
       start_orders = Order.count
       id = Product.first.id
@@ -65,7 +66,7 @@ describe OrderItemsController do
       delete order_item_path(id)
 
       must_respond_with :not_found
-      OrderItem.count.must_equal count 
+      OrderItem.count.must_equal count
     end # wont delete the OrderItem if the OrderItem doesn't exist
   end # destroy
 
