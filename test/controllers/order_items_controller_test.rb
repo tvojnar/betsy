@@ -48,12 +48,26 @@ describe OrderItemsController do
 
   describe "destroy" do
     it "returns success and deletes the order_item when given a valid order_item ID" do
-      o = orders(:pending)
-      oi = o.order_items.first
+      count = OrderItem.count
+      oi = OrderItem.first
+      # oi = order_items(:one)
+
+      puts "*" * 50
+      puts OrderItem.first
+      # puts oi.id
+      puts "=" * 50
 
       delete order_item_path(oi)
 
       must_respond_with :redirect
+      OrderItem.count.must_equal count - 1
+
+      # o = orders(:pending)
+      # oi = o.order_items.first
+      #
+      # delete order_item_path(oi)
+      #
+      # must_respond_with :redirect
 
 
       # def destroy
