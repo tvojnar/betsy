@@ -23,10 +23,13 @@ class OrderItemsController < ApplicationController
 
   def destroy
     # don't need to know what order you're deleting the order_item from! Just deleting from the order_items table :)
-    # @order = Order.find_by(id: session[:order_id])
     @item = OrderItem.find_by(id: params[:id])
-    @item.destroy
-    redirect_to order_path(@item.order.id)
+    if @item
+      @item.destroy
+      redirect_to order_path(@item.order.id)
+    else
+      head :not_found
+    end
   end
 
   private

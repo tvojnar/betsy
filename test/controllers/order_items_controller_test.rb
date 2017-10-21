@@ -7,11 +7,11 @@ describe OrderItemsController do
       start_orders = Order.count
       id = Product.first.id
       item_params = {
-          order_item: {
-             quantity: 1,
-             product_id: id
-           }
-         }
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }
 
       post order_items_path, params: item_params
 
@@ -31,11 +31,11 @@ describe OrderItemsController do
       start_orders = Order.count
       id = Product.last.id + 1
       item_params = {
-          order_item: {
-             quantity: 1,
-             product_id: id
-           }
-         }
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }
 
       post order_items_path, params: item_params
       # QUESTION: is not_found the right way to do this?
@@ -50,33 +50,25 @@ describe OrderItemsController do
     it "returns success and deletes the order_item when given a valid order_item ID" do
       count = OrderItem.count
       oi = OrderItem.first
-      # oi = order_items(:one)
-
-      puts "*" * 50
-      puts OrderItem.first
-      # puts oi.id
-      puts "=" * 50
 
       delete order_item_path(oi)
 
       must_respond_with :redirect
+      must_redirect_to order_path(oi.order.id)
       OrderItem.count.must_equal count - 1
-
-      # o = orders(:pending)
-      # oi = o.order_items.first
-      #
-      # delete order_item_path(oi)
-      #
-      # must_respond_with :redirect
-
-
-      # def destroy
-      #   @item = @order.order_items.find(params[:id])
-      #   @item.destroy
-      #   @order.save
-      #   redirect_to order_path(@order)
-      # end
     end # works when given valid order_item
+
+    it "wont delete the OrderItem if the OrderItem doesn't exist" do
+      count = OrderItem.count
+      id = OrderItem.last.id + 1
+
+      delete order_item_path(id)
+
+      must_respond_with :not_found
+      OrderItem.count.must_equal count 
+    end # wont delete the OrderItem if the OrderItem doesn't exist
   end # destroy
+
+
 
 end #OrderItemsController
