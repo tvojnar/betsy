@@ -15,7 +15,7 @@ describe Product do
 
   let(:p_less_than_zero) { Product.new(merchant: merchant, name: "Red Cap Cactus", inventory: 10, price: -1.0, description: "A cactus with a pink flower at the top", visible: true, image_url: "http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg") }
 
-  let(:p_no_quantity) { Product.new(merchant: merchant, name: "Red Cap Cactus", price: 30.00, description: "A cactus with a pink flower at the top", visible: true, image_url: "http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg") }
+  let(:p_no_inventory) { Product.new(merchant: merchant, name: "Red Cap Cactus", price: 30.00, description: "A cactus with a pink flower at the top", visible: true, image_url: "http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg") }
 
   describe "validations" do
     it "can be created with all fields" do
@@ -57,11 +57,6 @@ describe Product do
 
     it "requires a product must belong to a merchant" do
       products(:aloe_vera).merchant.must_equal merchants(:tamira)
-    end
-
-    it "must have quantity" do
-      is_valid = p_no_quantity.valid?
-      is_valid.must_equal false
     end
   end
 end
