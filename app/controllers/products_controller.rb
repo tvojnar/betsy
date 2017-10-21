@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :retire]
+
 
   def root #not necessary as it's already in index
     @products = Product.all
@@ -54,19 +56,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
-    unless @product
-      render :root, status: :not_found
-    end
+
   end
 
   def edit
     if find_merchant #<<defined in application_controller, contingent upon OAuth
-      #logic to make sure user is signed in as merchant to get to this page
-      @product = Product.find_by(id: params[:id])
-      unless @product
-        render :root, status: :not_found
-      end
+      
     else
       render :root, status: :not_found
     end
@@ -114,5 +109,12 @@ class ProductsController < ApplicationController
 
   def category_id
     params[:category_id] || params[:category][:id]
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    unless @product
+      render :root, status: :not_found
+    end
   end
 end
