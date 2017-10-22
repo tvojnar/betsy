@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
     # If this is the first order_item to be added then current_order will return a new instance of Order
     # if we already have a Order for this session then @order will be set to that order
     # we add the order_item from the _add_order_item_to_order form to @order and save the order
-    @product = Product.find_by(params[:product_id])
+    @product = Product.find_by(id: item_params[:product_id])
     if @product
       if item_params[:quantity].to_i <= @product.inventory
         @order = current_order
@@ -11,11 +11,14 @@ class OrderItemsController < ApplicationController
         @item.cost = Product.find_by(params[:product_id]).price
         @order.save
         session[:order_id] = @order.id
+        @product.inventory = (@product.inventory - item_params[:quantity].to_i)
+        @product.save
         # TODO: later we will want to redirect to a differnt path
         redirect_to root_path
+
       else
         flash[:status] = :failure
-        flash[:message] = "Sorry, there isn't enough stock. There are only #{@product.inventory} #{product.name} in stock."
+        flash[:message] = "Sorry, there isn't enough stock. There are only #{@product.inventory} #{@product.name} in stock."
         redirect_to root_path
       end
     else

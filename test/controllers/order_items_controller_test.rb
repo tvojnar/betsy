@@ -38,15 +38,30 @@ describe OrderItemsController do
       }
 
       post order_items_path, params: item_params
-      # QUESTION: is not_found the right way to do this?
       must_respond_with :redirect
       must_redirect_to root_path
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist
 
-    it "will only add the product if there is enoughh in stick" do
-    end # only add if there is enough stock 
+    it "wont add the product if there is enoughh in stock" do
+      start_num_itmes = OrderItem.count
+      start_orders = Order.count
+      prod = products(:tulip_bulb)
+      item_params = {
+        order_item: {
+          quantity: 1,
+          product_id: prod.id 
+        }
+      }
+
+      post order_items_path, params: item_params
+      # QUESTION: is not_found the right way to do this?
+      must_respond_with :redirect
+      must_redirect_to root_path
+      OrderItem.count.must_equal start_num_itmes
+      Order.count.must_equal start_orders
+    end # only add if there is enough stock
   end # create
 
   describe "destroy" do
