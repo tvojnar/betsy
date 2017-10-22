@@ -45,6 +45,7 @@ class MerchantsController < ApplicationController
 
   def login
     auth_hash = request.env['omniauth.auth']
+    # if session[:merchant_id] = nil
 
     if auth_hash['uid']
       merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
@@ -65,6 +66,7 @@ class MerchantsController < ApplicationController
       flash[:status] = :failure
       flash[:message] = "Could not create user from data provided by Github"
     end # if/else
+  # end
     redirect_to root_path
   end
 

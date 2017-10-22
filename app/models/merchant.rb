@@ -19,9 +19,7 @@ class Merchant < ApplicationRecord
     total = 0
     moi = merchant.merchant_order_items(merchant)
     moi.each do |item|
-      if item.cost
-        total += item.product.price * item.quantity
-      end
+      total += item.product.price * item.quantity
     end
     return total
   end
@@ -29,9 +27,9 @@ class Merchant < ApplicationRecord
   def merchant_order_items(merchant)
     merchant_order_items = []
     products = Product.where(merchant_id: merchant.id) #params[:id])
-    products.each do |product|
-      product.order_items.each do |order_item|
-        merchant_order_items << order_item
+    products.each do |pr|
+      pr.order_items.each do |oi|
+        merchant_order_items << oi
       end
     end
     return merchant_order_items
