@@ -29,10 +29,11 @@ resources :merchants do
 end
 
 
-get '/category', to: 'categories#show', as: 'filter_category'
+# get '/category', to: 'categories#show', as: 'filter_category'
 
-resources :categories do
-  resources :products
+resources :categories, only: [:index, :new, :create] do
+  # resources :products, only: [:index]
+  get '/categories/:id/products', to: 'products#index', as: "category_products"
 end
 
 
