@@ -5,9 +5,12 @@ class ProductsController < ApplicationController
   end
 
   def index
+    puts " ************************** MERCHANT_ID #{merchant_id} !!!"
+
     if merchant_id != nil
       merchant = Merchant.find_by(id: merchant_id)
       @products = merchant.products
+      puts " ************************** GOT INTO THE IF MERCHANT_ID != NIL !!!"
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
@@ -111,12 +114,14 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :inventory, :price, :image_url)
+    return params.require(:product).permit(:name, :inventory, :price, :image_url, :category_ids)
   end
 
   def merchant_id
     if params[:merchant] != nil
-      params[:merchant_id] || params[:merchant][:id]
+      params[:merchant][:id]
+    elsif params[:merchant_id] != nil
+      params[:merchant_id]
     end
   end
 
