@@ -2,7 +2,7 @@ require "test_helper"
 
 describe OrderItemsController do
   describe "create" do
-    it "will add an instock order_item and create a new instance of Order if the product exists" do
+    it "will add an order_item and create a new instance of Order if the product exists" do
       start_num_itmes = OrderItem.count
       start_orders = Order.count
       id = Product.first.id
@@ -15,7 +15,6 @@ describe OrderItemsController do
 
       post order_items_path, params: item_params
 
-
       must_respond_with :redirect
       # TODO: change this when we decide where to redirect to!
       must_redirect_to root_path
@@ -25,11 +24,7 @@ describe OrderItemsController do
       Order.count.must_equal start_orders + 1
       # TODO: figure out why this is returning a string! The id # is the same but the 'actual' is a string and the expected is an integer....
       Order.last.order_items.first.product_id.must_equal id
-      # check that it was in stocl
-      puts "+" * 50
-      puts Order.last.order_items.first.quantity
-      puts "=" * 50
-    end # will add an instock product to an Order
+    end
 
     it "won't add a order_item or save the order if the product doesn't exist" do
       start_num_itmes = OrderItem.count
@@ -49,17 +44,6 @@ describe OrderItemsController do
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist
-
-    it "will only add products that are in stock to an Order via an OrderItem" do
-    end # only add in stock products
-
-    it "won't add a product if the quantity is more than the stock" do
-      # TODO
-    end # won't add product if quantity > stock
-
-    it "will only add a product to an OrderItem if quntity is > 0" do
-      # TODO
-    end # only adds product if quantity is > 0
   end # create
 
   describe "destroy" do

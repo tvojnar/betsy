@@ -46,7 +46,7 @@ completed:
   status: completed
   date_submitted:
 
-cancelled:
+shipped:
   email: tv@ada.edu
   address: 4 Steet that Tamira lives at
   cc_name: Tamira
@@ -54,5 +54,5 @@ cancelled:
   cc_exp: 2017-10-01
   cc_cvv: 123
   zip: 44444
-  status: cancelled
+  status: shipped
   date_submitted:

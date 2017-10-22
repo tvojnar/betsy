@@ -20,7 +20,7 @@
           <nav class="row">
             <div class="large-8 small-12 columns button-group">
               <%= link_to "View All Products", products_path, class: "button" %>
-              <%# f.label :category %>
+
               <%= render partial: 'layouts/categorydropdown' %>
               <%= render partial: 'layouts/merchantdropdown' %>
 
@@ -29,14 +29,14 @@
 
             <div class="float-right">
               <% if session[:merchant_id] %>
-                <p class="button">
+
                   Logged in as
                   <%= Merchant.find(session[:merchant_id]).name %>
-                  </p>
+
                   <%= link_to "Add a New Product", new_product_path, class: "button" %>
-                  <p class="button">
-                  <%= link_to "Account", merchant_path(session[:merchant_id])%>
-                  </p>
+
+                  <%= link_to "Account", merchant_path(session[:merchant_id]), class: "button"%>
+                
                   <% if session[:order_id] %>
                     <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
                   <% end %>
