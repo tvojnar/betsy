@@ -9,8 +9,7 @@
   <%= f.label :price %>
   <%= f.number_field :price %>
 
-  <%= f.label :category %>
-  <%= f.collection_select(:category_ids, Category.all, :id, :name, class: "text_field") %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
 
   <%= f.label :image_url %>
   <%= f.text_field :image_url %>
