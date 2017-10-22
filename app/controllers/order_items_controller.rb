@@ -15,17 +15,16 @@ class OrderItemsController < ApplicationController
         @product.save
         # TODO: later we will want to redirect to a differnt path
         redirect_to root_path
-
       else
         flash[:status] = :failure
-        flash[:message] = "Sorry, there isn't enough stock. There are only #{@product.inventory} #{@product.name} in stock."
-        redirect_to root_path
+        flash[:message] = "Sorry, there isn't enough stock. There are #{@product.inventory} #{@product.name}\'s in stock."
+        redirect_to product_path(@product)
       end
     else
       # QUESTION: is this the right way to check that an order_item won't be added if the product with that ID doesn't exist?
       flash[:status] = :failure
       flash[:message] = "Sorry, that product does not exist on our site"
-      redirect_to root_path
+      redirect_to products_path
 
       head :not_found
     end

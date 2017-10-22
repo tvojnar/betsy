@@ -39,29 +39,51 @@ describe OrderItemsController do
 
       post order_items_path, params: item_params
       must_respond_with :redirect
-      must_redirect_to root_path
+      must_redirect_to products_path
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist
 
-    it "wont add the product if there is enoughh in stock" do
+    it "wont add the product if inventory = 0 " do
       start_num_itmes = OrderItem.count
       start_orders = Order.count
       prod = products(:tulip_bulb)
       item_params = {
         order_item: {
           quantity: 1,
-          product_id: prod.id 
+          product_id: prod.id
         }
       }
 
       post order_items_path, params: item_params
       # QUESTION: is not_found the right way to do this?
       must_respond_with :redirect
-      must_redirect_to root_path
+      flash[:message].must_equal "Sorry, there isn't enough stock. There are 0 Tulip bulb's in stock."
+      must_redirect_to product_path(prod)
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
-    end # only add if there is enough stock
+    end # only add if stock is at 0
+
+    it "won't add the product to the OrderItem if quantity requested > inventory" do
+      start_num_itmes = OrderItem.count
+      start_orders = Order.count
+      prod = products(:spider_plant)
+      item_params = {
+        order_item: {
+          quantity: 11,
+          product_id: prod.id
+        }
+      }
+
+      post order_items_path, params: item_params
+      # QUESTION: is not_found the right way to do this?
+      must_respond_with :redirect
+      # TODO: test the flash message!
+      flash[:message].must_equal "Sorry, there isn't enough stock. There are 5 Spider Plant's in stock."
+      must_redirect_to product_path(prod)
+      OrderItem.count.must_equal start_num_itmes
+      Order.count.must_equal start_orders
+    end # won't add if quantity < inventory
   end # create
 
   describe "destroy" do
