@@ -44,6 +44,9 @@ describe OrderItemsController do
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist
+
+    it "will only add the product if there is enoughh in stick" do
+    end # only add if there is enough stock 
   end # create
 
   describe "destroy" do
