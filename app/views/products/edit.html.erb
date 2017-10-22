@@ -8,7 +8,7 @@
 <%= f.text_field :price %>
 
 <%= f.label :category %>
-<%= f.collection_select(:category_ids, Category.all, :id, :name, :include_blank => "Nothing selected", class: "text_field") %>
+<%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
 
 <%= f.label :inventory %>
 <%= f.number_field :inventory %>
