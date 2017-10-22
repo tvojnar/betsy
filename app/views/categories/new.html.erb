@@ -1,5 +1,11 @@
 <h1>Create a new category</h1>
 
+<ul>
+  <% @category.errors.each do |field, msg| %>
+    <li><%= field %> <%= msg %></li>
+  <% end %>
+</ul>
+
 <%= form_for @category do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
