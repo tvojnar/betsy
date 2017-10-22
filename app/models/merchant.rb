@@ -18,15 +18,11 @@ class Merchant < ApplicationRecord
   def total_revenue(merchant)
     total = 0
     moi = merchant.merchant_order_items(merchant)
-    # merchant_products = Product.where()
-    # merchant_order_items = OrderItem.where(product_id:  #is the same as the merchant.id)
-    # if moi
     moi.each do |item|
       if item.cost
-        total += item.cost
+        total += item.product.price * item.quantity
       end
     end
-  # end
     return total
   end
 
@@ -41,35 +37,89 @@ class Merchant < ApplicationRecord
     return merchant_order_items
   end
 
-  def pending(merchant)
-    if
-  end
-
-  def total_revenue_by_status(merchant)
-    @pending_total = 0
-    @paid_total = 0
-    @shipped_total = 0
-    @completed_total = 0
-    @pending_number = 0
-    @paid_number = 0
-    @shipped_number = 0
-    @completed_number = 0
-
+  def pending_revenue(merchant)
+    pending_total = 0
+    pending_number = 0
     merchant_order_items(merchant).each do |item|
-      #If the order that is contained in the order_item status is pending
-      if Order.find_by(id: item.order_id) == "pending"
-        @pending_total += item.quantity * item.product.price
-        @pending_number += 1
-      elsif Order.find_by(id: item.order_id) == "paid"
-        @pending_total += item.quantity * item.product.price
-        @paid_number += 1
-      elsif Order.find_by(id: item.order_id) == "shipped"
-        @pending_total += item.quantity * item.product.price
-        @shipped_number += 1
-      elsif Order.find_by(id: item.order_id) == "completed"
-        @pending_total += item.quantity * item.product.price
-        @completed_number += 1
+      if item.order.status == "pending"
+        pending_total += item.quantity * item.product.price
+        pending_number += 1
       end
     end
+    return pending_total
   end
+
+  def paid_revenue(merchant)
+    paid_total = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "paid"
+        paid_total += item.quantity * item.product.price
+      end
+    end
+    return paid_total
+  end
+
+  def shipped_revenue(merchant)
+    shipped_total = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "shipped"
+        shipped_total += item.quantity * item.product.price
+      end
+    end
+    return shipped_total
+  end
+
+  def completed_revenue(merchant)
+    completed_total = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "completed"
+        completed_total += item.quantity * item.product.price
+      end
+    end
+    return completed_total
+  end
+
+  def orders(merchant)
+    merchant_orders = []
+    merchant_order_items(merchant).each do |item|
+      if merchant_orders == []
+        merchant_orders << item.order
+      end
+      merchant_orders.each do |mo|
+        if item.order != mo
+          merchant_orders << item.order
+        end
+      end
+    end
+    return merchant_orders
+  end
+
+  # def total_revenue_by_status(merchant)
+  #   @pending_total = 0
+  #   @paid_total = 0
+  #   @shipped_total = 0
+  #   @completed_total = 0
+  #   @pending_number = 0
+  #   @paid_number = 0
+  #   @shipped_number = 0
+  #   @completed_number = 0
+  #
+  #   merchant_order_items(merchant).each do |item|
+  #     #If the order that is contained in the order_item status is pending
+  #     if Order.find_by(id: item.order_id) == "pending"
+  #       @pending_total += item.quantity * item.product.price
+  #       @pending_number += 1
+  #     elsif Order.find_by(id: item.order_id) == "paid"
+  #       @pending_total += item.quantity * item.product.price
+  #       @paid_number += 1
+  #     elsif Order.find_by(id: item.order_id) == "shipped"
+  #       @pending_total += item.quantity * item.product.price
+  #       @shipped_number += 1
+  #     elsif Order.find_by(id: item.order_id) == "completed"
+  #       @pending_total += item.quantity * item.product.price
+  #       @completed_number += 1
+  #     end
+  #   end
+  # end
+
 end

@@ -42,3 +42,21 @@ audrey_ficus:
   visible: true
   image_url: https://www.plantshed.com//media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/s/ps20008_1_1.jpg
   # category: house_plants
+
+ogre_ears:
+  merchant: diane
+  name: Ogre Ears
+  inventory: 10
+  price: 9.00
+  description: something
+  visible: true
+  image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
+
+string_of_pearls:
+  merchant: diane
+  name: String of Pearls
+  inventory: 10
+  price: 16.00
+  description: something.
+  visible: true
+  image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg

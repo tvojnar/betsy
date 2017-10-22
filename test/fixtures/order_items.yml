@@ -16,7 +16,7 @@ two:
 
 three:
   product: red_cap_cactus
-  order: cancelled
+  order: shipped
   quantity: 2
   cost: 12.00
   shipped_status: false
@@ -27,3 +27,38 @@ four:
   quantity: 2
   cost: 160.00
   shipped_status: false
+
+five:
+  product: ogre_ears
+  quantity: 3
+  order: paid
+  cost: 70.0
+  shipped_status: false
+
+six:
+  product: ogre_ears
+  quantity: 4
+  order: pending
+  cost: 19.00
+  shipped_status: false
+
+seven:
+  product: string_of_pearls
+  quantity: 1
+  order: shipped
+  cost: 150.0
+  shipped_status: true
+
+eight:
+  product: string_of_pearls
+  quantity: 3
+  order: completed
+  cost: 30.0
+  shipped_status: true
+
+nine:
+  product: audrey_ficus
+  quantity: 10
+  order: completed
+  cost: 100.0
+  shipped_status: true

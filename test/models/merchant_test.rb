@@ -73,16 +73,76 @@ describe "custom methods" do
 
   describe "total revenue" do
     it "returns total revenue regardless of order status for a given merchant" do
-
+      merchant = merchants(:diane)
+      merchant.total_revenue(merchant).must_equal 541.0
     end
-
     it "returns 0 when there are no orders for the given merchant" do
-      
+      OrderItem.destroy_all
+      merchant = merchants(:diane)
+      merchant.total_revenue(merchant).must_equal 0
+    end
+
+    it "returns the total of each status revenue" do
+      merchant = merchants(:diane)
+      total_by_status = merchant.pending_revenue(merchant) + merchant.paid_revenue(merchant) + merchant.shipped_revenue(merchant) + merchant.completed_revenue(merchant)
+      puts ">>>>>>>>>>>>>>>>>>>>>> TOTAL_BY_STATUS #{total_by_status}"
+      merchant.total_revenue(merchant).must_equal total_by_status
     end
   end
 
-  describe "total_revenue_by_status" do
+  describe "pending revenue" do
+    it "returns the correct pending revenue for a merchant with many order statuses" do
+      merchant = merchants(:diane)
+      merchant.pending_revenue(merchant).must_equal 36.0
+    end
+
+    it "returns the 0 for a merchant with no pending revenue" do
+      OrderItem.destroy_all
+      merchant = merchants(:diane)
+      merchant.pending_revenue(merchant).must_equal 0
+    end
 
   end
+
+  describe "paid revenue" do
+    it "returns the correct paid revenue for a merchant with many order statuses" do
+      merchant = merchants(:diane)
+      merchant.paid_revenue(merchant).must_equal 187.0
+    end
+
+    it "returns the 0 for a merchant with no paid revenue" do
+      OrderItem.destroy_all
+      merchant = merchants(:diane)
+      merchant.paid_revenue(merchant).must_equal 0
+    end
+
+  end
+
+  describe "shipped revenue" do
+    it "returns the correct shipped revenue for a merchant with many order statuses" do
+      merchant = merchants(:diane)
+      merchant.shipped_revenue(merchant).must_equal 28.0
+    end
+
+    it "returns the 0 for a merchant with no shipped revenue" do
+      OrderItem.destroy_all
+      merchant = merchants(:diane)
+      merchant.shipped_revenue(merchant).must_equal 0
+    end
+  end
+
+  describe "completed revenue" do
+    it "returns the correct completed revenue for a merchant with many order statuses" do
+      merchant = merchants(:diane)
+      merchant.completed_revenue(merchant).must_equal 848.0
+    end
+
+    it "returns the 0 for a merchant with no paid revenue" do
+      OrderItem.destroy_all
+      merchant = merchants(:diane)
+      merchant.completed_revenue(merchant).must_equal 0
+    end
+  end
+
 end
 end

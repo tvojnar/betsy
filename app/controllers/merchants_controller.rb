@@ -6,7 +6,11 @@ class MerchantsController < ApplicationController
       @merchant = Merchant.find_by(id: params[:id])
       @merchant_order_items = @merchant.merchant_order_items(@merchant)
       @total_revenue = @merchant.total_revenue(@merchant)
-      @total_revenue_by_status = @merchant.total_revenue_by_status(@merchant)
+      @pending_revenue = @merchant.pending_revenue(@merchant)
+      @paid_revenue = @merchant.paid_revenue(@merchant)
+      @shipped_revenue = @merchant.shipped_revenue(@merchant)
+      @completed_revenue = @merchant.completed_revenue(@merchant)
+      @merchant_orders = @merchant.orders(@merchant)
     else
       render :show, status: :not_found
     end
