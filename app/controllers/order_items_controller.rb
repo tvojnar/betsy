@@ -32,6 +32,18 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def mark_shipped
+    item = OrderItem.find_by(id: params[:id])
+    if item.shipped_status == false
+      item.shipped_status = true
+      item.save
+    else
+      item.shipped_status = false
+      item.save
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
   private
   def item_params
     params.require(:order_item).permit(:quantity, :product_id)
