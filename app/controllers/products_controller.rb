@@ -64,21 +64,26 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
+    if @product == nil
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that product was not found!"
+      redirect_to products_path
+      return
+    end
     if find_merchant #<<defined in application_controller, contingent upon OAuth
       #logic to make sure user is signed in as merchant to get to this page
-      @product = Product.find_by(id: params[:id])
-      unless @product
-        render :root, status: :not_found
-      end
       unless @login_merchant.id == @product.merchant_id
         flash[:status] = :failure
         flash[:message] = "Sorry, you cannot edit another Merchant's products!"
-        redirect_to root_path
+        redirect_to merchant_path(@login_merchant.id)
+        return
       end
     else
         flash[:status] = :failure
         flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
-        redirect_to root_path
+        redirect_to products_path
+        return
     end
 
   end
