@@ -139,14 +139,48 @@ describe ProductsController do
       end
 
       it "returns not_found when given a bogus product id" do
-        product_id = Product.first.id + 1
+        product_id = Product.last.id + 1
         get edit_product_path(product_id)
         must_respond_with :not_found
       end
     end
-    #
-    # describe "update" do
-    # end
+
+    describe "update" do
+      before do
+        login(merchants(:tamira))
+        @product = products(:aloe_vera)
+        @product_data = {
+          product: {
+            name: @product.name + "exquisite",
+            inventory: 2,
+            price: 5.50
+          }
+        }
+      end
+      it "updates an existing product if it belongs to the logged in merchant" do
+        start_product_count = Product.count
+
+        patch product_path(@product), params: @product_data
+        must_redirect_to product_path(@product.id)
+      # Verify the DB was really modified
+        Product.find(@product.id).name.must_equal @product_data[:product][:name]
+
+        start_product_count must_equal Product.count
+
+      end
+
+      it "will not update product if it does not belog to the logged in merchant and responds with :bad_request" do
+
+      end
+
+      it "will not update product if no logged in merchant" do
+
+      end
+
+      it "will not update if data given is invalid" do
+
+      end
+    end
     #
     # describe "retire" do
     #

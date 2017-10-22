@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(product_params)
     if save_and_flash(@product) #<<defined as a method in in application controller
-      redirect_to merchant_product_path(@product.merchant_id) #<<I figure we should redirect to all the merchant's product but lmk if you think differently DL
+      redirect_to product_path(@product.id) #<<I figure we should redirect to all the merchant's product but lmk if you think differently DL
     else
       render :edit, status: :bad_request
       return
