@@ -24,8 +24,6 @@ class OrderItemsController < ApplicationController
       # QUESTION: is this the right way to check that an order_item won't be added if the product with that ID doesn't exist?
       flash[:status] = :failure
       flash[:message] = "Sorry, that product does not exist on our site"
-      redirect_to products_path
-
       head :not_found
     end
   end # create
