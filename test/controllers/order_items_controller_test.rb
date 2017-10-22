@@ -38,7 +38,7 @@ describe OrderItemsController do
       }
 
       post order_items_path, params: item_params
-      must_respond_with :not_found 
+      must_respond_with :not_found
       OrderItem.count.must_equal start_num_itmes
       Order.count.must_equal start_orders
     end # won't add if product doesn't exist

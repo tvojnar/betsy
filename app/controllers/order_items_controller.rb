@@ -11,8 +11,6 @@ class OrderItemsController < ApplicationController
         @item.cost = Product.find_by(params[:product_id]).price
         @order.save
         session[:order_id] = @order.id
-        @product.inventory = (@product.inventory - item_params[:quantity].to_i)
-        @product.save
         # TODO: later we will want to redirect to a differnt path
         redirect_to root_path
       else
