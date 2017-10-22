@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
 
   def edit
     if find_merchant #<<defined in application_controller, contingent upon OAuth
-      
+
     else
       render :root, status: :not_found
     end
@@ -104,11 +104,15 @@ class ProductsController < ApplicationController
   end
 
   def merchant_id
-    params[:merchant_id] || params[:merchant][:id]
+    if params[:merchant] != nil
+      params[:merchant_id] || params[:merchant][:id]
+    end
   end
 
   def category_id
-    params[:category_id] || params[:category][:id]
+    if params[:category] != nil
+      params[:category_id] || params[:category][:id]
+    end
   end
 
   def find_product
