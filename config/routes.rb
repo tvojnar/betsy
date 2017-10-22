@@ -32,8 +32,8 @@ end
 # get '/category', to: 'categories#show', as: 'filter_category'
 
 resources :categories, only: [:index, :new, :create] do
-  # resources :products, only: [:index]
-  get '/categories/:id/products', to: 'products#index', as: "category_products"
+  resources :products, only: [:index, :new]
+  # get '/categories/:id/products', to: 'products#index', as: "category_products"
 end
 
 
