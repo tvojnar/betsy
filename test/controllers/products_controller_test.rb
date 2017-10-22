@@ -129,72 +129,72 @@ describe ProductsController do
         must_redirect_to products_path
       end
     end
+
+
+    describe "edit" do
+      it "returns a success status when passed a valid id" do
+        product_id = Product.first.id
+        get edit_product_path(product_id)
+        must_respond_with :success
+      end
+
+      it "returns not_found when given a bogus product id" do
+        product_id = Product.first.id + 1
+        get edit_product_path(product_id)
+        must_respond_with :not_found
+      end
+    end
+    #
+    # describe "update" do
+    # end
+    #
+    # describe "retire" do
+    #
+    # end
+
+    # describe "destroy" do
+    #   #not currently working because of merchant verification OAuth work necessary
+    #   it "returns success and destroys the work when given a valid product ID" do
+    #     product_id = Product.first.id
+    #     delete product_path(product_id)
+    #     must_respond_with :redirect
+    #     must_redirect_to merchant_product_path
+    #     Product.find_by(id: product_id).must_be_nil
+    #   end
+    #
+    #   it "returns not_found when given an invalid work ID" do
+    #     invalid_product_id = Product.last.id + 1
+    #     product_count = Product.count
+    #     delete product_path(invalid_product_id)
+    #     must_respond_with :not_found
+    #     Product.count.must_equal work_count
+    #   end
   end
-  #
-  # describe "edit" do
-  #   it "returns a success status when passed a valid id" do
-  #     product_id = Product.first.id
-  #     get edit_product_path(product_id)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "returns not_found when given a bogus product id" do
-  #     product_id = Product.first.id + 1
-  #     get edit_product_path(product_id)
-  #     must_respond_with :not_found
-  #   end
-  # end
-  #
-  # describe "update" do
-  # end
-  #
-  # describe "retire" do
-  #
   # end
 
-  # describe "destroy" do
-  #   #not currently working because of merchant verification OAuth work necessary
-  #   it "returns success and destroys the work when given a valid product ID" do
-  #     product_id = Product.first.id
-  #     delete product_path(product_id)
-  #     must_respond_with :redirect
-  #     must_redirect_to merchant_product_path
-  #     Product.find_by(id: product_id).must_be_nil
-  #   end
-  #
-  #   it "returns not_found when given an invalid work ID" do
-  #     invalid_product_id = Product.last.id + 1
-  #     product_count = Product.count
-  #     delete product_path(invalid_product_id)
-  #     must_respond_with :not_found
-  #     Product.count.must_equal work_count
-  #   end
-end
-# end
+  describe "guest users" do
+    it "cannot create a new product" do
+      start_count = Product.count
 
-describe "guest users" do
-  it "cannot create a new product" do
-    start_count = Product.count
-
-    product_data = {
-      product: {
-        merchant: "tamira",
-        name: "Fly Trap",
-        inventory: 5,
-        price: 8.75,
-        description: "It eats flies",
-        visible: true,
-        image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
+      product_data = {
+        product: {
+          merchant: "tamira",
+          name: "Fly Trap",
+          inventory: 5,
+          price: 8.75,
+          description: "It eats flies",
+          visible: true,
+          image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
+        }
       }
-    }
 
 
 
-    start_count.must_equal Product.count
+      start_count.must_equal Product.count
+    end
   end
+  #   it "cannot access edit" do
+  #
+  #   end
+  #
 end
-#   it "cannot access edit" do
-#
-#   end
-#
-# end
