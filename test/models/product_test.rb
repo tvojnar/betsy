@@ -54,7 +54,9 @@ describe Product do
       is_valid = prod.valid?
       is_valid.must_equal false
     end
+  end
 
+  describe "relationship" do
     it "requires a product must belong to a merchant" do
       products(:aloe_vera).merchant.must_equal merchants(:tamira)
     end
