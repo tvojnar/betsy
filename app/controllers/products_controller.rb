@@ -70,8 +70,15 @@ class ProductsController < ApplicationController
       unless @product
         render :root, status: :not_found
       end
+      unless @login_merchant.id == @product.merchant_id
+        flash[:status] = :failure
+        flash[:message] = "Sorry, you cannot edit another Merchant's products!"
+        redirect_to root_path
+      end
     else
-      render :root, status: :not_found
+        flash[:status] = :failure
+        flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
+        redirect_to root_path
     end
 
   end

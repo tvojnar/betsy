@@ -143,6 +143,14 @@ describe ProductsController do
         get edit_product_path(product_id)
         must_respond_with :not_found
       end
+
+      it "will not allow access to edit form if user is not logged in and redirects to root_path" do
+
+      end
+
+      it "will not allow access to edit form if logged in Mecharnt is not the owner of the product" do
+
+      end
     end
 
     describe "update" do
@@ -165,11 +173,25 @@ describe ProductsController do
       # Verify the DB was really modified
         Product.find(@product.id).name.must_equal @product_data[:product][:name]
 
-        start_product_count must_equal Product.count
+        start_product_count.must_equal Product.count
 
       end
 
-      it "will not update product if it does not belog to the logged in merchant and responds with :bad_request" do
+      it "will not update product if it does not belong to the logged in merchant and responds with :bad_request" do
+        product = products(:red_cap_cactus)
+        product_data = {
+          product: {
+            name: product.name + "exquisite",
+            inventory: 2,
+            price: 5.50
+          }
+        }
+
+        patch product_path(product), params: product_data
+        must_respond_with :bad_request
+        # must_redirect_to product_path(@product.id)
+      # Verify the DB was really modified
+        Product.find(product.id).name.wont_be product_data[:product][:name]
 
       end
 
