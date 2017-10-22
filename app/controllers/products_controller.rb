@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
     unless @product
       flash[:status] = :failure
       flash[:message] = "Sorry that product is not in our database."
-      redirect_to root_path
+      redirect_to products_path
       return
     end
   end
