@@ -8,7 +8,7 @@
   <h3>Cost: $<%= sprintf("%.2f", @product.price) %></h3>
   <h3><%= @product.inventory %> in stock</h3>
   <h3> Categories: <% @product.categories.each do |category| %>
-    <%= link_to category.name, products_path(category_id: category.id)%>
+    <%= link_to category.name, category_path(category.id)%>
     <% end%>
 </section>
 <%= render partial: 'layouts/add_order_item_to_order' %>
