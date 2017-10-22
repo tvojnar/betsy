@@ -90,12 +90,21 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
-    @product.update_attributes(product_params)
-    if save_and_flash(@product) #<<defined as a method in in application controller
-      redirect_to product_path(@product.id) #<<I figure we should redirect to all the merchant's product but lmk if you think differently DL
+    if find_merchant && @product != nil
+      if @product.merchant_id == @login_merchant.id
+        @product.update_attributes(product_params)
+        if save_and_flash(@product) #<<defined as a method in in application controller
+          redirect_to product_path(@product.id)
+        # else
+        #   render :edit, status: :bad_request
+        # return
+        end
+      # else
+        # render :root, status: :bad_request
+      # return
+      end
     else
-      render :edit, status: :bad_request
-      return
+      render :root, status: :bad_request
     end
   end
 
