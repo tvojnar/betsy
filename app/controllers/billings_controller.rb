@@ -1,10 +1,10 @@
 class BillingsController < ApplicationController
   def new
-    @billing = Billings.new
+    @billing = Billing.new
   end
 
   def create
-    @billing = Billings.new(billing_params)
+    @billing = Billing.new(billing_params)
     if @billing
       save_and_flash(@billing)
       redirect_to order_submit_path(session[:order_id])
