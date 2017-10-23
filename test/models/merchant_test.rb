@@ -47,6 +47,8 @@ describe Merchant do
 
   end # validations
 describe "custom methods" do
+
+  let :o_item { order_items(:one)}
   let :merchant {merchants(:diane)}
 
   describe "self.from_auth_hash" do
@@ -56,6 +58,7 @@ describe "custom methods" do
     describe "merchant_order_items" do
 
     it "returns an array that contains instances of order_items" do
+      o_id = o_item.id
       order_items = merchant.merchant_order_items(merchant)
       order_items.each do |oi|
         oi.must_be_instance_of OrderItem
