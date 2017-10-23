@@ -17,6 +17,8 @@ describe Product do
 
   let(:p_no_inventory) { Product.new(merchant: merchant, name: "Red Cap Cactus", price: 30.00, description: "A cactus with a pink flower at the top", visible: true, image_url: "http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg") }
 
+  let(:p_no_merchant) {Product.new(name: "Aloe Vera", inventory: 2, price: 5.50, description: "A small aloe vera plant", visible: true, image_url: " https://altmanplants.com/wp-content/uploads/Echeveria-Bluebird.jpg")}
+
   describe "validations" do
     it "can be created with all fields" do
       p = products(:spider_plant)
@@ -55,12 +57,18 @@ describe Product do
     is_valid.must_equal false
   end
 
-  # TODO test quantity???? maybe?
+  # TODO do possibly test for quantity and review??? thoughts
   end
 
   describe "relationship" do
     it "requires a product must belong to a merchant" do
-      products(:aloe_vera).merchant.must_equal merchants(:tamira)
+      is_valid = p_no_merchant.valid?
+      is_valid.must_equal false
+      p_no_merchant.errors.messages.must_include :merchant
+    end
+
+    it "can get merchant from product" do
+    products(:aloe_vera).merchant.must_equal merchants(:tamira)
     end
   end
 end
