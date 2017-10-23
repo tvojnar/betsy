@@ -24,4 +24,18 @@ describe Category do
       c_not_uniq_name.errors.messages.must_include :name
     end
   end
+
+  describe "relationships" do
+    it "can access products of a category" do
+      c = categories(:house_plants)
+      c.products << products(:spider_plant)
+      c.products << products(:aloe_vera)
+
+      c.products.wont_be :empty?
+      c.products.size.must_equal 2
+
+      c.products.must_include products(:spider_plant)
+      c.products.must_include products(:aloe_vera)
+    end
+  end
 end
