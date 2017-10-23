@@ -74,15 +74,12 @@ describe Product do
 
   describe "relationships" do
     it "has many orders through order_items" do
-      prod = Product.first
-      prod_id = prod.id
-      o = Order.new
-      o.save!
+      prod = products(:spider_plant)
+      p_id = prod.id
+      o = orders(:pending)
 
       prod.must_respond_to :orders
-      prod.orders.wont_include o
-      oi = OrderItem.create!(product_id: prod_id, quantity: 1, order: o)
-      prod.orders.must_include oi
+      prod.orders.must_include o
     end # has many orders through order_items
   end # relationships
 
