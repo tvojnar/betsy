@@ -1,4 +1,4 @@
-<%= form_for order_item_path(:update) do |f| %>
+<%= form_for item do |f| %>
   <%= f.label :quantity %>
   <%= f.select :quantity, (1..item.product.inventory) %>
   <%= f.submit "Update" %>
