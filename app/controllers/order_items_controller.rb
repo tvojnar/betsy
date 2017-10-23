@@ -8,7 +8,6 @@ class OrderItemsController < ApplicationController
       if item_params[:quantity].to_i <= @product.inventory
         @order = current_order
         @item = @order.order_items.new(item_params)
-        @item.cost = Product.find_by(params[:product_id]).price
         @order.save
         session[:order_id] = @order.id
         # TODO: later we will want to redirect to a differnt path
@@ -39,13 +38,18 @@ class OrderItemsController < ApplicationController
 
   def mark_shipped
     @item = OrderItem.find_by(id: params[:id])
-    if @item.shipped_status == false
-      @item.shipped_status = true
-      @item.save!
-      # require 'pry'
-      # binding.pry
-    else
-      @item.shipped_status = false
+    if @item.order.status == "paid" || @item.order.status == "shipped"
+      if @item.shipped_status == false
+        @item.shipped_status = true
+        @item.save!
+      elsif @item.shipped_status == true
+        @item.shipped_status = false
+        @item.save!
+      end
+
+      @item.order.update_status
+      require 'pry'
+      binding.pry
       @item.save!
     end
     redirect_back(fallback_location: root_path)

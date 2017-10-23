@@ -10,3 +10,13 @@
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>
+
+<h4>Customer Info: </h4>
+<%= @order.cc_name %>
+<%= @order.address %>
+<p>etc.</p>
+
+
+<% if current_order.status == "pending" %>
+<%= link_to "Check Out", edit_order_path %>
+<% end %>

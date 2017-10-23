@@ -69,14 +69,14 @@ Name: <%= @merchant.name %>
     <td><%= oi.quantity %> </td>
     <td><%= oi.quantity * oi.product.price%> </td>
     <td><%= oi.order.date_submitted %> </td>
-    <% if oi.order.status == "paid"%>
+    <% if oi.order.status == "paid" || oi.order.status == "shipped"%>
     <% if oi.shipped_status == true%>
     <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
     <% else %>
     <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
     <% end %>
     <% else %>
-    <td>order <%=oi.order.status%></td>
+    <td>order <%=oi.order.status%> <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
     <% end %>
 
     <td><%= oi.order.status %></td>

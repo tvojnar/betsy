@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_order
 
+
   # before_action :require_login
+
 
   protected
   def current_order

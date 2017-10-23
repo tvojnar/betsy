@@ -110,19 +110,21 @@ describe OrderItemsController do
 
   describe "mark_shipped" do
     it "marks an order item that belongs to a paid order as shipped" do
+      #I DONT KNOW WHY THIS IS FAILING, THE SHIPPED STATUS SAVES IN THE MARK_SHIPPED METHODDDDD
       oi = order_items(:four)
-      puts ">>>>>>>>>>>>>>>>>>>>>>>> #{oi.order.status}"
-
+      puts "********************************************* "
+      puts oi.order.status
       oi.shipped_status.must_equal false
       patch mark_order_item_path(oi.id)
-      require 'pry'
-      binding.pry
-      puts ">>>>>>>>>>>>>>>>>>>>>> OI.SHIPPED_STATUS #{oi.shipped_status}"
+      must_redirect_to root_path
       oi.shipped_status.must_equal true
     end
 
     it "will not mark an orderitem that belongs to a pending, shipped, or complete order as shipped" do
       oi = order_items(:one)
+      oi.shipped_status.must_equal false
+      patch mark_order_item_path(oi.id)
+      oi.shipped_status.must_equal false
 
     end
 
