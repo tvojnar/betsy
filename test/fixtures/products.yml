@@ -60,3 +60,12 @@ string_of_pearls:
   description: something.
   visible: true
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
+
+tulip_bulb:
+  merchant: Tamira
+  name: Tulip bulb
+  inventory: 0
+  price: 2.00
+  description: A tulip
+  visible: true
+  image_url: https://d23x084dcxncv3.cloudfront.net/sarahraven/product/77aa0d14.261046_1.jpg/320x320.crop.261046_1.jpg

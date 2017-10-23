@@ -216,15 +216,21 @@ describe ProductsController do
     #
     # end
 
-    # describe "destroy" do
-    #   #not currently working because of merchant verification OAuth work necessary
-    #   it "returns success and destroys the work when given a valid product ID" do
-    #     product_id = Product.first.id
-    #     delete product_path(product_id)
-    #     must_respond_with :redirect
-    #     must_redirect_to merchant_product_path
-    #     Product.find_by(id: product_id).must_be_nil
-    #   end
+    describe "destroy" do
+      before do
+        @merchant = merchants(:tamira)
+        @merchant_id = @merchant.id
+      end
+        it "returns success and destroys the work when given a valid product ID AND logged in merchant owns the product" do
+          start_count = Product.count
+          productid = products(:spider_plant).id
+          delete product_path(productid)
+          must_respond_with :redirect
+          # must_redirect_to merchant_products_path(@merchant_id)
+          Product.find_by(id: productid).must_be_nil
+          # Product.count.must_equal (start_count -1)
+      end
+    end
     #
     #   it "returns not_found when given an invalid work ID" do
     #     invalid_product_id = Product.last.id + 1
