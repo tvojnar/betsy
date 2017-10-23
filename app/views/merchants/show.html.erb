@@ -9,16 +9,32 @@ Name: <%= @merchant.name %>
 <%= @pending_revenue %>
 </p>
 
+<p>Pending Number:
+<%= @pending_number %>
+</p>
+
 <p>Paid Revenue:
 <%= @paid_revenue %>
+</p>
+
+<p>Paid Number:
+<%= @paid_number %>
 </p>
 
 <p>Shipped Revenue:
   <%= @shipped_revenue %>
 </p>
 
+<p>Shipped Numer:
+  <%= @shipped_number %>
+</p>
+
 <p>Completed Revenue:
   <%= @completed_revenue %>
+</p>
+
+<p>Completed Number:
+  <%= @completed_number %>
 </p>
 
 <h4>Orders containing your products: </h4>
@@ -53,7 +69,16 @@ Name: <%= @merchant.name %>
     <td><%= oi.quantity %> </td>
     <td><%= oi.quantity * oi.product.price%> </td>
     <td><%= oi.order.date_submitted %> </td>
-    <td> link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch" </td>
+    <% if oi.order.status == "paid"%>
+    <% if oi.shipped_status == true%>
+    <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
+    <% else %>
+    <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
+    <% end %>
+    <% else %>
+    <td>order <%=oi.order.status%></td>
+    <% end %>
+
     <td><%= oi.order.status %></td>
   </tr>
   <% end %>

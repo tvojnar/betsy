@@ -37,11 +37,9 @@ class Merchant < ApplicationRecord
 
   def pending_revenue(merchant)
     pending_total = 0
-    pending_number = 0
     merchant_order_items(merchant).each do |item|
       if item.order.status == "pending"
         pending_total += item.quantity * item.product.price
-        pending_number += 1
       end
     end
     return pending_total
@@ -76,6 +74,49 @@ class Merchant < ApplicationRecord
     end
     return completed_total
   end
+
+  def pending_number(merchant)
+    pending_num = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "pending"
+        pending_num += 1
+      end
+    end
+    return pending_num
+  end
+
+  
+
+  def paid_number(merchant)
+    paid_num = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "paid"
+        paid_num += 1
+      end
+    end
+    return paid_num
+  end
+
+  def shipped_number(merchant)
+    shipped_num = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "shipped"
+        shipped_num += 1
+      end
+    end
+    return shipped_num
+  end
+
+  def completed_number(merchant)
+    completed_num = 0
+    merchant_order_items(merchant).each do |item|
+      if item.order.status == "completed"
+        completed_num += 1
+      end
+    end
+    return completed_num
+  end
+
 
   def orders(merchant)
     merchant_orders = []

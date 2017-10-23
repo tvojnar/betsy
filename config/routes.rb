@@ -28,6 +28,7 @@ resources :merchants do
   resources :products
 end
 
+patch '/merchant/:id/show', to: "order_items#mark_shipped", as: "mark_order_item"
 
 get '/category', to: 'categories#show', as: 'filter_category'
 
