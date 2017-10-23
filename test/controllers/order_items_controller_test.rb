@@ -70,6 +70,24 @@ describe OrderItemsController do
     end # wont delete the OrderItem if the OrderItem doesn't exist
   end # destroy
 
+  describe "mark_shipped" do
+    it "marks an order item that belongs to a paid order as shipped" do
+      oi = order_items(:four)
+      puts ">>>>>>>>>>>>>>>>>>>>>>>> #{oi.order.status}"
 
+      oi.shipped_status.must_equal false
+      patch mark_order_item_path(oi.id)
+      require 'pry'
+      binding.pry
+      puts ">>>>>>>>>>>>>>>>>>>>>> OI.SHIPPED_STATUS #{oi.shipped_status}"
+      oi.shipped_status.must_equal true
+    end
+
+    it "will not mark an orderitem that belongs to a pending, shipped, or complete order as shipped" do
+      oi = order_items(:one)
+
+    end
+
+  end
 
 end #OrderItemsController

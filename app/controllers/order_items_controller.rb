@@ -33,19 +33,21 @@ class OrderItemsController < ApplicationController
   end
 
   def mark_shipped
-    item = OrderItem.find_by(id: params[:id])
-    if item.shipped_status == false
-      item.shipped_status = true
-      item.save
+    @item = OrderItem.find_by(id: params[:id])
+    if @item.shipped_status == false
+      @item.shipped_status = true
+      @item.save!
+      # require 'pry'
+      # binding.pry
     else
-      item.shipped_status = false
-      item.save
+      @item.shipped_status = false
+      @item.save!
     end
     redirect_back(fallback_location: root_path)
   end
 
   private
   def item_params
-    params.require(:order_item).permit(:quantity, :product_id)
+    params.require(:order_item).permit(:quantity, :product_id, :shipped_status)
   end # item_params
 end
