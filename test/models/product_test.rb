@@ -29,5 +29,11 @@ describe Product do
       is_valid.must_equal false
       p_no_name.errors.messages.must_include :name
     end
+
+    it "requires a unique name" do
+      product.save
+      p_not_uniq_name.valid?.must_equal false
+      p_not_uniq_name.errors.messages.must_include :name
+    end
   end
 end
