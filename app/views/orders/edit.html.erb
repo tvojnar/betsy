@@ -5,24 +5,24 @@
 </ul>
 <%= form_for current_order do |f| %>
 <%= f.label :name %>
-<%= f.text_field :cc_name %>
+<%= f.text_field :cc_name, required: true  %>
 <%= f.label :email %>
-<%= f.text_field :email %>
+<%= f.text_field :email, required: true   %>
 <%= f.label :address %>
-<%= f.text_field :address %>
-<%= f.label :cc_number%>
-<%= f.text_field :cc_number%>
-<%= f.label :cc_exp%>
-<%= f.date_select :cc_exp %>
-<%= f.label :cc_cvv %>
-<%= f.text_field :cc_cvv %>
+<%= f.text_field :address, required: true   %>
+<%= f.label :credit_card_number%>
+<%= f.number_field :cc_number, required: true  %>
+<%= f.label :credit_card_expiration%>
+<%= f.date_select :cc_exp, required: true   %>
+<%= f.label :credit_card_cvv %>
+<%= f.number_field  :cc_cvv, required: true  %>
 <%= f.label :zip %>
-<%= f.text_field :zip %>
+<%= f.number_field  :zip, required: true  %>
 <%= f.hidden_field :status, value: "paid" %>
 <%#= f.hidden_field :inventory, value: @product.inventory - @order.order_item.quantity %>
 
-
-
+<!-- QUESTION: is this required: true enough of a safegaurd? why does order_params not ensure the presence of these? -->
+<!-- if I validate in the order model, a cart will not be started. -->
 <%= f.submit "Submit Order"%>
 
 <% end %>

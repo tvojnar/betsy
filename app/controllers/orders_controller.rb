@@ -24,12 +24,15 @@ class OrdersController < ApplicationController
   end
 
   def update
+    #TODO: MOVE SOME OF THIS STUFF TO CREATE METHOD OF BILLING
     @order = current_order
     if @order
       @order.update_attributes(order_params)
       if save_and_flash(@order)
+        #is this where we want to redirect?
         redirect_to root_path
         # o = Order.new
+        #IS THIS THE BEST PLACE TO DO THIS? IT MAKES SENSE FOR THE BUYER BUT NOT THE MERCHANT DL
         session[:order_id] = Order.new.id
         return
       else

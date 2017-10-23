@@ -121,7 +121,7 @@ CSV.foreach(ORDERITEM_FILE, :headers => true) do |row|
   orderitem.product_id = Product.order("RANDOM()").first.id
   orderitem.order_id = Order.order("RANDOM()").first.id
   orderitem.quantity = row['quantity']
-  orderitem.cost = row['cost']
+  # orderitem.cost = row['cost']
   orderitem.shipped_status = row['shipped_status']
   puts "Created orderitem: #{orderitem.inspect}"
   successful = orderitem.save
