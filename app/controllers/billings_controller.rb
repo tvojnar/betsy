@@ -33,7 +33,7 @@ end
 
 private
 def billing_params
-  return params.require(:order).permit(:cc_name, :email, :address, :zip, :cc_cvv, :cc_num, :cc_exp, :order_id)
+  return params.require(:billing).permit(:cc_name, :email, :address, :zip, :cc_cvv, :cc_num, :cc_exp, :order_id)
 end
 
 def find_billing
