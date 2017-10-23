@@ -1,0 +1,28 @@
+<ul>
+  <%# @category.products.each do |product| %>
+    <li><%#= link_to product.name, product_path(product.id) %></li>
+  <%# end %>
+</ul>
+<%= form_for current_order do |f| %>
+<%= f.label :name %>
+<%= f.text_field :cc_name %>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<%= f.label :address %>
+<%= f.text_field :address %>
+<%= f.label :cc_number%>
+<%= f.text_field :cc_number%>
+<%= f.label :cc_exp%>
+<%= f.date_select :cc_exp %>
+<%= f.label :cc_cvv %>
+<%= f.text_field :cc_cvv %>
+<%= f.label :zip %>
+<%= f.text_field :zip %>
+<%= f.hidden_field :status, value: "paid" %>
+<%#= f.hidden_field :inventory, value: @product.inventory - @order.order_item.quantity %>
+
+
+
+<%= f.submit "Submit Order"%>
+
+<% end %>
