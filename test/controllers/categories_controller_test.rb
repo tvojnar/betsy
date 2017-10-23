@@ -1,11 +1,19 @@
 require "test_helper"
 
 describe CategoriesController do
-  describe "index" do
-    it "returns a success for all categories" do
+  describe "Guest users" do
+    it "can access the index" do
       get categories_path
       must_respond_with :success
     end
+
+    # it "cannot access form to create new category" do
+    #   get new_category_path
+    #   must_respond_with :redirect
+    #   must_redirect_to root_path
+    #   flash[:message].must_equal "You must be logged in to do that!"
+    # end
+    # 
   end
 
   describe "new" do
