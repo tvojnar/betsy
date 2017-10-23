@@ -134,13 +134,43 @@ describe OrderItemsController do
       let(:oi) { order_items(:one)}
      describe "when the OrderItem belongs to the current Order" do
        # :one is in the :pending order
-       let(:o) { orders(:pending) }
+      #  let(:o) { orders(:pending) }
        it "will update the quantity when given a valid quantity" do
-         # TODO
+         # NOTE: Need to get this test to pass 
+         # Arrange
+          # set up the order item edit
+           oi_data = {
+             order_item: {
+               quantity: 4
+             }
+           }
+           # set up the Order and add an OrderItem to it
+           id = Product.first.id
+           item_params = {
+             order_item: {
+               quantity: 1,
+               product_id: id
+             }
+           }
+           post order_items_path, params: item_params
+           # find the OrderItem to update
+           oi = Order.find_by(id: session[:order_id]).order_items.last
+           oi_id = oi.id
+           oi.quantity.must_equal 1
+
+         # Act
+         patch order_item_path(oi_id), params: oi_data
+
+         # Assert
+         must_respond_with :redirect
+         # also check that it redirects to order_path(session[:order_id])
+         oi.quantity.must_equal 4
        end # updates when given a valid quantity
        it "won't update if given an invalid quantity ( quantity <= 0)" do
          # TODO
        end # won't update if given invalid quantity
+       it "won't update the quantity if the provided quantity > inventory" do
+       end # won't update if q > inventory
      end # when the OI belongs to the current order
      describe "when the OrderItem does not belong to the current Order" do
        # :one is not in the :paid order!
@@ -151,6 +181,7 @@ describe OrderItemsController do
      end # when the OrderItem does not belong to the current Order
     end # when OI can be found
     describe "when the OrderItem does not exist" do
+      let(:oi_id) {OrderItem.last.id + 1}
       it "won't update and will return not_found the quantity if the OrderItem does not exist" do
       end # not_found and won't update q
     end # when the OrderItem does not exist

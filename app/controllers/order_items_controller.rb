@@ -1,3 +1,4 @@
+require 'pry'
 class OrderItemsController < ApplicationController
 
   before_action :find_order_item_by_params, only: [:update]
@@ -51,8 +52,6 @@ class OrderItemsController < ApplicationController
       end
 
       @item.order.update_status
-      require 'pry'
-      binding.pry
       @item.save!
     end
     redirect_back(fallback_location: root_path)
