@@ -13,11 +13,14 @@ describe CategoriesController do
   end
 
   describe "new" do
-
+    it "works to get category" do
+      get new_category_path
+      must_respond_with :success
+    end
   end
 
   describe "create" do
-    
+
   end
 
 end
