@@ -46,5 +46,13 @@ describe Product do
       p_not_float.wont_be :valid?
       p_not_float.wont_be_kind_of Float
     end
+
+    it "requires price to be greater than 0" do
+    pr = -1.0
+    prod = Product.new(merchant: merchant, name: "Red Cap Cactus", inventory: 10, price: pr)
+
+    is_valid = prod.valid?
+    is_valid.must_equal false
+  end
   end
 end
