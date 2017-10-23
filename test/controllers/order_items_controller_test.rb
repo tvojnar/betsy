@@ -130,18 +130,30 @@ describe OrderItemsController do
   end # destroy
 
   describe "update" do
-    let(:oi) { order_items(:ten)}
-    let(:update_data) {{
-        order_item:   {
-        quantity: 3
-        }
-}}
-    it "will change the quantity if the OrderItem exists" do
-    end # change q if OI exists in O
-
-    it "won't change the quantity if the OrderItem doesn't exist" do
-    end # wont change q if OI isn't in order
-    # it "returns success when passed valid order_id" do
+    describe "when OrderItem exists/can be found" do
+      let(:oi) { order_items(:one)}
+     describe "when the OrderItem belongs to the current Order" do
+       # :one is in the :pending order
+       let(:o) { orders(:pending) }
+       it "will update the quantity when given a valid quantity" do
+         # TODO
+       end # updates when given a valid quantity
+       it "won't update if given an invalid quantity ( quantity <= 0)" do
+         # TODO
+       end # won't update if given invalid quantity
+     end # when the OI belongs to the current order
+     describe "when the OrderItem does not belong to the current Order" do
+       # :one is not in the :paid order!
+       let(:o) {orders(:paid)}
+       it "won't update the quantity if the OrderItem isn't in the current Order" do
+         # TODO
+       end # if won't update the quantity if the OrderItem isn't in the current Order
+     end # when the OrderItem does not belong to the current Order
+    end # when OI can be found
+    describe "when the OrderItem does not exist" do
+      it "won't update and will return not_found the quantity if the OrderItem does not exist" do
+      end # not_found and won't update q
+    end # when the OrderItem does not exist
   end # update
 
 end #OrderItemsController
