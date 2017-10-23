@@ -17,5 +17,11 @@ describe Category do
       is_valid.must_equal false
       c_no_name.errors.messages.must_include :name
     end
+
+    it "requires a unique name to be valid"  do
+      category.save
+      c_not_uniq_name.valid?.must_equal false
+      c_not_uniq_name.errors.messages.must_include :name
+    end
   end
 end
