@@ -39,16 +39,19 @@ class OrderItemsController < ApplicationController
 
   def mark_shipped
     @item = OrderItem.find_by(id: params[:id])
-    if @item.shipped_status == false
-      @item.shipped_status = true
-      @item.save!
+    if @item.order.status == "paid" || @item.order.status == "shipped"
+      if @item.shipped_status == false
+        @item.shipped_status = true
+        @item.save!
+      elsif @item.shipped_status == true
+        @item.shipped_status = false
+        @item.save!
+      end
+
       @item.order.update_status
-      # require 'pry'
-      # binding.pry
-    elsif @item.shipped_status == true
-      @item.shipped_status = false
+      require 'pry'
+      binding.pry
       @item.save!
-      @item.order.update_status
     end
     redirect_back(fallback_location: root_path)
   end

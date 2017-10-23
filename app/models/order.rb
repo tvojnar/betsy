@@ -13,14 +13,17 @@ class Order < ApplicationRecord
   #DL WORKING ON THIS METHOD
   def update_status
     self.order_items.each do |item|
-      if item.shipped_status == true
-        self.status = "shipped"
-        self.save
-      elsif item.shipped_status == false
+      if item.shipped_status == false
+        # require 'pry'
+        # binding.pry
         self.status = "paid"
         self.save
+        return
       end
     end
+    self.status = "shipped"
+    return self.save
+
   end
 
 

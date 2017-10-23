@@ -25,4 +25,53 @@ describe Order do
       o.order_items.must_include oi
     end
   end
+
+
+  describe "update_status" do
+    it "changes order status to shipped if all order items are shipped" do
+      o = Order.new(status: "paid")
+      oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
+      oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
+      oi.shipped_status = true
+      oi.save
+      oi2.shipped_status = true
+      oi2.save
+      o.status.must_equal "paid"
+      o.update_status
+      o.status.must_equal "shipped"
+    end
+
+    it "does not change order status to shipped if not all order items are shipped" do
+      o = Order.new(status: "paid")
+      oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
+      oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
+      oi.shipped_status = true
+      oi.save
+      oi2.shipped_status = false
+      oi2.save
+      o.status.must_equal "paid"
+      o.update_status
+      o.status.must_equal "paid"
+    end
+
+    it "changes order status back to paid if one or more order items are unmarked as shipped" do
+      o = Order.new(status: "paid")
+      oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
+      oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
+      oi.shipped_status = true
+      oi.save
+      oi2.shipped_status = true
+      oi2.save
+      o.status.must_equal "paid"
+      o.update_status
+      o.status.must_equal "shipped"
+      oi2.shipped_status = false
+      oi2.save
+      o.update_status
+      o.status.must_equal "paid"
+    end
+
+
+  end
+
 end
