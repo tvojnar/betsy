@@ -126,8 +126,45 @@ describe OrderItemsController do
       patch mark_order_item_path(oi.id)
       oi.shipped_status.must_equal false
 
-    end
+    end # it
+  end # destroy
 
-  end
+  describe "update" do
+    let(:oi) { order_items(:ten)}
+    let(:update_data) {{
+        order_item:   {
+          quantity: 3
+        }
+}}
+    it "will change the quantity if the OrderItem exists" do
+      id = Product.first.id
+      item_params = {
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }
+
+      post order_items_path, params: item_params
+      cart = Order.find_by(id: session[:order_id])
+
+      patch order_item_path(oi), params: update_data
+      must_respond_with :redirect
+      must_redirect_to order_path(cart)
+      oi.quantity.must_equal 3
+
+    end # change q if OI exists in O
+
+    it "won't change the quantity if the OrderItem doesn't exist" do
+      oi_id = OrderItem.last.id + 1
+
+      patch order_item_path(oi_id), params: update_data
+
+      must_respond_with :not_found
+      
+      # TODO
+    end # wont change q if OI isn't in order
+    # it "returns success when passed valid order_id" do
+  end # update
 
 end #OrderItemsController

@@ -42,15 +42,7 @@ describe "edit" do
 end
 
 describe "update" do
-  it "will change the quantity if the OrderItem esists in the Order" do
-      # TODO
-      
-  end # change q if OI exists in O
 
-  it "won't change the quantity if the OrderItem doesn't exist in the Order" do
-    # TODO
-  end # wont change q if OI isn't in order
-  # it "returns success when passed valid order_id" do
   #
   # end
 

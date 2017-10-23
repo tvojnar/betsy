@@ -55,6 +55,9 @@ class OrderItemsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def update
+  end # update 
+
   private
   def item_params
     params.require(:order_item).permit(:quantity, :product_id, :shipped_status)
