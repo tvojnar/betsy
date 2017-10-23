@@ -29,7 +29,7 @@
         <td><%= product.description %></td>
         <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
         <td><%= product.inventory %></td>
-        <td><%= product.price%></td>
+        <td><%= number_to_currency product.price %></td>
       </tr>
       <%end%>
 
