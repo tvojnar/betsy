@@ -22,16 +22,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def show
-    if params[:category]
-      # THIS IS A TOTAL HACK!!!
-      @category = Category.find(params[:category][:id])
-      redirect_to category_path(@category.id)
-    else
-      @category = Category.find(params[:id])
-    end
-  end
-
   private
 
   def category_params
