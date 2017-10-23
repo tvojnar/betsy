@@ -1,7 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    # @categories = Category.all
-    @categories = Category.where(product_id: params[:product_id])
+    @categories = Category.all
   end
 
   def new
