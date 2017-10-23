@@ -8,7 +8,6 @@ class OrderItemsController < ApplicationController
       if item_params[:quantity].to_i <= @product.inventory
         @order = current_order
         @item = @order.order_items.new(item_params)
-        @item.cost = Product.find_by(params[:product_id]).price
         @order.save
         session[:order_id] = @order.id
         # TODO: later we will want to redirect to a differnt path
