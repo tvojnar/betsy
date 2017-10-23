@@ -13,7 +13,6 @@ describe CategoriesController do
     #   must_redirect_to root_path
     #   flash[:message].must_equal "You must be logged in to do that!"
     # end
-    # 
   end
 
   describe "new" do
