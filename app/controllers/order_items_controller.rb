@@ -42,11 +42,13 @@ class OrderItemsController < ApplicationController
     if @item.shipped_status == false
       @item.shipped_status = true
       @item.save!
+      @item.order.update_status
       # require 'pry'
       # binding.pry
-    else
+    elsif @item.shipped_status == true
       @item.shipped_status = false
       @item.save!
+      @item.order.update_status
     end
     redirect_back(fallback_location: root_path)
   end

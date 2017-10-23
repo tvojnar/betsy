@@ -26,4 +26,69 @@ end # index
 describe "current_order" do
   # TODO: need to figure out how to access current_order in my tests before I can test this
 end # current_order
+
+describe "edit" do
+  # it "returns success when passed a valid order id" do
+  #
+  # end
+  #
+  # it "returns not found if passed bogus order number" do
+  #   order_id = Order.last.id
+  #   order_id2 = order_id + 1
+  #   get edit_order_path(order_id2)
+  #   must_respond_with :not_found
+  # end
+
+end
+
+describe "update" do
+  # it "returns success when passed valid order_id" do
+  #
+  # end
+
+  # it "returns bad request when passed bogus data/not all fields are filled" do
+  #   order = Order.new
+  #   patch order_path(Order.first.id)
+  #   must_respond_with :bad_request
+  # end
+  #
+  # it "returns not found if passed bogus order number" do
+  #   patch order_path(Order.last.id + 1)
+  #   must_respond_with :not_found
+  # end
+
+  # it "updates information correctly" do
+  #   order = current_order
+  #   order_data = {
+  #     order: {
+  #       cc_name: "diane",
+  #       cc_number: 12345667,
+  #       cc_exp: Date.today,
+  #       zip: 55122,
+  #       email: "d@ada.com",
+  #       address: "my address",
+  #       cc_cvv: 234
+  #     }
+  #   }
+  #
+  #   order = Order.new(order_data[:order])
+  #   order.must_be :valid?
+  #
+  #   order_count = Order.count
+  #   patch order_path(order.id), params: order_data
+  #   # must_respond_with :redirect
+  #   # must_redirect_to merchant_products_path(product.merchant.id)
+  #   Order.count.must_equal order_count + 1
+  # end
+  #
+  # it "changes status from pending to paid" do
+  #   order = current_order
+  #   patch order_path(current_order.id)
+  #   order.status.must_equal "paid"
+  #
+  # end
+
+end #describe update
+
+
 end # OrdersController

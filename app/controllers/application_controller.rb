@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
 
-  
+
 
   protected
   def current_order
