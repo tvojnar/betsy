@@ -37,5 +37,11 @@ describe Category do
       c.products.must_include products(:spider_plant)
       c.products.must_include products(:aloe_vera)
     end
+
+    it "returns an empty array if category has no products" do
+      c = categories(:house_plants)
+
+      c.products.must_be :empty?
+    end
   end
 end
