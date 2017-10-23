@@ -35,5 +35,11 @@ describe Product do
       p_not_uniq_name.valid?.must_equal false
       p_not_uniq_name.errors.messages.must_include :name
     end
+
+    it "must have a price" do
+      is_valid = p_no_price.valid?
+      is_valid.must_equal false
+      p_no_price.errors.messages.must_include :price
+    end
   end
 end
