@@ -230,15 +230,29 @@ describe ProductsController do
 
         # Make assumptions explicit
         product.merchant.must_equal @merchant
-        puts "About to send delete request for product #{product.id}. Before count is #{start_count}"
+
         delete product_path(product)
-        puts "Finished delete request, end count is #{Product.count}"
         must_respond_with :redirect
 
         Product.find_by(id: product.id).must_be_nil
         Product.count.must_equal (start_count - 1)
       end
     end
+
+      it "will not allow a logged in merchant who is not the owner of the product to delete it" do
+        merchant = merchants(:kimberley)
+        login(merchant)
+        start_count = Product.count
+        product = products(:spider_plant)
+
+        product.merchant.wont_equal @merchant
+
+        delete product_path(product)
+        must_respond_with :redirect
+        must_redirect_to product_path(product.id)
+
+        Product.count.must_equal start_count
+      end
 
       it "returns not_found when given an invalid work ID" do
         invalid_product_id = Product.last.id + 1
@@ -248,7 +262,6 @@ describe ProductsController do
         Product.count.must_equal product_count
       end
   end
-  # end
 
   describe "guest users" do
     it "cannot create a new product" do
@@ -265,23 +278,22 @@ describe ProductsController do
           image_url: "https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg"
         }
       }
-
+      product = Product.new(product_data[:product])
+      product.must_be :valid?
+      post products_path, params: product_data
+      must_respond_with :redirect
 
 
       start_count.must_equal Product.count
     end
+
+
+    it "will not allow access to edit form if user is not logged in" do
+
+    end
+
+    it "will not update product if no logged in merchant" do
+
+    end
   end
-  #   it "cannot access edit" do
-  #
-  #   end
-  #
-
-  #move this to guest users tests
-  # it "will not allow access to edit form if user is not logged in and redirects to root_path" do
-  #
-  # end
-
-  # it "will not update product if no logged in merchant" do
-  #
-  # end
 end
