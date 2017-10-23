@@ -27,10 +27,15 @@ describe "current_order" do
   # TODO: need to figure out how to access current_order in my tests before I can test this
 end # current_order
 
-describe "edit" do
-  # it "returns success when passed a valid order id" do
-  #
-  # end
+
+#TODO: MOVE THESE TESTS TO BILLING CONTROLLER TEST
+
+# describe "edit" do
+#   it "returns success when passed a valid order id" do
+#     get edit_orders_path(Order.first.id)
+#     must_respond_with :success
+#   end
+
   #
   # it "returns not found if passed bogus order number" do
   #   order_id = Order.last.id
@@ -43,12 +48,12 @@ end
 
 describe "update" do
   # it "returns success when passed valid order_id" do
-  #
+  #   post order_items_path params(item_params)
   # end
 
   # it "returns bad request when passed bogus data/not all fields are filled" do
   #   order = Order.new
-  #   patch order_path(Order.first.id)
+  #   patch order_path(current_order)
   #   must_respond_with :bad_request
   # end
   #

@@ -71,12 +71,21 @@ describe Order do
       oi.save
       oi2.shipped_status = true
       oi2.save
+      # puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE PAID"
       o.status.must_equal "paid"
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE SHIPPED"
       o.update_status
+
       o.status.must_equal "shipped"
       oi2.shipped_status = false
-      oi2.save
+      oi2.save!
+      puts oi.shipped_status
+      puts oi2.shipped_status
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE PAID"
       o.update_status
+      puts o.status
+      # require 'pry'
+      # binding.pry
       o.status.must_equal "paid"
     end
   end

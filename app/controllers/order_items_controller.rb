@@ -46,11 +46,9 @@ class OrderItemsController < ApplicationController
         @item.shipped_status = false
         @item.save!
       end
-
-      @item.order.update_status
-      require 'pry'
-      binding.pry
-      @item.save!
+       #@item.order.billing.update_status
+       @item.order.update_status
+      # @item.save!
     end
     redirect_back(fallback_location: root_path)
   end
