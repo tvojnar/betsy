@@ -4,6 +4,10 @@ class Order < ApplicationRecord
   has_one :billing
   
 
+  # validates :cc_name, presence: true
+  # validates :cc_number, presence: true
+  # validates :cc_
+
 
 
   def calculate_total
@@ -17,16 +21,13 @@ class Order < ApplicationRecord
   def update_status
     self.order_items.each do |item|
       if item.shipped_status == false
-        # require 'pry'
-        # binding.pry
         self.status = "paid"
         self.save
         return
       end
     end
     self.status = "shipped"
-    return self.save
-
+    self.save
   end
 
 
