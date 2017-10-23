@@ -23,5 +23,11 @@ describe Product do
       result = p.valid?
       result.must_equal true
     end
+
+    it "requires name" do
+      is_valid = p_no_name.valid?
+      is_valid.must_equal false
+      p_no_name.errors.messages.must_include :name
+    end
   end
 end
