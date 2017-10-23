@@ -41,5 +41,10 @@ describe Product do
       is_valid.must_equal false
       p_no_price.errors.messages.must_include :price
     end
+
+    it "requires price to be a float" do
+      p_not_float.wont_be :valid?
+      p_not_float.wont_be_kind_of Float
+    end
   end
 end
