@@ -11,5 +11,11 @@ describe Category do
       result = c.valid?
       result.must_equal true
     end
+
+    it "requires a name to be valid" do
+      is_valid = c_no_name.valid?
+      is_valid.must_equal false
+      c_no_name.errors.messages.must_include :name
+    end
   end
 end
