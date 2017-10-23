@@ -168,7 +168,7 @@ describe ProductsController do
 
         patch product_path(@product), params: @product_data
         must_redirect_to product_path(@product.id)
-      # Verify the DB was really modified
+        # Verify the DB was really modified
         Product.find(@product.id).name.must_equal @product_data[:product][:name]
 
         start_product_count.must_equal Product.count
@@ -188,7 +188,7 @@ describe ProductsController do
 
         patch product_path(product), params: product_data
 
-      # Verify the DB was really modified
+        # Verify the DB was really modified
         Product.find(product.id).name.wont_equal product_data[:product][:name]
 
       end
@@ -206,7 +206,7 @@ describe ProductsController do
 
         patch product_path(product), params: product_data
 
-      # Verify the DB was not modified
+        # Verify the DB was not modified
         Product.find(product.id).inventory.wont_equal 100
 
       end
@@ -220,25 +220,33 @@ describe ProductsController do
       before do
         @merchant = merchants(:tamira)
         @merchant_id = @merchant.id
+
       end
-        it "returns success and destroys the work when given a valid product ID AND logged in merchant owns the product" do
-          start_count = Product.count
-          productid = products(:spider_plant).id
-          delete product_path(productid)
-          must_respond_with :redirect
-          # must_redirect_to merchant_products_path(@merchant_id)
-          Product.find_by(id: productid).must_be_nil
-          # Product.count.must_equal (start_count -1)
+      it "returns success and destroys the work when given a valid product ID AND logged in merchant owns the product" do
+        login(@merchant)
+        start_count = Product.count
+
+        product = products(:spider_plant)
+
+        # Make assumptions explicit
+        product.merchant.must_equal @merchant
+        puts "About to send delete request for product #{product.id}. Before count is #{start_count}"
+        delete product_path(product)
+        puts "Finished delete request, end count is #{Product.count}"
+        must_respond_with :redirect
+
+        Product.find_by(id: product.id).must_be_nil
+        Product.count.must_equal (start_count - 1)
       end
     end
-    #
-    #   it "returns not_found when given an invalid work ID" do
-    #     invalid_product_id = Product.last.id + 1
-    #     product_count = Product.count
-    #     delete product_path(invalid_product_id)
-    #     must_respond_with :not_found
-    #     Product.count.must_equal work_count
-    #   end
+
+      it "returns not_found when given an invalid work ID" do
+        invalid_product_id = Product.last.id + 1
+        product_count = Product.count
+        delete product_path(invalid_product_id)
+        must_respond_with :not_found
+        Product.count.must_equal product_count
+      end
   end
   # end
 
