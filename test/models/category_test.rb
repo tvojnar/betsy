@@ -39,9 +39,11 @@ describe Category do
     end
 
     it "returns an empty array if category has no products" do
-      c = categories(:house_plants)
+      c = categories(:flower_bulb)
 
       c.products.must_be :empty?
     end
+
+    #will it be interesting to test if two merchants have the same category?
   end
 end
