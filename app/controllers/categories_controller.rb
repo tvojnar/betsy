@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  # before_action :require_login, only: [:new, :create]
+  before_action :find_merchant, only: [:new, :create]
 
   def index
     @categories = Category.all
@@ -14,12 +14,12 @@ class CategoriesController < ApplicationController
 
     if @category.save
 
-      flash[:success] = :success
+      flash[:status] = :success
       flash[:message] = "#{@category.name} successfully created"
       redirect_to categories_path
     else
-
-      flash.now[:message] = "Failed to create category "
+      flash[:status] = :failure
+      flash[:message] = "Failed to create category "
       render :new, status: :bad_request
     end
   end
