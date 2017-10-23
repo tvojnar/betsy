@@ -5,6 +5,6 @@ class Product < ApplicationRecord
   has_many :reviews
 
   validates :name, presence: {message: "A product must have a name."}, uniqueness: true
-  validates :price, presence: {message: "A product must have a price."}, numericality: { only_float: true }
+  validates :price, presence: {message: "A product must have a price."}, numericality: { only_float: true, greater_than: 0 }
 
 end
