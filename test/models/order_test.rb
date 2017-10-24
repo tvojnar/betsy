@@ -86,5 +86,16 @@ describe Order do
 
 
   describe "calculate_total" do
+    it "will calculate the total when there are items in the order" do
+      o = orders(:pending)
+      total = 67.75
+      o.calculate_total.must_equal total
+    end # works when there are items in the cart
+
+    it "will calculate the total as $0 if there are no items in the order" do
+      o = orders(:empty)
+      total = 0
+      o.calculate_total.must_equal total
+    end # works when there are no items in the cart
   end # calculate_total
 end
