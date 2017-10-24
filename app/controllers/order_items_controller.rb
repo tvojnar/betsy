@@ -15,7 +15,7 @@ class OrderItemsController < ApplicationController
         @order.save
         session[:order_id] = @order.id
         # TODO: later we will want to redirect to a differnt path
-        redirect_to root_path
+        redirect_to order_current_path
       else
         flash[:status] = :failure
         flash[:message] = "Sorry, there isn't enough stock. There are #{@product.inventory} #{@product.name}\'s in stock."
@@ -34,7 +34,7 @@ class OrderItemsController < ApplicationController
     @item = OrderItem.find_by(id: params[:id])
     if @item
       @item.destroy
-      redirect_to order_path(@item.order.id)
+      redirect_to order_current_path
     else
       head :not_found
     end
