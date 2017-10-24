@@ -49,7 +49,7 @@ ogre_ears:
   inventory: 10
   price: 9.00
   description: something
-  visible: true
+  visible: false
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
 
 string_of_pearls:

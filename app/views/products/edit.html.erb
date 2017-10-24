@@ -1,4 +1,6 @@
-
+<div>
+  <%= link_to "Add a New Category", new_category_path, class: "button" %>
+</div>
 
 <%= form_for @product do |f| %>
 <%= f.label :name %>
@@ -19,6 +21,9 @@
 
 <%= f.label :image_url %>
 <%= f.text_field :image_url %>
+
+<%= f.label :visible, 'Status' %>
+<%= f.select(:visible, options_for_select([['Active', true], ['Inactive', false]], {:selected => @product.visible})) %>
 
 <%= f.hidden_field :merchant_id, value: @login_merchant.id %>
 

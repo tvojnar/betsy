@@ -17,7 +17,7 @@ describe OrderItemsController do
 
       must_respond_with :redirect
       # TODO: change this when we decide where to redirect to!
-      must_redirect_to root_path
+      must_redirect_to order_current_path
       # check that a new OrderItem was created
       OrderItem.count.must_equal start_num_itmes + 1
       # check that a new Order was created
@@ -93,7 +93,7 @@ describe OrderItemsController do
       delete order_item_path(oi)
 
       must_respond_with :redirect
-      must_redirect_to order_path(oi.order.id)
+      must_redirect_to order_current_path
       OrderItem.count.must_equal count - 1
     end # works when given valid order_item
 
