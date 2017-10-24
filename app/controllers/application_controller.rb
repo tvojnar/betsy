@@ -5,16 +5,17 @@ class ApplicationController < ActionController::Base
   protected
   def require_correct_merchant
     @merchant = Merchant.find_by(id: session[:merchant_id])
-    unless @merchant
+    if @merchant
+      if @merchant != Merchant.find_by(id: params[:id])
+        flash[:status] = :failure
+        flash[:message] = "You cannot view the account details of another merchant"
+        redirect_to root_path
+      end # if
+    else
       flash[:status] = :failure
       flash[:message] = "You must be logged in to do that"
-      head :unauthorized
-    end # unless
-    if @merchant != Merchant.find_by(id: params[:id])
-      flash[:status] = :failure
-      flash[:message] = "You cannot view the account details of another merchant"
-      head :unauthorized
-    end # if
+      redirect_to root_path 
+    end # if/else
   end # require_correct_merchant
 
   def current_order

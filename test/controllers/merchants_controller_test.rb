@@ -77,27 +77,41 @@ describe MerchantsController do
     it "returns unauthorized when a merchant tries to see another merchants show page" do
       good_merchant = merchants(:diane)
       bad_merchant = merchants(:tamira)
-      get merchant_path(good_merchant_id)
-      must_respond_with :unauthorized
+      get merchant_path(bad_merchant.id)
+      must_respond_with :redirect
+      must_redirect_to root_path
     end
-
   end
 
   describe "edit" do
-    it "returns a success status when passed a valid id" do
-      merchant = merchants(:diane)
-      merchant_id = merchants(:diane).id
-      get edit_merchant_path(merchant_id)
-      must_respond_with :success
-    end
+    describe "logged in merchant" do
+      before do
+        merchant = merchants(:diane)
+        login(merchant)
+      end
+      it "returns a success status when passed the id of the logged in user" do
+        merchant = merchants(:diane)
+        merchant_id = merchants(:diane).id
+        get edit_merchant_path(merchant_id)
+        must_respond_with :success
+      end
 
-    it "returns not_found when given a bogus product id" do
-      merchant = merchants(:diane)
-      merchant_id = merchants(:diane).id + 1
-      get edit_merchant_path(merchant_id)
-      must_respond_with :not_found
-    end
-  end
+      it "returns not_found when given a bogus product id" do
+        merchant = merchants(:diane)
+        merchant_id = merchants(:diane).id + 1
+        get edit_merchant_path(merchant_id)
+        must_respond_with :redirect
+        must_redirect_to root_path 
+      end
+
+      it "redirects to the root path if given a merchant id other than the logged in merchant" do
+        bad_merchant = merchants(:tamira)
+        get edit_merchant_path(bad_merchant.id)
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end # redirects if given an incorrect merchant it
+    end # logged in user
+  end # edit
 
   describe "update" do
     it "returns success if the merchant ID is valid and the change is valid" do
