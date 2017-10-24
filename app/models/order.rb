@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
   has_one :billing
-  
+
 
   # validates :cc_name, presence: true
   # validates :cc_number, presence: true
@@ -15,6 +15,7 @@ class Order < ApplicationRecord
     self.order_items.each do |item|
       total += item.product.price * item.quantity
     end
+    return total 
   end # calculate_total
 
   #DL WORKING ON THIS METHOD
