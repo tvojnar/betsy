@@ -1,5 +1,4 @@
-<h1> Show page for Order</h1>
-
+<h1>Shopping cart</h1>
 <% if @order_items.any? %>
   <% @order_items.each do |item| %>
     <p><%= item.product.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
