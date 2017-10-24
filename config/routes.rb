@@ -32,6 +32,8 @@ end
 get '/order/:id/submit', to: 'orders#submit', as: 'order_submit'
 post '/order/:id/submit', to: 'orders#submit'
 
+get '/order/:id/summary', to: 'orders#summary', as: 'order_summary'
+
 patch '/merchant/:id/show', to: "order_items#mark_shipped", as: "mark_order_item"
 
 resources :categories, only: [:index, :new, :create] do
