@@ -1,0 +1,8 @@
+This is the list of reviews page for a given product.  it should list the reviews for a selected product.
+<ul>
+<% @product.reviews.each do |review| %>
+    <li> Rating: <%= review.rating %>
+      <p> Description: <%= review.description %> </p>
+    </li>
+<% end %>
+</ul>

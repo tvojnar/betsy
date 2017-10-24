@@ -17,6 +17,11 @@
 </div>
 
 <div>
+  <%= button_to "Read Reviews", product_reviews_path(@product.id), method: :get %>
+
+</div>
+
+<div>
   <% if session[:merchant_id] == @product.merchant_id %>
   <p> Active Status:
     <% if @product.visible %>

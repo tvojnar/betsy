@@ -1,5 +1,10 @@
 class ReviewsController < ApplicationController
 
+  def index
+    @product = Product.find_by(id: params[:product_id])
+    @reviews = Review.all.find_by(product_id: @product.id)
+  end
+
   def new
     @product = Product.find_by(id: params[:product_id])
     @review = Review.new(product: @product)
