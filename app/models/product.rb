@@ -9,4 +9,5 @@ class Product < ApplicationRecord
   validates :price, presence: {message: "A product must have a price."}, numericality: { only_float: true, greater_than: 0 }
   validates :inventory, presence: true, numericality: {only_integer: true, greater_than: - 1}
 
+
 end

@@ -267,6 +267,13 @@ describe ProductsController do
       # end
   end
 
+  describe "visible/active" do
+    it "does not allow products that are visible-false to display on root page or products_path" do
+
+    end
+  end
+
+
   describe "guest users" do
     it "cannot create a new product" do
       start_count = Product.count

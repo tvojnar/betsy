@@ -9,6 +9,7 @@
     <%else%>
 
     <% Product.all.each do |product| %>
+      <% if product.visible%>
       <div>
         Image will go here-ish
         <%#= link_to image_tag(product.image_url), products_path(product.id)%>
@@ -25,6 +26,7 @@
           </li>
       </div>
       <%end%>
-      <% end %>
+      <%end%>
+    <% end %>
     </section>
 </main>

@@ -5,27 +5,27 @@ class ProductsController < ApplicationController
   end
 
   def index
+    @products = Product.where(visible: true)
     if params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
       flash[:status] = :failure
       flash[:message] = "Sorry, that merchant was not found."
-      @products = Product.all
       redirect_to products_path
-      return
+
     elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
       flash[:status] = :failure
       flash[:message] = "Sorry, that category was not found."
-      @products = Product.all
       redirect_to products_path
-      return
+
     elsif merchant_id != nil
-      merchant = Merchant.find_by(id: merchant_id)
-      @products = merchant.products
+      @merchant = Merchant.find_by(id: merchant_id)
+      @products = @merchant.products.where(visible:true)
+      @invisible_products = @merchant.products.where(visible: false)
+
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
-    else
-      @products = Product.all
     end
+
     return @products
   end
 
@@ -97,22 +97,11 @@ class ProductsController < ApplicationController
         @product.update_attributes(product_params)
         if save_and_flash(@product) #<<defined as a method in in application controller
           redirect_to product_path(@product.id)
-          # else
-          #   render :edit, status: :bad_request
-          # return
         end
-        # else
-        # render :root, status: :bad_request
-        # return
       end
     else
       render :root, status: :bad_request
     end
-  end
-
-
-  def retire
-    #not sure about this, change the status to retired? add a new column with a migration?
   end
 
   def destroy
@@ -145,8 +134,9 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :inventory, :price, :image_url, :category_ids => [])
+    return params.require(:product).permit(:name, :inventory, :price, :image_url, :visible, :category_ids => [])
   end
+
 
   def merchant_id
     if params[:merchant] != nil
