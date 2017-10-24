@@ -20,47 +20,25 @@ class OrdersController < ApplicationController
   end
   end # current
 
-  # def edit
+  # def sure
   #   @order = current_order
-  #   # @orderitems = current_order.order_items
-  #   if @order != nil
-  #     @order = session[:order]
-  #   else
-  #     render :edit, status: :not_found
-  #   end
   # end
 
-  # def update
-  #   #TODO: MOVE SOME OF THIS STUFF TO CREATE METHOD OF BILLING
-  #   @order = current_order
-  #   if @order
-  #     @order.update_attributes(order_params)
-  #     if save_and_flash(@order)
-  #       #is this where we want to redirect?
-  #       redirect_to root_path
-  #       # o = Order.new
-  #       #IS THIS THE BEST PLACE TO DO THIS? IT MAKES SENSE FOR THE BUYER BUT NOT THE MERCHANT DL
-  #       session[:order_id] = Order.new.id
-  #       return
-  #     else
-  #       render :edit, status: :bad_request
-  #       return
-  #     end
-  #   else
-  #     render :edit, status: :not_found
-  #   end
-  # end
 
   def submit
     @order = current_order
     if @order
       @order.status = "paid"
       @order.date_submitted = DateTime.now
+      @order.save
       session[:order_id] = nil
     else
-      redirect_to order_path(@order.id)
+      redirect_to confirmation_path(@order.id)
+      render :sure
       head :not_found
     end
+    puts ">>>>>>>>>>>>>>>>>>>>>>>> @ORDER.STATUS: #{@order.status}"
+    puts ">>>>>>>>>>>>>>>>>>>>>>>> @ORDER.ID: #{@order.id}"
   end
 
   def show
@@ -85,7 +63,3 @@ class OrdersController < ApplicationController
   end
 
 end
-
-#DL took out billing attributes and added :status to def order_params permit. the order wasn't saving without it since it was validating its presence
-#DL took out the redirect in the submit if loop, as it redirected before the page was displayed...we actually want the button on the submit page to do the redirect/post
-#DL changed session[:order_id] = Order.new to session[:order_id] = nil, since current session searches and assigns current_order to Order.new

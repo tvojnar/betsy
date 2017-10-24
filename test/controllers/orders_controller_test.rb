@@ -41,18 +41,64 @@ end # current_order
 
 
 
-
 describe "submit" do
   it "responds with success when passed a valid order id" do
-    o = Order.create
-    puts o.id
-    get order_path(o.id)
-    get order_submit_path(o.id)
+    order = Order.new
+    id = Product.first.id
+
+    item_params = {
+      order_item: {
+        quantity: 1,
+        product_id: id
+      }
+    }
+
+    billing_params = {
+      billing: {
+        cc_name: "some_string",
+        cc_number: "some_string",
+        cc_exp: Date.today,
+        cc_cvv: "some_string",
+        order_id: order.id,
+
+      }
+    }
+    post order_items_path params: item_params
+    post billings_path params: billing_params
+    get order_submit_path
     must_respond_with :success
   end
 
   it "sets order status to paid and redirects to order_summary_path if order is not nil" do
-    #get submit_order_path
+    # order = Order.new
+    id = Product.first.id
+
+    item_params = {
+      order_item: {
+        quantity: 1,
+        product_id: id
+      }
+    }
+
+    billing_params = {
+      billing: {
+        cc_name: "some_string",
+        cc_number: "some_string",
+        cc_exp: Date.today,
+        cc_cvv: "some_string",
+        # order_id:
+
+      }
+    }
+
+
+    post order_items_path params: item_params
+    post billings_path params: billing_params
+    get order_submit_path
+    must_respond_with :success
+    post orders_current_submit_path
+    must_respond_with :success
+    Order.last.status.must_equal "paid"
   end
 
   it "redirects to order_path if order is nil" do
@@ -62,8 +108,8 @@ describe "submit" do
 end
 
 
-describe "summary" do
-  it "returns success if the order exists and is the current order" do
+describe "show" do
+  it "returns success if the order exists" do
 
   end
 
