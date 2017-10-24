@@ -1,7 +1,8 @@
 class CategoriesController < ApplicationController
+  before_action :find_merchant, only: [:new, :create]
+
   def index
-    # @categories = Category.all
-    @categories = Category.where(product_id: params[:product_id])
+    @categories = Category.all
   end
 
   def new
@@ -13,23 +14,13 @@ class CategoriesController < ApplicationController
 
     if @category.save
 
-      flash[:success] = :success
+      flash[:status] = :success
       flash[:message] = "#{@category.name} successfully created"
       redirect_to categories_path
     else
-
-      flash.now[:message] = "Failed to create category "
+      flash[:status] = :failure
+      flash[:message] = "Failed to create category "
       render :new, status: :bad_request
-    end
-  end
-
-  def show
-    if params[:category]
-      # THIS IS A TOTAL HACK!!!
-      @category = Category.find(params[:category][:id])
-      redirect_to category_path(@category.id)
-    else
-      @category = Category.find(params[:id])
     end
   end
 

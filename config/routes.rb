@@ -23,17 +23,21 @@ resources :order_items
 resources :merchants
 resources :categories
 resources :reviews
+resources :billings, only: [:new, :create, :edit, :update]
 
 resources :merchants do
   resources :products
 end
 
+get '/order/:id/submit', to: 'orders#submit', as: 'order_submit'
+post '/order/:id/submit', to: 'orders#submit'
+
+get '/order/:id/summary', to: 'orders#summary', as: 'order_summary'
+
 patch '/merchant/:id/show', to: "order_items#mark_shipped", as: "mark_order_item"
 
-get '/category', to: 'categories#show', as: 'filter_category'
-
-resources :categories do
-  resources :products
+resources :categories, only: [:index, :new, :create] do
+  resources :products, only: [:index, :new]
 end
 
 

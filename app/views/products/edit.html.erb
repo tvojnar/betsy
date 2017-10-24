@@ -5,7 +5,8 @@
 <%= f.text_field :name %>
 
 <%= f.label :price  %>
-<%= f.number_field :price, value: number_to_currency(f.object.price.to_f, delimiter: '.', unit: '$', precision: 2), step: :any%>
+<%= f.number_field :price, value: f.object.price.to_f, step: 0.01%>
+<%#value: number_to_currency(f.object.price.to_f, delimiter: '.', unit: '$', precision: 2), step: :any%>
 
 <%= f.label :category %>
 <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>

@@ -3,12 +3,11 @@
   <h3>Product: <%= @product.name %></h3>
 
   <%= image_tag(@product.image_url) %>
-  <h3>Merchant: <%= link_to @product.merchant.name, merchant_path(@product.merchant) %></h3>
+  <h3>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h3>
   <h3><%= @product.description %></h3>
-  <h3>Cost: $<%= sprintf("%.2f", @product.price) %></h3>
   <h3><%= @product.inventory %> in stock</h3>
   <h3> Categories: <% @product.categories.each do |category| %>
-    <%= link_to category.name, category_path(category.id)%>
+    <%= link_to category.name, category_products_path(category_id: category.id)%>
     <% end%>
 </section>
 <%= render partial: 'layouts/add_order_item_to_order' %>

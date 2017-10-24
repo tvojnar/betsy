@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
 
+  # before_action :require_login
 
 
   protected
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::Base
   #     flash[:message] = "You must be logged in to do that"
   #     redirect_to root_path
   #   end
-  # end
+# end
 
 # When current_order is called it checks if there is a order_id associated with the session. If there is, it will find that order, if there isn't then it will make a new order
 
@@ -48,8 +49,4 @@ private
     end
 
   end
-
-
-
-
 end
