@@ -62,6 +62,7 @@ class OrdersController < ApplicationController
     if @order
       @order = Order.find(params[:id])
       @order_items = @order.order_items
+      redirect_to
     else
       head :not_found
     end
