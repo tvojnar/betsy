@@ -130,18 +130,16 @@ describe OrderItemsController do
   end # destroy
 
   describe "update" do
+    let(:item_params) {{
+      order_item: {
+        quantity: 1,
+        product_id: prod_id
+      }
+    }}
+    let(:prod) {Product.first}
+    let(:prod_name) {prod.name}
+    let(:prod_id) {prod.id}
     describe "when OrderItem exists/can be found" do
-
-      let(:prod) {Product.first}
-      let(:prod_name) {prod.name}
-      let(:prod_id) {prod.id}
-      let(:item_params) {{
-        order_item: {
-          quantity: 1,
-          product_id: prod_id
-        }
-      }}
-
      describe "when the OrderItem belongs to the current Order" do
        it "will update the quantity when given a valid quantity" do         # Arrange
           # set up the order item edit
@@ -256,9 +254,26 @@ describe OrderItemsController do
        end # if won't update the quantity if the OrderItem isn't in the current Order
      end # when the OrderItem does not belong to the current Order
     end # when OI can be found
+
     describe "when the OrderItem does not exist" do
       let(:oi_id) {OrderItem.last.id + 1}
       it "won't update and will return not_found the quantity if the OrderItem does not exist" do
+        # Arrange
+        oi_data = {
+          order_item: {
+            quantity: 2
+          }
+        }
+
+        # Act
+        post order_items_path, params: item_params
+        patch order_item_path(oi_id), params: oi_data
+
+        # Assert
+        must_respond_with :not_found
+        Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
+        # There will still only be one OrderItem in the order!
+        Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
       end # not_found and won't update q
     end # when the OrderItem does not exist
   end # update
