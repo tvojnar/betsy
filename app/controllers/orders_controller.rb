@@ -44,11 +44,12 @@ class OrdersController < ApplicationController
   # end
 
   def submit
-    @order = current_order
     if @order
       @order.status = "paid"
+      @order = current_order
       # redirect_to order_summary_path(@order.id)
       # return
+      session[:order_id] = nil
 
     else
       redirect_to order_path(@order.id)
@@ -56,11 +57,11 @@ class OrdersController < ApplicationController
     end
   end
 
-  def summary
+  def show
+    @order = Order.find(params[:id])
     if @order
-      @order = current_order
+      @order = Order.find(params[:id])
       @order_items = @order.order_items
-      session[:order_id] = nil
     else
       head :not_found
     end
