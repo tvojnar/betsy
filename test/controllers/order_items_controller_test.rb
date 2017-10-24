@@ -202,7 +202,6 @@ describe OrderItemsController do
          oi_data = {
            order_item: {
              quantity: new_quantity,
-             product_id: prod.id
            }
          }
          # add an orderItem to the current order

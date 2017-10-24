@@ -64,7 +64,7 @@ class OrderItemsController < ApplicationController
 
     if @order.order_items.include? (@order_item)
       # TODO: add logic to only update the quantity if the new quantity is <= to the inventory
-      if item_params[:quantity].to_i <= Product.find_by(id: item_params[:product_id]).inventory
+      if item_params[:quantity].to_i <= @order_item.product.inventory
         @order_item.update_attributes(item_params)
         if @order_item.save
           flash[:status] = :success
