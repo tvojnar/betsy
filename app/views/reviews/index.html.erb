@@ -1,4 +1,13 @@
 <h3> <%= link_to @product.name, product_path(@product.id) %> Reviews </h3>
+
+<% if @product.reviews.count == 0 %>
+  <%= "This product has not been reviewed yet! Be the first to review?" %>
+<% end %>
+
+<div>
+  <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get %>
+</div>
+
 <ul>
 <% @product.reviews.each do |review| %>
     <li> Rating: <%= review.rating %>

@@ -2,7 +2,14 @@ class ReviewsController < ApplicationController
 
   def index
     @product = Product.find_by(id: params[:product_id])
+    if @product
     @reviews = Review.all.find_by(product_id: @product.id)
+    else
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that product is not in our database."
+      redirect_to products_path
+      return
+    end
   end
 
   def new
