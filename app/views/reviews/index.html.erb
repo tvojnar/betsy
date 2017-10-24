@@ -1,4 +1,4 @@
-This is the list of reviews page for a given product.  it should list the reviews for a selected product.
+<h3> <%= link_to @product.name, product_path(@product.id) %> Reviews </h3>
 <ul>
 <% @product.reviews.each do |review| %>
     <li> Rating: <%= review.rating %>
