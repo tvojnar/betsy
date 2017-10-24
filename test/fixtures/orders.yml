@@ -56,3 +56,7 @@ shipped:
   # zip: 44444
   status: shipped
   date_submitted:
+
+empty:
+  status: pending
+  date_submitted:

@@ -1,20 +1,31 @@
 require "test_helper"
 
 describe OrdersController do
-  describe "show" do
-  it "will succeed if there passed an existing order" do
-    order = orders(:pending)
-    get order_path(order)
-    must_respond_with :success
-  end # works with existing order
+  describe "current" do
+  it "will succeed if session[:order_id] has been set" do
+    # Arrange
+      # set session[:order_id]
+      id = Product.first.id
+      item_params = {
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }
+      post order_items_path, params: item_params
 
-  it "will work if no order has been created yet for the session" do
-  # QUESTION: why can't I use current_order in my tests??????
-  # need to do the post that is calling current_order in my test
-   get order_path(current_order)
-   must_respond_with :success
-  end # works if an orger hasn't been created yet for the session
-end # show
+      # Act
+      get order_current_path
+
+      # Assert
+      must_respond_with :success
+  end # works if session[:order_id] has been set
+
+  it "won't work if no order has been created yet for the session" do
+   get order_current_path
+   must_respond_with :not_found
+  end # won't work if no order has been created yet for the session
+end # current
 
 describe "index" do
   it "will respond with sucess" do
