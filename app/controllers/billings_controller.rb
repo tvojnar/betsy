@@ -7,7 +7,7 @@ class BillingsController < ApplicationController
     @billing = Billing.new(billing_params)
     if @billing
       save_and_flash(@billing)
-      redirect_to order_submit_path(session[:order_id])
+      redirect_to order_submit_path
       return
     else
       render :new, status: :bad_request
@@ -22,7 +22,7 @@ class BillingsController < ApplicationController
   def update
     @billing.update_attributes(billing_params)
     if save_and_flash(@billing)
-      redirect_to order_submit_path(session[:order_id])
+      redirect_to order_submit_path
       return
     else
       render :edit, status: :bad_request

@@ -85,5 +85,6 @@ describe Order do
   end
 
 
-
+  describe "calculate_total" do
+  end # calculate_total
 end
