@@ -63,16 +63,21 @@ class OrderItemsController < ApplicationController
     @order = Order.find_by(id: session[:order_id])
 
     if @order.order_items.include? (@order_item)
+      # TODO: add logic to only update the quantity if the new quantity is <= to the inventory
+      if item_params[:quantity].to_i <= Product.find_by(id: item_params[:product_id]).inventory
         @order_item.update_attributes(item_params)
-      if @order_item.save
-        flash[:status] = :success
-        flash[:message] = "Updated the quantity of #{@order_item.product.name} to #{@order_item.quantity}"
-        redirect_to order_path(session[:order_id])
+        if @order_item.save
+          flash[:status] = :success
+          flash[:message] = "Updated the quantity of #{@order_item.product.name} to #{@order_item.quantity}"
+          redirect_to order_path(session[:order_id])
+        else
+          flash[:status] = :failure
+          flash[:message] = "Could not update the quantiy for @order_item.product.name"
+          redirect_to order_path(session[:order_id])
+        end # if/else saved
       else
-        flash[:status] = :failure
-        flash[:message] = "Could not update the quantiy for @order_item.product.name"
-        redirect_to order_path(session[:order_id])
-      end # if/else saved
+        head :bad_request
+      end # if q <= inventory
     else
       head :unauthorized
     end # if/else OI is in O

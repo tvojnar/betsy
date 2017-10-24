@@ -156,19 +156,22 @@ describe OrderItemsController do
            oi = Order.find_by(id: session[:order_id]).order_items.last
            oi_id = oi.id
            oi.quantity.must_equal 1
+           # make sure that the OrderItem starts off with the expected quantity
            Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
 
          # Act
-         patch order_item_path(oi_id), params: oi_data
+          # update the quantity of the OrderItem
+          patch order_item_path(oi_id), params: oi_data
 
          # Assert
-         must_respond_with :redirect
-         Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 4
-         Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
+           must_respond_with :redirect
+           # the quantity of the OrderItem must have been updated
+           Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 4
+           # there will still only be one OrderItem in the Order
+           Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
        end # updates when given a valid quantity
 
        it "won't update if given an invalid quantity ( quantity <= 0)" do
-         # TODO : finish this test
          # set up the order item edit
           oi_data = {
             order_item: {
@@ -177,20 +180,48 @@ describe OrderItemsController do
           }
           # add an orderItem to the current order
           post order_items_path, params: item_params
-          # find the OrderItem to update
+          # find the OrderItem to update and make sure it has the expected quantity
           oi = Order.find_by(id: session[:order_id]).order_items.last
           oi_id = oi.id
           oi.quantity.must_equal 1
 
         # Act
-        patch order_item_path(oi_id), params: oi_data
+           # update the OrderItem to have a new quantity
+           patch order_item_path(oi_id), params: oi_data
 
         # Assert
-        must_respond_with :redirect
-        Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
-        Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
+          must_respond_with :redirect
+          # the quantity of the OrderItem won't have changed!
+          Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
+          # There will still only be one OrderItem in the order!
+          Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
        end # won't update if given invalid quantity
+
        it "won't update the quantity if the provided quantity > inventory" do
+         new_quantity = prod.inventory + 1
+         oi_data = {
+           order_item: {
+             quantity: new_quantity,
+             product_id: prod.id
+           }
+         }
+         # add an orderItem to the current order
+         post order_items_path, params: item_params
+         # find the OrderItem to update and make sure it has the expected quantity
+         oi = Order.find_by(id: session[:order_id]).order_items.last
+         oi_id = oi.id
+         oi.quantity.must_equal 1
+
+       # Act
+          # update the OrderItem to have a new quantity
+          patch order_item_path(oi_id), params: oi_data
+
+       # Assert
+         must_respond_with :bad_request
+         # the quantity of the OrderItem won't have changed!
+         Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
+         # There will still only be one OrderItem in the order!
+         Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
        end # won't update if q > inventory
      end # when the OI belongs to the current order
      describe "when the OrderItem does not belong to the current Order" do
