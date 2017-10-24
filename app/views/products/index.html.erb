@@ -6,7 +6,7 @@
     <%# submit_tag("GO") %>
 <%# end %>
 
-
+<div>
 <table>
   <h3> Products </h3>
   <thead>
@@ -23,18 +23,51 @@
     <% if @products == nil %>
     <h4> Sorry, there are not yet any products listed. </h4>
     <%else%>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= link_to product.name, product_path(product.id) %></td>
-        <td><%= product.description %></td>
-        <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
-        <td><%= product.inventory %></td>
-        <td><%= number_to_currency product.price %></td>
-      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product_path(product.id) %></td>
+          <td><%= product.description %></td>
+          <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
+          <td><%= product.inventory %></td>
+          <td><%= number_to_currency product.price %></td>
+        </tr>
       <%end%>
 
     <%end%>
+  </tbody>
+</table>
+</div>
+
+<div>
+  <% if session[:merchant_id] %>
+    <% if @merchant %>
+      <% if session[:merchant_id] == @merchant.id %>
+    <table>
+      <h3> Inactive Products </h3>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Merchant Name</th>
+          <th>Inventory</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invisible_products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product_path(product.id) %></td>
+          <td><%= product.description %></td>
+          <td><%= link_to product.merchant.name, merchant_path(product.merchant) %></td>
+          <td><%= product.inventory %></td>
+          <td><%= number_to_currency product.price %></td>
+        </tr>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
 
 
     </tbody>
   </table>
+</div>

@@ -5,27 +5,27 @@ class ProductsController < ApplicationController
   end
 
   def index
+    @products = Product.where(visible: true)
     if params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
       flash[:status] = :failure
       flash[:message] = "Sorry, that merchant was not found."
-      @products = Product.all
       redirect_to products_path
-      return
+
     elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
       flash[:status] = :failure
       flash[:message] = "Sorry, that category was not found."
-      @products = Product.all
       redirect_to products_path
-      return
+
     elsif merchant_id != nil
-      merchant = Merchant.find_by(id: merchant_id)
-      @products = merchant.products
+      @merchant = Merchant.find_by(id: merchant_id)
+      @products = @merchant.products.where(visible:true)
+      @invisible_products = @merchant.products.where(visible: false)
+
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
-    else
-      @products = Product.all
     end
+
     return @products
   end
 
@@ -82,10 +82,10 @@ class ProductsController < ApplicationController
         return
       end
     else
-        flash[:status] = :failure
-        flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
-        redirect_to products_path
-        return
+      flash[:status] = :failure
+      flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
+      redirect_to products_path(@product.id)
+      return
     end
 
   end
@@ -97,58 +97,46 @@ class ProductsController < ApplicationController
         @product.update_attributes(product_params)
         if save_and_flash(@product) #<<defined as a method in in application controller
           redirect_to product_path(@product.id)
-        # else
-        #   render :edit, status: :bad_request
-        # return
         end
-      # else
-        # render :root, status: :bad_request
-      # return
       end
     else
       render :root, status: :bad_request
     end
   end
 
-
-  def retire
-    #not sure about this, change the status to retired? add a new column with a migration?
-  end
-
   def destroy
     @product = Product.find_by(id: params[:id])
-    puts "Found product"
-    if find_merchant
-      if @login_merchant.id == @product.merchant_id
-        puts "Login merchant matches, calling destroy"
-        @product.destroy
-        puts "Finished destroy"
-        flash[:status] = :success
-        flash[:message] = "Successfully removed #{@product.name} from your products"
-        redirect_to merchant_products_path(@login_merchant.id)
+      if find_merchant
+        if @login_merchant.id == @product.merchant_id
+          puts "Login merchant matches, calling destroy"
+          @product.destroy
+          puts "Finished destroy"
+          flash[:status] = :success
+          flash[:message] = "Successfully removed #{@product.name} from your products"
+          redirect_to merchant_products_path(@login_merchant.id)
+        else
+          puts "Login merchant does not match"
+          flash[:status] = :failure
+          flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
+          redirect_to product_path(@product.id)
+        end
       else
-        puts "Login merchant does not match"
         flash[:status] = :failure
-        flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
+        flash[:message] = "Sorry, you must be logged in to do that!"
         redirect_to product_path(@product.id)
       end
-    else
-      flash[:status] = :failure
-      flash[:message] = "Sorry you must be logged in to do that!"
-      redirect_to product_path(@product.id)
-    end
+
       #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
 
   end
 
-  #logic to make sure user is signed in as merchant to get to this page
-  #if session[:merchant_id]?
 
   private
 
   def product_params
-    return params.require(:product).permit(:name, :inventory, :price, :image_url, :category_ids => [])
+    return params.require(:product).permit(:name, :inventory, :price, :image_url, :visible, :category_ids => [])
   end
+
 
   def merchant_id
     if params[:merchant] != nil
