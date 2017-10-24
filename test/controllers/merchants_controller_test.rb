@@ -41,6 +41,7 @@ describe MerchantsController do
       # Assert that logout worked
       must_redirect_to root_path
       session[:merchant_id].must_equal nil
+      session[:order_id].must_equal nil 
     end # it can log a user out
   end # logout
 
