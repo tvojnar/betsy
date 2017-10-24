@@ -28,7 +28,11 @@ resources :merchants do
   resources :products
 end
 
-# NOTE: Dan made orders plural in rout and replaced :id with current since we don't reference :id in these actions. He also took out session[:order_id] from where we reference these routes in the OrdersController. 
+resources :products do
+  resources :reviews, only: [:index, :new, :create, :show]
+end
+
+# NOTE: Dan made orders plural in rout and replaced :id with current since we don't reference :id in these actions. He also took out session[:order_id] from where we reference these routes in the OrdersController.
 get 'orders/current', to: "orders#current", as: 'order_current'
 get 'orders/current/submit', to: 'orders#submit', as: 'order_submit'
 post 'orders/current/submit', to: 'orders#submit'
