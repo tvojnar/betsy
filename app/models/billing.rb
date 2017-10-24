@@ -10,3 +10,6 @@ class Billing < ApplicationRecord
   validates :zip, presence: true
   validates :order_id, presence: true
 end
+
+#for some reason I had to comment these out to get things going on the local host but then
+#I uncommented and it started working again ??
