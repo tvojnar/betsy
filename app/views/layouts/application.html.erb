@@ -36,14 +36,14 @@
                   <%= link_to "Add a New Product", new_product_path, class: "button" %>
 
                   <%= link_to "Account", merchant_path(session[:merchant_id]), class: "button"%>
-                
+
                   <% if session[:order_id] %>
-                    <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                    <%= link_to "View cart", order_current_path, class: "button" %>
                   <% end %>
                   <%= link_to "Log out", logout_path, class: "button" %>
               <% else %>
                 <% if session[:order_id] %>
-                  <%= link_to "View cart", order_path(session[:order_id]), class: "button" %>
+                  <%= link_to "View cart", order_current_path, class: "button" %>
                 <% end %>
                 <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
               <% end %>

@@ -1,6 +1,16 @@
-Product name
-Order status
-Order time
-Quantity
-Item Subtotal
-Image
+<h2>Confirmation</h2>
+
+<% if @order_items.any? %>
+  <% @order_items.each do |item| %>
+    <p><%= item.product.name %> | %></p>
+    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
+    <%# TODO: make calculating the total price a method! %>
+    <p> Date Placed: <%= item.order.date_submitted %></p>
+  <% end %>
+  <p>Your Total: <%= number_to_currency current_order.calculate_total %></p>
+<% else %>
+<% end %>
+
+
+
+can add image later if we choose to
