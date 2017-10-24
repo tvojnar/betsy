@@ -59,12 +59,15 @@ class OrderItemsController < ApplicationController
 
   def update
     # @order_item is set by the before action
-
     @order = Order.find_by(id: session[:order_id])
+    # if @order_item exists
     if @order_item
+      # if the OrderItem is in the current Order
       if @order.order_items.include? (@order_item)
+        # if the quantity requested is <= the inventory of the product
         if item_params[:quantity].to_i <= @order_item.product.inventory
           @order_item.update_attributes(item_params)
+          # if the update was passed valid data and the OrderItem saved successfully
           if @order_item.save
             flash[:status] = :success
             flash[:message] = "Updated the quantity of #{@order_item.product.name} to #{@order_item.quantity}"
@@ -82,7 +85,7 @@ class OrderItemsController < ApplicationController
       end # if/else OI is in O
     else
       head :not_found
-    end # if the OI exists 
+    end # if the OI exists
 
   end # update
 
