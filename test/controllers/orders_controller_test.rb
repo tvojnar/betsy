@@ -39,7 +39,43 @@ describe "current_order" do
 end # current_order
 
 
-#TODO: MOVE THESE TESTS TO BILLING CONTROLLER TEST
+
+
+
+describe "submit" do
+  it "responds with success when passed a valid order id" do
+    o = Order.create
+    puts o.id
+    get order_path(o.id)
+    get order_submit_path(o.id)
+    must_respond_with :success
+  end
+
+  it "sets order status to paid and redirects to order_summary_path if order is not nil" do
+    #get submit_order_path
+  end
+
+  it "redirects to order_path if order is nil" do
+
+  end
+
+end
+
+
+describe "summary" do
+  it "returns success if the order exists and is the current order" do
+
+  end
+
+  it "sets the session[:order_id] to nil if the order exits and is the current order" do
+  end
+
+
+  it "returns not found if the order does not exist or is not the current order" do
+
+  end
+
+end
 
 # describe "edit" do
 #   it "returns success when passed a valid order id" do

@@ -15,7 +15,7 @@ describe MerchantsController do
       Merchant.count.must_equal start_count
     end # logs in an existing user
 
-    it "creates a new merchant" do
+    it "creates a new merchant if the merchant is not an existing user" do
       start_count = Merchant.count
       merchant = Merchant.new(provider: "github", uid: 99999, name: "test_user", email: "test@ada.org")
       login(merchant)
@@ -23,7 +23,18 @@ describe MerchantsController do
       Merchant.count.must_equal start_count + 1
       session[:merchant_id].must_equal Merchant.last.id
     end
-    #must test that user can log in to be merchant
+
+    it "tells a user they are already logged in if that is true" do
+      new_merchant = merchants(:tamira)
+
+      login(new_merchant)
+      must_respond_with :redirect
+      must_redirect_to root_path
+
+      login(new_merchant)
+      must_respond_with :error
+    end
+
   end # login
 
   describe "logout" do
@@ -46,9 +57,9 @@ describe MerchantsController do
   end # logout
 
   describe "show" do
-      before do
-        login(merchants(:diane))
-      end
+    before do
+      login(merchants(:diane))
+    end
 
     it "returns a success status when passed a valid id" do
       merchant = merchants(:diane)
@@ -63,7 +74,7 @@ describe MerchantsController do
       must_respond_with :not_found
     end
 
-   end
+  end
 
   describe "edit" do
     it "returns a success status when passed a valid id" do
@@ -117,7 +128,7 @@ describe MerchantsController do
       must_respond_with :not_found
     end
 
-#THIS TEST IS NOT CURRENTLY PASSING BUT WILL ONCE I MERGE WITH MASTER (MODEL VALIDATIONS)
+    #THIS TEST IS NOT CURRENTLY PASSING BUT WILL ONCE I MERGE WITH MASTER (MODEL VALIDATIONS)
     it "returns bad_request if the change is invalid" do
       merchant = merchants(:nkiru)
       merchant_data = {
@@ -142,6 +153,6 @@ describe MerchantsController do
 
 
 
-end
+  end
 
 end
