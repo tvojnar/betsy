@@ -12,8 +12,13 @@ class OrdersController < ApplicationController
   end # show
 
   def current
+  # if there is a current order (so if anything was added to the cart)
+  if session[:order_id]
     @order_items = current_order.order_items
     @order = current_order
+  else
+    head :not_found
+  end
   end # current
 
   def edit
