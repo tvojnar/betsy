@@ -47,13 +47,18 @@ class OrdersController < ApplicationController
   def submit
     @order = current_order
     if @order
-      @order.status = paid
-      session[:order_id] = Order.new
+      @order.status = "paid"
       redirect_to order_summary_path(@order.id)
       return
     else
       redirect_to order_path(@order.id)
     end
+  end
+
+  def order_summary
+    @order = current_order
+    @order_items = @order.order_items
+    session[:order_id] = Order.new
   end
 
   private
