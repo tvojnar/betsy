@@ -74,6 +74,13 @@ describe MerchantsController do
       must_respond_with :not_found
     end
 
+    it "returns unauthorized when a merchant tries to see another merchants show page" do
+      good_merchant = merchants(:diane)
+      bad_merchant = merchants(:tamira)
+      get merchant_path(good_merchant_id)
+      must_respond_with :unauthorized
+    end
+
   end
 
   describe "edit" do

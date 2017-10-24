@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-
+before_action :require_correct_merchant, only: [:show, :edit, :update]
   def show
     @merchant = Merchant.find_by(id: params[:id])
     if @merchant #!= nil

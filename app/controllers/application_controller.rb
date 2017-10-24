@@ -2,11 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_order
 
-
-  # before_action :require_login
-
-
   protected
+  def require_correct_merchant
+    @merchant = Merchant.find_by(id: session[:merchant_id])
+    unless @merchant
+      flash[:status] = :failure
+      flash[:message] = "You must be logged in to do that"
+      head :unauthorized
+    end # unless
+    if @merchant != Merchant.find_by(id: params[:id])
+      flash[:status] = :failure
+      flash[:message] = "You cannot view the account details of another merchant"
+      head :unauthorized
+    end # if
+  end # require_correct_merchant
+
   def current_order
     if session[:order_id]
       Order.find(session[:order_id])
