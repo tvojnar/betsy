@@ -5,25 +5,24 @@ class ProductsController < ApplicationController
   end
 
   def index
-    puts " ************************** MERCHANT_ID #{merchant_id} !!!"
-
-    if merchant_id != nil
+    if params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that merchant was not found."
+      @products = Product.all
+      redirect_to products_path
+      return
+    elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
+      flash[:status] = :failure
+      flash[:message] = "Sorry, that category was not found."
+      @products = Product.all
+      redirect_to products_path
+      return
+    elsif merchant_id != nil
       merchant = Merchant.find_by(id: merchant_id)
       @products = merchant.products
-      puts " ************************** GOT INTO THE IF MERCHANT_ID != NIL !!!"
     elsif category_id != nil
       category = Category.find_by(id: category_id)
       @products = category.products
-    elsif params[:merchant_id] && Merchant.find_by(id: params[:merchant_id]) == nil
-      flash[:status] = :failure
-      flash[:message] = "Sorry, that merchant was not found."
-      redirect_to products_path
-      return @products = Product.all
-    elsif params[:category_id] && Category.find_by(id: params[:category_id]) == nil
-    flash[:status] = :failure
-    flash[:message] = "Sorry, that category was not found."
-      redirect_to products_path
-      return @products = Product.all
     else
       @products = Product.all
     end
@@ -118,13 +117,17 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find_by(id: params[:id])
+    puts "Found product"
     if find_merchant
       if @login_merchant.id == @product.merchant_id
+        puts "Login merchant matches, calling destroy"
         @product.destroy
+        puts "Finished destroy"
         flash[:status] = :success
         flash[:message] = "Successfully removed #{@product.name} from your products"
         redirect_to merchant_products_path(@login_merchant.id)
       else
+        puts "Login merchant does not match"
         flash[:status] = :failure
         flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
         redirect_to product_path(@product.id)
@@ -157,7 +160,12 @@ class ProductsController < ApplicationController
 
   def category_id
     if params[:category] != nil
-      params[:category_id] || params[:category][:id]
+      params[:category][:id]
+    elsif params[:category_id] != nil
+      params[:category_id]
     end
+    # if params[:category] != nil
+    #   params[:category_id] || params[:category][:id]
+    # end
   end
 end

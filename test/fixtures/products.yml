@@ -62,7 +62,7 @@ string_of_pearls:
   image_url: http://www.floristika.com.my/florist/image/cache/data/cactus%20red%20cap-500x612.jpg
 
 tulip_bulb:
-  merchant: Tamira
+  merchant: tamira
   name: Tulip bulb
   inventory: 0
   price: 2.00

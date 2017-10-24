@@ -9,8 +9,8 @@ class OrdersController < ApplicationController
   end # index
 
   def show
-     @order_items = current_order.order_items
-     @order = current_order
+    @order_items = current_order.order_items
+    @order = current_order
   end # show
 
   def edit
@@ -24,12 +24,15 @@ class OrdersController < ApplicationController
   end
 
   def update
+    #TODO: MOVE SOME OF THIS STUFF TO CREATE METHOD OF BILLING
     @order = current_order
     if @order
       @order.update_attributes(order_params)
       if save_and_flash(@order)
+        #is this where we want to redirect?
         redirect_to root_path
         # o = Order.new
+        #IS THIS THE BEST PLACE TO DO THIS? IT MAKES SENSE FOR THE BUYER BUT NOT THE MERCHANT DL
         session[:order_id] = Order.new.id
         return
       else
@@ -41,10 +44,27 @@ class OrdersController < ApplicationController
     end
   end
 
-private
+  def submit
+    @order = current_order
+    if @order
+      @order.status = "paid"
+      redirect_to order_summary_path(@order.id)
+      return
+    else
+      redirect_to order_path(@order.id)
+    end
+  end
 
-def order_params
-  return params.require(:order).permit(:cc_name, :email, :address, :zip, :cc_cvv, :cc_num, :cc_exp, :status)
-end
+  def order_summary
+    @order = current_order
+    @order_items = @order.order_items
+    session[:order_id] = Order.new
+  end
+
+  private
+
+  def order_params
+    return params.require(:order).permit(:cc_name, :email, :address, :zip, :cc_cvv, :cc_num, :cc_exp, :status)
+  end
 
 end
