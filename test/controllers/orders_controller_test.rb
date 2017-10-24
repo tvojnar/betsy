@@ -44,7 +44,7 @@ end # current_order
   #   must_respond_with :not_found
   # end
 
-end
+# end
 
 describe "update" do
   # it "returns success when passed valid order_id" do

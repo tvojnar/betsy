@@ -62,3 +62,10 @@ nine:
   order: completed
   # cost: 100.0
   shipped_status: true
+
+ten:
+  product: spider_plant
+  order: pending
+  quantity: 2
+  # cost: 8.75
+  shipped_status: false
