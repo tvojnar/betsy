@@ -126,8 +126,13 @@ describe OrderItemsController do
       OrderItem.find_by(id: oi.id).shipped_status.must_equal true
     end
 
-    it "will not mark an orderitem that belongs to a pending, shipped, or complete order as shipped" do
+    it "will not mark an orderitem that belongs to a pending or complete order as shipped" do
       oi = order_items(:one)
+      oi.shipped_status.must_equal false
+      patch mark_order_item_path(oi.id)
+      OrderItem.find_by(id: oi.id).shipped_status.must_equal false
+
+      oi = order_items(:eight)
       oi.shipped_status.must_equal false
       patch mark_order_item_path(oi.id)
       OrderItem.find_by(id: oi.id).shipped_status.must_equal false

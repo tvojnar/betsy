@@ -54,7 +54,7 @@ eight:
   quantity: 3
   order: completed
   # cost: 30.0
-  shipped_status: true
+  shipped_status: false
 
 nine:
   product: audrey_ficus
