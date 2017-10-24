@@ -1,4 +1,4 @@
-require 'pry'
+
 class OrderItemsController < ApplicationController
 
   before_action :find_order_item_by_params, only: [:update]
