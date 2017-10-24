@@ -131,12 +131,12 @@ describe OrderItemsController do
 
   describe "update" do
     describe "when OrderItem exists/can be found" do
-      let(:oi) { order_items(:one)}
+      # let(:oi) { order_items(:one)}
      describe "when the OrderItem belongs to the current Order" do
        # :one is in the :pending order
       #  let(:o) { orders(:pending) }
        it "will update the quantity when given a valid quantity" do
-         # NOTE: Need to get this test to pass 
+         # NOTE: Need to get this test to pass
          # Arrange
           # set up the order item edit
            oi_data = {
@@ -145,11 +145,13 @@ describe OrderItemsController do
              }
            }
            # set up the Order and add an OrderItem to it
-           id = Product.first.id
+           prod = Product.first
+           name = prod.name
+           prod_id = prod.id
            item_params = {
              order_item: {
                quantity: 1,
-               product_id: id
+               product_id: prod_id
              }
            }
            post order_items_path, params: item_params
@@ -163,8 +165,10 @@ describe OrderItemsController do
 
          # Assert
          must_respond_with :redirect
+        #  flash[:message].must_equal "Updated the quantity of #{prod.name} to #{oi.quantity}"
          # also check that it redirects to order_path(session[:order_id])
-         oi.quantity.must_equal 4
+         Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 4
+         Order.find_by(id: session[:order_id]).order_items.length.must_equal 1 
        end # updates when given a valid quantity
        it "won't update if given an invalid quantity ( quantity <= 0)" do
          # TODO
