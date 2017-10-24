@@ -2,12 +2,6 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
   has_one :billing
-  
-
-  validates :cc_name, presence: true
-  validates :cc_number, presence: true
-  validates :cc_
-
 
 
   def calculate_total
@@ -15,7 +9,9 @@ class Order < ApplicationRecord
     self.order_items.each do |item|
       total += item.product.price * item.quantity
     end
+    return total
   end # calculate_total
+#DL ADDED ^ 'RETURN TOTAL' TO CALC TOTAL METHOD FOR ORDER SUMMARY PAGE
 
   #DL WORKING ON THIS METHOD
   def update_status
@@ -23,11 +19,13 @@ class Order < ApplicationRecord
       if item.shipped_status == false
         self.status = "paid"
         self.save
+        puts "StATUS = PAID"
         return
       end
     end
     self.status = "shipped"
     self.save
+    puts "STATUS = SHIPPED"
   end
 
 

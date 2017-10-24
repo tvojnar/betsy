@@ -91,13 +91,13 @@ puts "Loading raw order data from #{ORDER_FILE}"
 order_failures = []
 CSV.foreach(ORDER_FILE, :headers => true) do |row|
   order = Order.new
-  order.cc_name = row['cc_name']
-  order.cc_number = row['cc_number']
-  order.cc_exp = rand(10.years).seconds.from_now
-  order.cc_cvv = row['cc_cvv']
-  order.address = row['address']
-  order.zip = row['zip']
-  order.email = row['email']
+  # order.cc_name = row['cc_name']
+  # order.cc_number = row['cc_number']
+  # order.cc_exp = rand(10.years).seconds.from_now
+  # order.cc_cvv = row['cc_cvv']
+  # order.address = row['address']
+  # order.zip = row['zip']
+  # order.email = row['email']
   order.date_submitted = Date.today
   order.status = row['status']
   puts "Created order: #{order.inspect}"

@@ -1,1 +1,6 @@
-<%= link_to "Submit", submit_order_path(@order.id), method: :post %>
+<p>Billing Name:  <%= %> </p>
+
+<%= link_to "Submit", order_summary_path(@order.id) %>
+
+<!-- this link does the post method of submit and gets us to the summary page...I wonder if we need a post
+for submit or if  the order is already changed to paid by the time we get to this page. something to look into -->

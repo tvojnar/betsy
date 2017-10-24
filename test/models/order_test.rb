@@ -27,6 +27,17 @@ describe Order do
       oi = OrderItem.create!(product_id: p_id, quantity: 1, order: o)
       o.products.must_include Product.first
     end # it has a collection of producs
+
+    it "has one billing" do
+      o = Order.new
+      o.save!
+
+      o.must_respond_to :billing
+      o.billing.must_equal nil
+      b = Billing.create!(order_id: o.id, zip: "123", cc_name: "di", cc_number: "1234", cc_exp: Date.today, cc_cvv: "1234", address: "whatever", email: "yahoo")
+      Order.find(o.id).billing.must_equal b
+    end
+
   end # relationships
 
 
@@ -58,6 +69,7 @@ describe Order do
     end
 
     it "changes order status back to paid if one or more order items are unmarked as shipped" do
+      #TODO: Diane fix this test a la Jaimie
       o = Order.new(status: "paid")
       oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
       oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
@@ -65,22 +77,17 @@ describe Order do
       oi.save
       oi2.shipped_status = true
       oi2.save
-      # puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE PAID"
       o.status.must_equal "paid"
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE SHIPPED"
       o.update_status
-
       o.status.must_equal "shipped"
       oi2.shipped_status = false
       oi2.save!
-      puts oi.shipped_status
-      puts oi2.shipped_status
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SHOULD BE PAID"
+      puts "OI2.SHIPPED_STATUS #{oi2.shipped_status}"
       o.update_status
-      puts o.status
+      o2 = Order.find(o.id)
       # require 'pry'
       # binding.pry
-      o.status.must_equal "paid"
+      Order.find(o2.id).status.must_equal "paid"
     end
   end
 

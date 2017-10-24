@@ -138,13 +138,20 @@ describe OrderItemsController do
       OrderItem.find_by(id: oi.id).shipped_status.must_equal false
     end
 
-    it "marks and orderitem back to pending if merchant unmarks order item as shipped" do
-      #TODO: CHECK WHY THIS TETST IS FAILING
-      oi = order_items(:four)
+    it "marks an orderitem back to false if merchant unmarks order item as shipped" do
+      oi_data = {
+        oi: {
+          order: orders(:paid),
+          quantity: 10,
+          product: products(:ogre_ears),
+        }
+      }
+      oi = OrderItem.new(oi_data[:oi])
+      oi.save
       oi.shipped_status.must_equal false
       patch mark_order_item_path(oi.id)
       must_redirect_to root_path
-      oi.shipped_status.must_equal true
+      OrderItem.find_by(id: oi.id).shipped_status.must_equal true
       patch mark_order_item_path(oi.id)
       OrderItem.find_by(id: oi.id).shipped_status.must_equal false
 
