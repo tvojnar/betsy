@@ -36,6 +36,9 @@ get '/order/:id/summary', to: 'orders#summary', as: 'order_summary'
 
 patch '/merchant/:id/show', to: "order_items#mark_shipped", as: "mark_order_item"
 
+# show info for current order
+get 'orders/current', to: "orders#current", as: 'current_order'
+
 resources :categories, only: [:index, :new, :create] do
   resources :products, only: [:index, :new]
 end
