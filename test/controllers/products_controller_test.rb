@@ -254,22 +254,26 @@ describe ProductsController do
         Product.count.must_equal start_count
       end
 
-      it "returns not_found when given an invalid work ID" do
-        invalid_product_id = Product.last.id + 1
-        product_count = Product.count
-        delete product_path(invalid_product_id)
-        must_respond_with :not_found
-        Product.count.must_equal product_count
-      end
+    ## I don't think we really need this test. Should not be possible for a user to get to the point of delete if the product doesn't exist"
+
+      # it "returns not_found when given an invalid product ID" do
+      #   merchant = merchants(:kimberley)
+      #   login(merchant)
+      #   invalid_product_id = Product.last.id + 1
+      #   product_count = Product.count
+      #   delete product_path(invalid_product_id)
+      #   must_respond_with :not_found
+      #   Product.count.must_equal product_count
+      # end
   end
 
   describe "guest users" do
     it "cannot create a new product" do
       start_count = Product.count
-
+      merchant = merchants(:tamira)
       product_data = {
         product: {
-          merchant: "tamira",
+          merchant: merchant,
           name: "Fly Trap",
           inventory: 5,
           price: 8.75,
@@ -289,11 +293,26 @@ describe ProductsController do
 
 
     it "will not allow access to edit form if user is not logged in" do
-
+      product = Product.first
+      get edit_product_path(product.id)
+      must_respond_with :redirect
+      must_redirect_to products_path(product.id)
     end
 
     it "will not update product if no logged in merchant" do
+      product = products(:aloe_vera)
+      product_data = {
+        product: {
+          name: product.name + "exquisite",
+          inventory: 2,
+          price: 5.50
+        }
+      }
 
+      patch product_path(product), params: product_data
+
+      # Verify the DB was really modified
+      Product.find(product.id).name.wont_equal product_data[:product][:name]
     end
   end
 end

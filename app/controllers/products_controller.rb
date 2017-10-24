@@ -82,10 +82,10 @@ class ProductsController < ApplicationController
         return
       end
     else
-        flash[:status] = :failure
-        flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
-        redirect_to products_path
-        return
+      flash[:status] = :failure
+      flash[:message] = "Sorry, only logged in Merchants can edit products. Please log in to continue."
+      redirect_to products_path(@product.id)
+      return
     end
 
   end
@@ -97,13 +97,13 @@ class ProductsController < ApplicationController
         @product.update_attributes(product_params)
         if save_and_flash(@product) #<<defined as a method in in application controller
           redirect_to product_path(@product.id)
-        # else
-        #   render :edit, status: :bad_request
-        # return
+          # else
+          #   render :edit, status: :bad_request
+          # return
         end
-      # else
+        # else
         # render :root, status: :bad_request
-      # return
+        # return
       end
     else
       render :root, status: :bad_request
@@ -117,32 +117,30 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find_by(id: params[:id])
-    puts "Found product"
-    if find_merchant
-      if @login_merchant.id == @product.merchant_id
-        puts "Login merchant matches, calling destroy"
-        @product.destroy
-        puts "Finished destroy"
-        flash[:status] = :success
-        flash[:message] = "Successfully removed #{@product.name} from your products"
-        redirect_to merchant_products_path(@login_merchant.id)
+      if find_merchant
+        if @login_merchant.id == @product.merchant_id
+          puts "Login merchant matches, calling destroy"
+          @product.destroy
+          puts "Finished destroy"
+          flash[:status] = :success
+          flash[:message] = "Successfully removed #{@product.name} from your products"
+          redirect_to merchant_products_path(@login_merchant.id)
+        else
+          puts "Login merchant does not match"
+          flash[:status] = :failure
+          flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
+          redirect_to product_path(@product.id)
+        end
       else
-        puts "Login merchant does not match"
         flash[:status] = :failure
-        flash[:message] = "Sorry, you cannot delete this item - merchants only have access to delete their own products!"
+        flash[:message] = "Sorry, you must be logged in to do that!"
         redirect_to product_path(@product.id)
       end
-    else
-      flash[:status] = :failure
-      flash[:message] = "Sorry you must be logged in to do that!"
-      redirect_to product_path(@product.id)
-    end
+
       #this is where we might add logic to destroy any reviews and and unshipped OrderItems associated with this Product DL
 
   end
 
-  #logic to make sure user is signed in as merchant to get to this page
-  #if session[:merchant_id]?
 
   private
 
