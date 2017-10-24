@@ -11,12 +11,14 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-
+    @product =
     if @category.save
 
       flash[:status] = :success
       flash[:message] = "#{@category.name} successfully created"
-      redirect_to categories_path
+
+      redirect_to merchant_products_path(@login_merchant)
+
     else
       flash[:status] = :failure
       flash[:message] = "Failed to create category "

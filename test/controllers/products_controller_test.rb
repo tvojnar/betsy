@@ -211,10 +211,6 @@ describe ProductsController do
 
       end
     end
-    #
-    # describe "visible" do
-    #
-    # end
 
     describe "destroy" do
       before do
@@ -267,8 +263,34 @@ describe ProductsController do
       # end
   end
 
-  describe "visible/active" do
-    it "does not allow products that are visible-false to display on root page or products_path" do
+  describe "visible" do
+    before do
+      @merchant = merchants(:diane)
+      @visible_product = products(:audrey_ficus)
+      @invisible_product = products(:ogre_ears)
+    end
+
+    it "only allows products that are visible-true to display on products_path (not incl product owner)" do
+      login(merchants(:kimberley))
+      get merchant_products_path(@merchant.id)
+
+      merchant = Merchant.find_by(id: @merchant.id)
+
+      merchant.products.where(visible: true).must_include @visible_product
+      merchant.products.where(visible: true).wont_include @invisible_product
+
+    end
+
+    it "allows product owner to see invisible products on view page" do
+      login(@merchant)
+
+      get merchant_products_path(@merchant.id)
+      merchant = Merchant.find_by(id: @merchant.id)
+
+      merchant.products.where(visible: true).must_include @visible_product
+      merchant.products.where(visible: true).wont_include @invisible_product
+
+      merchant.products.where(visible: false).must_include @invisible_product
 
     end
   end
