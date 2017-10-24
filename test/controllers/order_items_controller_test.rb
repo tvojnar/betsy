@@ -223,11 +223,36 @@ describe OrderItemsController do
          Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
        end # won't update if q > inventory
      end # when the OI belongs to the current order
+
      describe "when the OrderItem does not belong to the current Order" do
-       # :one is not in the :paid order!
-       let(:o) {orders(:paid)}
        it "won't update the quantity if the OrderItem isn't in the current Order" do
          # TODO
+         # create an OrderItem that will not be in the current Order
+         other_oi = order_items(:one)
+
+         # data to update the OrderItem
+         oi_data = {
+           order_item: {
+             quantity: 2
+           }
+         }
+         # add an orderItem to the current order
+         post order_items_path, params: item_params
+         # find the OrderItem to update and make sure it has the expected quantity
+         oi = Order.find_by(id: session[:order_id]).order_items.last
+         oi_id = oi.id
+         oi.quantity.must_equal 1
+
+       # Act
+          # try to update the OrderItem (that is not in the current Order) to have a new quantity
+          patch order_item_path(other_oi), params: oi_data
+
+       # Assert
+         must_respond_with :unauthorized
+         # the quantity of the OrderItem won't have changed!
+         Order.find_by(id: session[:order_id]).order_items.last.quantity.must_equal 1
+         # There will still only be one OrderItem in the order!
+         Order.find_by(id: session[:order_id]).order_items.length.must_equal 1
        end # if won't update the quantity if the OrderItem isn't in the current Order
      end # when the OrderItem does not belong to the current Order
     end # when OI can be found
