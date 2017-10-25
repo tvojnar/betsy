@@ -1,0 +1,5 @@
+<%= form_tag({controller: "merchants", action: "show"}, method: "get", class: "filter_form") do %>
+  <%= label_tag "Filter by order status" %>
+  <%= collection_select(:order, :status, Order.all, :status, :status) %>
+  <%= submit_tag "Filter" %>
+<% end %>
