@@ -10,11 +10,14 @@ before_action :require_correct_merchant, only: [:show, :edit, :update]
       @paid_revenue = @merchant.paid_revenue(@merchant)
       @shipped_revenue = @merchant.shipped_revenue(@merchant)
       @completed_revenue = @merchant.completed_revenue(@merchant)
-      @merchant_orders = @merchant.orders(@merchant)
       @pending_number = @merchant.pending_number(@merchant)
       @paid_number = @merchant.paid_number(@merchant)
       @shipped_number = @merchant.shipped_number(@merchant)
       @completed_number = @merchant.completed_number(@merchant)
+      @merchant_orders = @merchant.orders(@merchant)
+      if params[:order][:status] == "paid"
+        @merchant_orders = Order.filter_by_status(@merchant_orders, "paid")
+      end
     else
       render :show, status: :not_found
     end

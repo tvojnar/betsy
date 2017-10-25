@@ -3,6 +3,15 @@ class Order < ApplicationRecord
   has_many :products, through: :order_items
   has_one :billing
 
+  def self.filter_by_status(o, status)
+    by_status = []
+    o.each do |item|
+      if item.status == status
+        by_status << item
+      end
+    end
+    return by_status 
+  end
 
 
   def find_merchants_oi_in_order(session)
