@@ -38,11 +38,7 @@ class ReviewsController < ApplicationController
         redirect_to product_path(@review.product_id)
         return
       else
-        flash[:status] = :failure
-        flash[:message] = "Sorry, your review could not be saved."
-        puts ">>>>>>>>>>> DPR: Failed to save review:"
-        puts "#{@review.errors.messages}"
-        redirect_to products_path
+        render :new, status: :bad_request
         return
       end
 

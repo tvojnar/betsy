@@ -19,7 +19,7 @@ root 'products#root'
 
 resources :products
 resources :order_items
-resources :merchants
+resources :merchants, only[:show, :edit, :update]
 resources :categories
 resources :reviews
 resources :billings, only: [:new, :create, :edit, :update]
@@ -35,12 +35,15 @@ end
 
 # NOTE: Dan made orders plural in rout and replaced :id with current since we don't reference :id in these actions. He also took out session[:order_id] from where we reference these routes in the OrdersController.
 get 'orders/current', to: "orders#current", as: 'order_current'
-get 'orders/current/submit', to: 'orders#submit', as: 'order_submit'
-post 'orders/current/submit', to: 'orders#submit'
+
+get 'orders/current/sure', to: 'orders#sure', as: 'sure_order'
+post 'orders/current/submit', to: 'orders#submit', as: 'order_submit'
+
+#CHANGED: DL CHANGED TWO ROUTES ABOVE TO ACCOMODATE THE SURE/SUBMIT
 
 get 'orders/:id/confirmation', to: 'orders#confirmation', as: 'confirm_order'
 
-resources :orders
+resources :orders, only: [:index, :show]
 # get 'orders/:id/summary', to: 'orders#summary', as: 'order_summary'
 
 patch '/merchant/:id/show', to: "order_items#mark_shipped", as: "mark_order_item"

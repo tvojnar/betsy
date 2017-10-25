@@ -5,14 +5,22 @@ class BillingsController < ApplicationController
 
   def create
     @billing = Billing.new(billing_params)
+<<<<<<< HEAD
     if save_and_flash(@billing)
       redirect_to order_submit_path
+=======
+    if @billing
+      save_and_flash(@billing)
+      redirect_to sure_order_path
+>>>>>>> 2bc0da102e4c0aa3f6ad21fc254ddcf53f11e424
       return
     else
       render :new, status: :bad_request
       return
     end
   end
+
+#DL CHANGED REDIRECT TO sure_order_path
 
 #   def edit
 #     find_billing
