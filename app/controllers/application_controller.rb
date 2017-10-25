@@ -3,6 +3,22 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   protected
+  # NOTE: Don't know if we need this because kimberley blocked the edit/destroy paths in another way
+  # NOTE: maybe need this for the create action 
+  def cant_mondify_others_products
+    if session[:merchant_id]
+      if session[:merchant_id] != Product.find_by(id: params[:id]).merchant.id
+        flash[:status] = :failure
+        flash[:message] = "You cannot modify another merchant's products"
+        redirect_to product_path(params[:id])
+      end # if
+    else
+      flash[:status] = :failure
+      flash[:message] = "You must be logged in to do that"
+      redirect_to product_path(params[:id])
+    end # if/else
+  end # can't modify products
+
   def require_correct_merchant
     @merchant = Merchant.find_by(id: session[:merchant_id])
     if @merchant

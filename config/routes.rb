@@ -19,7 +19,7 @@ root 'products#root'
 
 resources :products
 resources :order_items
-resources :merchants, only[:show, :edit, :update]
+resources :merchants, only: [:show, :edit, :update, :logout, :login]
 resources :categories
 resources :reviews
 resources :billings, only: [:new, :create, :edit, :update]
