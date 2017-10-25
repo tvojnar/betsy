@@ -13,7 +13,7 @@
 <%= f.label :credit_card_number%>
 <%= f.number_field :cc_number, required: true  %>
 <%= f.label :credit_card_expiration%>
-<%= f.date_select :cc_exp, required: true   %>
+<%= f.date_select :cc_exp, discard_day: true, required: true   %>
 <%= f.label :credit_card_cvv %>
 <%= f.number_field  :cc_cvv, required: true  %>
 <%= f.label :zip %>

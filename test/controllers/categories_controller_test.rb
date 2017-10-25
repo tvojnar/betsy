@@ -7,12 +7,11 @@ describe CategoriesController do
       must_respond_with :success
     end
 
-    # it "cannot access form to create new category" do
-    #   get new_category_path
-    #   must_respond_with :redirect
-    #   must_redirect_to root_path
-    #   flash[:message].must_equal "You must be logged in to do that!"
-    # end
+    it "can access the index as logged in merchant" do
+      login(merchants(:nkiru))
+      get categories_path
+      must_respond_with :success
+    end
   end
 
   describe "new" do
