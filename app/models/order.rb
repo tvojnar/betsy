@@ -31,15 +31,13 @@ class Order < ApplicationRecord
   def update_quantity
     if self.status = "paid" &&  self.save
       self.order_items.each do |item|
-        item.products.each do |product|
-          product.inventory
-          if product.inventory >= item.quantity
-            product.inventory = product.inventory - quantity
-            #would like to use an enumerable
-            # but can't seem to get to products hmm.
-          else
-            return "unable to fulfill"
-          end
+        # item.products.each do |product|
+        # product.inventory
+        if item.product.inventory >= item.quantity
+          item.product.inventory = item.product.inventory - item.quantity
+          #would like to use an enumerable
+        else
+          return "unable to fulfill" #need a better condition
         end
       end
     end
