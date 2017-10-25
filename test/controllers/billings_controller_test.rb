@@ -37,9 +37,13 @@ describe BillingsController do
       }
 
       start_billing_count = Billing.count
+
+      post billings_path params: billing_data
+
+      start_billing_count = Billing.count
       post billings_path params: billing_data
       must_respond_with :redirect
-      must_redirect_to order_submit_path
+      must_redirect_to sure_order_path
 
       Billing.count.must_equal start_billing_count + 1
     end
@@ -58,14 +62,13 @@ describe BillingsController do
         }
       }
 
-      start_category_count = Billing.count
+      start_billing_count = Billing.count
 
       post billings_path, params: invalid_billing_data
 
       must_respond_with :bad_request
-      Billing.count.must_equal start_category_count
+      Billing.count.must_equal start_billing_count
     end
-
   end
 
   # describe "edit" do

@@ -38,6 +38,8 @@ class ReviewsController < ApplicationController
         redirect_to product_path(@review.product_id)
         return
       else
+        flash[:status] = :failure
+        flash[:message] = "Review did not save"
         render :new, status: :bad_request
         return
       end

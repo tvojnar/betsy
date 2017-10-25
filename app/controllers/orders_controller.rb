@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
     @order = Order.find_by(id: params[:id])
     if @order
       @order = Order.find(params[:id])
-      @order_items = @order.order_items
+      @order_items = @order.find_merchants_oi_in_order(session[:merchant_id])
     else
       head :not_found
     end

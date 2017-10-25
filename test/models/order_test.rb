@@ -104,4 +104,19 @@ describe Order do
       o.calculate_total.must_equal total
     end # works when there are no items in the cart
   end # calculate_total
+
+  describe "find_merchants_oi_in_order" do
+    it "will print out the correct order_items" do
+      merchant = merchants(:tamira)
+      oi_1 = order_items(:one)
+      oi_2 = order_items(:two)
+      oi_3 = order_items(:eleven)
+      o = orders(:pending)
+      o.find_merchants_oi_in_order(merchant.id).must_be_kind_of Array
+      o.find_merchants_oi_in_order(merchant.id).must_include oi_1
+      o.find_merchants_oi_in_order(merchant.id).must_include oi_2
+      o.find_merchants_oi_in_order(merchant.id).wont_include oi_3
+
+    end # print out the correct order items
+  end # find_merchants_oi_in_order
 end

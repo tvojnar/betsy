@@ -75,6 +75,25 @@ describe ReviewsController do
 
       end
 
+      it "must redirect to product_path when the product belongs to the logged in merchant" do
+        review_data = {
+          review: {
+            rating: 5,
+            description: "Loved it!",
+            product_id: @product.id
+          }
+        }
+        
+        @product = products(:aloe_vera)
+        login(merchants(:tamira))
+        puts @product.merchant_id
+        puts merchants(:tamira).id
+        get new_product_review_path(@product)
+        post reviews_path(@product.id), params: review_data
+        must_redirect_to product_path(@product.id)
+        # flash[:status].must_be :failure
+      end
+
       it "must respond with bad request if the review cannot be saved" do
 
         invalid_review_data = {
