@@ -258,10 +258,8 @@ describe ProductsController do
     # end
 
     it "will not allow a logged in merchant who is not the owner of the product to delete it" do
-      merchant = merchants(:kimberley)
-      login(merchant)
       start_count = Product.count
-      product = products(:spider_plant)
+      product = products(:grass)
       puts "*" * 100
       product.merchant.wont_equal @merchant
 

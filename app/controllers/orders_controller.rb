@@ -29,11 +29,19 @@ class OrdersController < ApplicationController
     unless @order.order_items.empty?
       @order.status = "paid"
       @order.date_submitted = DateTime.now
-      #TODO THIS IS WHERE WE SHOULD HAVE THE QUANTITY DECREASE
-      @order.save
-      session[:order_id] = nil
-      redirect_to confirm_order_path(@order.id)
-      return
+      if check_inventory(@order)
+        @order.save
+        session[:order_id] = nil
+        @order.products.reduce_inventory(@order)
+        #QUESTION is this right? ^^
+        redirect_to confirm_order_path(@order.id)
+        return
+      else
+        flash[:status] = :failure
+        flash[:message] = "There is not enough inventory to fulfill your order, please select quantity"
+        redirect_to order_current_path
+        return
+      end
     else
       flash[:status] = :failure
       flash[:message] = "You cannot checkout with 0 items"
@@ -71,6 +79,15 @@ class OrdersController < ApplicationController
 
   def order_params
     return params.require(:order).permit(:status)
+  end
+
+  def check_inventory(order)
+    order.order_items.each do |item|
+      if item.quantity> item.product.inventory
+        return false
+      end
+    end
+    return true
   end
 
 end

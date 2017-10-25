@@ -10,4 +10,16 @@ class Product < ApplicationRecord
   validates :inventory, presence: true, numericality: {only_integer: true, greater_than: - 1}
 
 
+  def self.reduce_inventory(order)
+    order.order_items.each do |item|
+      puts item
+      puts item.product.name
+      puts item.product.inventory
+      item.product.inventory -= item.quantity
+      item.product.save
+    end
+  end
+
+
+
 end
