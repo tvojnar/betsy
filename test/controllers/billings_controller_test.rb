@@ -69,6 +69,14 @@ describe BillingsController do
       must_respond_with :bad_request
       Billing.count.must_equal start_billing_count
     end
+
+    describe "find billing" do
+      it "find a billing that exits" do
+        
+      end
+
+    end
+
   end
 
   # describe "edit" do

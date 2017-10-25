@@ -24,6 +24,8 @@ class ReviewsController < ApplicationController
     product_merchant = Merchant.find_by(id: @product.merchant_id)
 
     if find_merchant
+      puts @login_merchant.id
+      puts @login_merchant.name
       if @login_merchant.id == product_merchant.id
         flash[:status] = :failure
         flash[:message] = "Sorry, you cannot review your own products."
