@@ -5,8 +5,7 @@ class BillingsController < ApplicationController
 
   def create
     @billing = Billing.new(billing_params)
-    if @billing
-      save_and_flash(@billing)
+    if save_and_flash(@billing)
       redirect_to sure_order_path
       return
     else

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     else
       flash[:status] = :failure
       flash[:message] = "You must be logged in to do that"
-      redirect_to root_path 
+      redirect_to root_path
     end # if/else
   end # require_correct_merchant
 
@@ -26,16 +26,16 @@ class ApplicationController < ActionController::Base
     end # if/else
   end
 
-  # def require_login
-  #   @merchant = Merchant.find_by(id: session[:user_id])
-  #   unless @merchant
-  #     flash[:status] = :failure
-  #     flash[:message] = "You must be logged in to do that"
-  #     redirect_to root_path
-  #   end
-# end
+  def require_login
+    @login_merchant = Merchant.find_by(id: session[:merchant_id])
+    unless @login_merchant
+      flash[:status] = :failure
+      flash[:message] = "You must be logged in to do that"
+      redirect_to root_path
+    end
+  end
 
-# When current_order is called it checks if there is a order_id associated with the session. If there is, it will find that order, if there isn't then it will make a new order
+  # When current_order is called it checks if there is a order_id associated with the session. If there is, it will find that order, if there isn't then it will make a new order
 
 
 
@@ -52,10 +52,10 @@ class ApplicationController < ActionController::Base
     return result
   end
 
-private
+  private
   def find_merchant
     if session[:merchant_id] #<<<this will be set in the login method, presumably in the
-                                  #merchants controller after verifying user is logged in as merchant DL
+      #merchants controller after verifying user is logged in as merchant DL
       @login_merchant = Merchant.find_by(id: session[:merchant_id])
     end
 
