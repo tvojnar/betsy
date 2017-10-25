@@ -131,8 +131,6 @@ describe MerchantsController do
 
       patch merchant_path(merchant), params: merchant_data
 
-
-
       must_respond_with :bad_request
 
       # Check that the change went through

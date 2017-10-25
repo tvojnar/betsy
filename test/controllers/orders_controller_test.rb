@@ -2,8 +2,8 @@ require "test_helper"
 
 describe OrdersController do
   describe "current" do
-  it "will succeed if session[:order_id] has been set" do
-    # Arrange
+    it "will succeed if session[:order_id] has been set" do
+      # Arrange
       # set session[:order_id]
       id = Product.first.id
       item_params = {
@@ -19,31 +19,27 @@ describe OrdersController do
 
       # Assert
       must_respond_with :success
-  end # works if session[:order_id] has been set
+    end # works if session[:order_id] has been set
 
-  it "won't work if no order has been created yet for the session" do
-   get order_current_path
-   must_respond_with :not_found
-  end # won't work if no order has been created yet for the session
-end # current
+    it "won't work if no order has been created yet for the session" do
+      get order_current_path
+      must_respond_with :not_found
+    end # won't work if no order has been created yet for the session
+  end # current
 
-describe "index" do
-  it "will respond with sucess" do
-    get orders_path
-    must_respond_with :success
+  describe "index" do
+    it "will respond with sucess" do
+      get orders_path
+      must_respond_with :success
+    end # index
   end # index
-end # index
 
-describe "current_order" do
-  # TODO: need to figure out how to access current_order in my tests before I can test this
-end # current_order
+  describe "current_order" do
+    # TODO: need to figure out how to access current_order in my tests before I can test this
+  end # current_order
 
+describe "checkout methods" do
 
-
-
-describe "submit" do
-  it "responds with success when passed a valid order id" do
-    order = Order.new
     id = Product.first.id
 
     item_params = {
@@ -59,134 +55,86 @@ describe "submit" do
         cc_number: "some_string",
         cc_exp: Date.today,
         cc_cvv: "some_string",
-        order_id: order.id,
-
-      }
-    }
-    post order_items_path params: item_params
-    post billings_path params: billing_params
-    get order_submit_path
-    must_respond_with :success
-  end
-
-  it "sets order status to paid and redirects to order_summary_path if order is not nil" do
-    # order = Order.new
-    id = Product.first.id
-
-    item_params = {
-      order_item: {
-        quantity: 1,
-        product_id: id
       }
     }
 
-    billing_params = {
-      billing: {
-        cc_name: "some_string",
-        cc_number: "some_string",
-        cc_exp: Date.today,
-        cc_cvv: "some_string",
-        # order_id:
+    describe "sure" do
+      it "responds with success when passed a valid order that is the current order" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        get sure_order_path
+        must_respond_with :success
+      end
 
-      }
-    }
-
-
-    post order_items_path params: item_params
-    post billings_path params: billing_params
-    get order_submit_path
-    must_respond_with :success
-    post orders_current_submit_path
-    must_respond_with :success
-    Order.last.status.must_equal "paid"
-  end
-
-  it "redirects to order_path if order is nil" do
-
-  end
-
-end
+#NOTE: SORT THIS OUT DL
+      # it "redirects to cart when passed a bogus order" do
+      #   post order_items_path params: item_params
+      #   post billings_path params: billing_params
+      #   get sure_order_path
+      #   get order_current_path
+      #   or = get order_current_path(Order.last.id)
+      #   delete order_path(Order.last.id)
+      #   must_redirect_to order_current_path
+      #   #how would i even test this current is in the route??
+      # end
 
 
-describe "show" do
-  it "returns success if the order exists" do
+    end
 
-  end
+    describe "submit" do
 
-  it "sets the session[:order_id] to nil if the order exits and is the current order" do
-  end
+      it "responds with success when passed a valid order id" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        get sure_order_path
+        post order_submit_path
+        must_redirect_to confirm_order_path(Order.last.id)
+      end
+
+      it "sets order status to paid and redirects to order_summary_path if order items for the order is not nil" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        must_redirect_to sure_order_path
+        get sure_order_path
+        post order_submit_path
+        must_redirect_to confirm_order_path(Order.last.id)
+        Order.last.status.must_equal "paid"
+      end
+
+      it "redirects to order_path if order items for the order is nil" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        must_redirect_to sure_order_path
+        get sure_order_path
+        Order.find_by(id: session[:order_id]).order_items[0].destroy
+        post order_submit_path
+        must_respond_with :not_found
+      end
+
+      it "sets the session[:order_id] to nil if the order exits and is the current order" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        get sure_order_path
+        post order_submit_path
+        session[:order_id].must_equal nil
+      end
+    end
 
 
-  it "returns not found if the order does not exist or is not the current order" do
+    describe "show" do
 
-  end
+      it "returns success if the order exists" do
+        get order_path(Order.create!)
+        must_respond_with :success
+      end
 
-end
+      it "returns not found if the order does not exist" do
+        get order_path(Order.last.id + 1)
+        must_respond_with :not_found
+      end
 
-# describe "edit" do
-#   it "returns success when passed a valid order id" do
-#     get edit_orders_path(Order.first.id)
-#     must_respond_with :success
-#   end
+    end
 
-  #
-  # it "returns not found if passed bogus order number" do
-  #   order_id = Order.last.id
-  #   order_id2 = order_id + 1
-  #   get edit_order_path(order_id2)
-  #   must_respond_with :not_found
-  # end
-
-# end
-
-describe "update" do
-  # it "returns success when passed valid order_id" do
-  #   post order_items_path params(item_params)
-  # end
-
-  # it "returns bad request when passed bogus data/not all fields are filled" do
-  #   order = Order.new
-  #   patch order_path(current_order)
-  #   must_respond_with :bad_request
-  # end
-  #
-  # it "returns not found if passed bogus order number" do
-  #   patch order_path(Order.last.id + 1)
-  #   must_respond_with :not_found
-  # end
-
-  # it "updates information correctly" do
-  #   order = current_order
-  #   order_data = {
-  #     order: {
-  #       cc_name: "diane",
-  #       cc_number: 12345667,
-  #       cc_exp: Date.today,
-  #       zip: 55122,
-  #       email: "d@ada.com",
-  #       address: "my address",
-  #       cc_cvv: 234
-  #     }
-  #   }
-  #
-  #   order = Order.new(order_data[:order])
-  #   order.must_be :valid?
-  #
-  #   order_count = Order.count
-  #   patch order_path(order.id), params: order_data
-  #   # must_respond_with :redirect
-  #   # must_redirect_to merchant_products_path(product.merchant.id)
-  #   Order.count.must_equal order_count + 1
-  # end
-  #
-  # it "changes status from pending to paid" do
-  #   order = current_order
-  #   patch order_path(current_order.id)
-  #   order.status.must_equal "paid"
-  #
-  # end
-
-end #describe update
-
+  end # checkout methods
 
 end # OrdersController
