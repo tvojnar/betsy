@@ -36,24 +36,25 @@ describe CategoriesController do
   end
 
   describe "create" do
-    it "adds a category to the DB and redirects when the category data is valid" do
-      category_data = {
-        category: {
-          name: "Annual"
-        }
-      }
+      describe "as a guest" do
+        it "redirects to root" do
+          category_data = {
+            category: {
+              name: "Annual"
+            }
+          }
 
-      Category.new(category_data[:category]).must_be :valid?
+          start_category_count = Category.count
 
-      start_category_count = Category.count
+          post categories_path, params: category_data
 
-      post categories_path, params: category_data
+          must_respond_with :redirect
+          must_redirect_to root_path
 
-      must_respond_with :redirect
-      # must_redirect_to categories_path
+          Category.count.must_equal start_category_count
 
-      Category.count.must_equal start_category_count + 1
-    end
+        end
+      end
 
     # it "sends bad_request when the category data is bogus" do
     #   invalid_category_data = {
