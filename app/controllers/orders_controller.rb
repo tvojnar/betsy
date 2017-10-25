@@ -53,14 +53,14 @@ class OrdersController < ApplicationController
 
   def submit
     @order = current_order
-    if @order
-      @order.status = "paid"
-      @order.date_submitted = DateTime.now
-      session[:order_id] = nil
-    else
-      redirect_to order_path(@order.id)
-      head :not_found
-    end
+    # if @order
+    #   @order.status = "paid"
+    #   @order.date_submitted = DateTime.now
+    #   session[:order_id] = nil
+    # else
+    #   redirect_to order_path(@order.id)
+    #   head :not_found
+    # end
   end
 
   def show
@@ -71,6 +71,15 @@ class OrdersController < ApplicationController
     else
       head :not_found
     end
+  end
+
+  def complete_order
+    order = current_order
+    order.status = "paid"
+    order.date_submitted = DateTime.now
+    order.save
+    
+    redirect_to order_confirmation_path
   end
 
   def confirmation

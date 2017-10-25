@@ -4,9 +4,13 @@ class BillingsController < ApplicationController
   end
 
   def create
-    @billing = Billing.new(billing_params)
-    if @billing
-      save_and_flash(@billing)
+    billing = Billing.new(billing_params)
+    if billing
+      save_and_flash(billing)
+      order = current_order
+      order.billing = billing
+
+
       redirect_to order_submit_path
       return
     else
@@ -15,20 +19,21 @@ class BillingsController < ApplicationController
     end
   end
 
-#   def edit
-#     find_billing
-#   end
-#
-#   def update
-#     @billing.update_attributes(billing_params)
-#     if save_and_flash(@billing)
-#       redirect_to order_submit_path
-#       return
-#     else
-#       render :edit, status: :bad_request
-#       return
-#     end
-#   end
+  def edit
+    find_billing
+  end
+
+  def update
+    find_billing
+    @billing.update_attributes(billing_params)
+    if save_and_flash(@billing)
+      redirect_to order_submit_path
+      return
+    else
+      render :edit, status: :bad_request
+      return
+    end
+  end
 
 private
 def billing_params

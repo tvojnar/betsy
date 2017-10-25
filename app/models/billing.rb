@@ -8,7 +8,7 @@ class Billing < ApplicationRecord
   validates :address, presence: true
   validates :email, presence: true
   validates :zip, presence: true
-  validates :order_id, presence: true
+  validates :order, presence: true
 end
 
 #for some reason I had to comment these out to get things going on the local host but then
