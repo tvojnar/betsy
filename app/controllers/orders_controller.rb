@@ -22,13 +22,7 @@ class OrdersController < ApplicationController
     unless @order
       redirect_to order_current_path
     end
-    #QUESTION: WHAT IS THE SAFEGUARD FOR THIS? WANT TO MAKE SURE THAT YOU CAN ONLY SEE THE SURE PAGE FOR THE CURRENT ORDER
   end
-
-  #DL MADE THIS METHOD SURE TO MAKE SURE/SUBMIT GET/POST PAIR LIKE NEW/CREATE
-  #CHANGED THE SUBMIT VIEW TO SURE AND MADE THE SUBMIT BUTTON POST TO SUBMIT,
-  #THEN THE SUBMIT ACTION REDIRECTS TO THE CONFIRMATION PAGE
-
 
   def submit
     @order = current_order
@@ -38,9 +32,7 @@ class OrdersController < ApplicationController
       #TODO THIS IS WHERE WE SHOULD HAVE THE QUANTITY DECREASE
       @order.save
       session[:order_id] = nil
-      #DL MOVED THIS REDIRECT UP AND HAD IT REDIRECT TO THE CONFIRMATION METHOD
       redirect_to confirm_order_path(@order.id)
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{session[:order_id].class}"
       return
     else
       flash[:status] = :failure
@@ -63,8 +55,16 @@ class OrdersController < ApplicationController
 #TODO GENERATE CONFIMATION NUMBER FOR ORDER TO CHECK THAT MOST PREVIOUS CURRENT
 
   def confirmation
-    @order = Order.find(params[:id])
-    @order_items = @order.order_items
+    if session[:order_id] == nil
+      @order = Order.find(params[:id])
+      if @order.status == "paid" && @order.date_submitted
+        @order_items = @order.order_items
+      end
+    else
+      flash[:status] = :failure
+      flash[:message] = "Order status did not update to paid"
+      redirect_to order_current_path
+    end
   end
 
   private
