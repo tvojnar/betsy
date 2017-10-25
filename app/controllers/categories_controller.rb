@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :find_merchant, only: [:new, :create]
+  before_action :require_login, only: [:new, :create]
 
   def index
     @categories = Category.all
@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @product =
+
     if @category.save
 
       flash[:status] = :success

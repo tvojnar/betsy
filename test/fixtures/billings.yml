@@ -1,21 +1,65 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
-  address: MyString
-  cc_name: MyString
-  cc_number: MyString
-  cc_exp: 2017-10-23
-  cc_cvv: MyString
-  zip: MyString
+  email: dl@ada.edu
+  address: Fake address for tamira
+  cc_name: Diane
+  cc_number: fakenumber12345
+  cc_exp: 2017-10-01
+  cc_cvv: 444
+  zip: 11111
   order_id: 1
 
-two:
-  email: MyString
-  address: MyString
-  cc_name: MyString
-  cc_number: MyString
-  cc_exp: 2017-10-23
-  cc_cvv: MyString
-  zip: MyString
-  order_id: 1
+no_name:
+  email: nk@ada.edu
+  address: 21 Steet that Nkiru lives at
+  cc_number: 1234fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 222
+  zip: 22222
+  order_id: 2
+
+no_email:
+  address: 17 Steet that Kimberley lives at
+  cc_name: Kimberley
+  cc_number: 7777fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 333
+  zip: 33333
+  order_id: 3
+
+no_zip:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Kim
+  cc_number: 2121fakenumber
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  order_id: 4
+
+no_ccnum:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Mira
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  zip: 44444
+  order_id: 5
+
+no_cvv:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Mira
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  zip: 88488
+  order_id: 5
+
+no_order_id:
+  email: tv@ada.edu
+  address: 4 Steet that Tamira lives at
+  cc_name: Mira
+  cc_exp: 2017-10-01
+  cc_cvv: 123
+  zip: 33995
+  cc_number: 59009
