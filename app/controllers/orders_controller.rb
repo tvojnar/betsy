@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
     if @order
       @order.status = "paid"
       @order.date_submitted = DateTime.now
+      @order.update_quantity
       session[:order_id] = nil
     else
       redirect_to order_path(@order.id)
