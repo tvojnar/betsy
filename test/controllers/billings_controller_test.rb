@@ -10,24 +10,38 @@ describe BillingsController do
 
   describe "create" do
     it "creates a billing with a valid order id" do
+
+      id = Product.first.id
+
+      item_params = {
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }
+
+      post order_items_path params: item_params
+      get order_current_path
+
       billing_data = {
         billing: {
           email: "dl@ada.edu",
           address: "Fake address for tamira",
           cc_name: "Diane",
-          cc_num: "fakenumber12345",
-          cc_exp: 2017-10-01,
+          cc_number: "fakenumber12345",
+          cc_exp: Date.today,
           cc_cvv: "444",
           zip: "11111",
-          order: orders(:pending).id
+          order_id: Order.find_by(id: session[:order_id])
         }
       }
+
       start_billing_count = Billing.count
 
-      post billings_path, params: billing_data
+      post billings_path params: billing_data
 
       must_respond_with :redirect
-      must_redirect_to order_submit_path
+      must_redirect_to sure_order_path
 
       Billing.count.must_equal start_billing_count + 1
     end
@@ -38,21 +52,20 @@ describe BillingsController do
           email: "dl@ada.edu",
           address: "Fake address for tamira",
           cc_name: "Diane",
-          cc_num: "fakenumber12345",
+          cc_number: "fakenumber12345",
           cc_exp: 2017-10-01,
           cc_cvv: "444",
           zip: "11111"
         }
       }
 
-      start_category_count = Billing.count
+      start_billing_count = Billing.count
 
       post billings_path, params: invalid_billing_data
 
       must_respond_with :bad_request
-      Billing.count.must_equal start_category_count
+      Billing.count.must_equal start_billing_count
     end
-
   end
 
   # describe "edit" do
