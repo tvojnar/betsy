@@ -94,3 +94,5 @@ describe CategoriesController do
         Category.count.must_equal start_category_count
       end
     end
+
+#edge case: what happens if the user input is invalid, possibly use proc
