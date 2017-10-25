@@ -7,9 +7,6 @@ class OrdersController < ApplicationController
     @orderitem = current_order.order_items.new
   end # index
 
-  def show
-  end # show
-
   def current
   # if there is a current order (so if anything was added to the cart)
   if session[:order_id]
@@ -20,51 +17,41 @@ class OrdersController < ApplicationController
   end
   end # current
 
-  # def edit
-  #   @order = current_order
-  #   # @orderitems = current_order.order_items
-  #   if @order != nil
-  #     @order = session[:order]
-  #   else
-  #     render :edit, status: :not_found
-  #   end
-  # end
+  def sure
+    @order = current_order
+    unless @order
+      redirect_to order_current_path
+    end
+    #QUESTION: WHAT IS THE SAFEGUARD FOR THIS? WANT TO MAKE SURE THAT YOU CAN ONLY SEE THE SURE PAGE FOR THE CURRENT ORDER
+  end
 
-  # def update
-  #   #TODO: MOVE SOME OF THIS STUFF TO CREATE METHOD OF BILLING
-  #   @order = current_order
-  #   if @order
-  #     @order.update_attributes(order_params)
-  #     if save_and_flash(@order)
-  #       #is this where we want to redirect?
-  #       redirect_to root_path
-  #       # o = Order.new
-  #       #IS THIS THE BEST PLACE TO DO THIS? IT MAKES SENSE FOR THE BUYER BUT NOT THE MERCHANT DL
-  #       session[:order_id] = Order.new.id
-  #       return
-  #     else
-  #       render :edit, status: :bad_request
-  #       return
-  #     end
-  #   else
-  #     render :edit, status: :not_found
-  #   end
-  # end
+  #DL MADE THIS METHOD SURE TO MAKE SURE/SUBMIT GET/POST PAIR LIKE NEW/CREATE
+  #CHANGED THE SUBMIT VIEW TO SURE AND MADE THE SUBMIT BUTTON POST TO SUBMIT,
+  #THEN THE SUBMIT ACTION REDIRECTS TO THE CONFIRMATION PAGE
+
 
   def submit
     @order = current_order
-    if @order
+    unless @order.order_items.empty?
       @order.status = "paid"
       @order.date_submitted = DateTime.now
+      #TODO THIS IS WHERE WE SHOULD HAVE THE QUANTITY DECREASE
+      @order.save
       session[:order_id] = nil
+      #DL MOVED THIS REDIRECT UP AND HAD IT REDIRECT TO THE CONFIRMATION METHOD
+      redirect_to confirm_order_path(@order.id)
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{session[:order_id].class}"
+      return
     else
-      redirect_to order_path(@order.id)
+      flash[:status] = :failure
+      flash[:message] = "You cannot checkout with 0 items"
+      render :sure
       head :not_found
     end
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by(id: params[:id])
     if @order
       @order = Order.find(params[:id])
       @order_items = @order.order_items
@@ -72,6 +59,8 @@ class OrdersController < ApplicationController
       head :not_found
     end
   end
+
+#TODO GENERATE CONFIMATION NUMBER FOR ORDER TO CHECK THAT MOST PREVIOUS CURRENT
 
   def confirmation
     @order = Order.find(params[:id])
@@ -85,7 +74,3 @@ class OrdersController < ApplicationController
   end
 
 end
-
-#DL took out billing attributes and added :status to def order_params permit. the order wasn't saving without it since it was validating its presence
-#DL took out the redirect in the submit if loop, as it redirected before the page was displayed...we actually want the button on the submit page to do the redirect/post
-#DL changed session[:order_id] = Order.new to session[:order_id] = nil, since current session searches and assigns current_order to Order.new

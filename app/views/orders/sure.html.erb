@@ -1,6 +1,6 @@
 <p>Billing Name:  <%= %> </p>
 <%#= link_to "Confirm", order_submit_path, method: :ps %>
-<%= link_to "Submit", confirm_order_path(@order.id)%>
+<%= link_to "Submit", order_submit_path, method: :post%>
 
 <%#= link_to "Edit Billing Info", edit_billing_path(@order.billing.id) %>
 
