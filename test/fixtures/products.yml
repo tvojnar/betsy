@@ -1,6 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-
+grass:
+  merchant: diane
+  name: Grass
+  inventory: 5
+  price: 8.75
+  description: A full grown spider plant with some babies growing off it.
+  visible: true
+  image_url: https://images-na.ssl-images-amazon.com/images/I/7120dmLtRmL._SL1000_.jpg
 
 spider_plant:
   merchant: tamira

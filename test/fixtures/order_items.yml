@@ -69,3 +69,9 @@ ten:
   quantity: 2
   # cost: 8.75
   shipped_status: false
+
+eleven:
+  product: grass
+  order: pending
+  quantity: 2
+  shipped_status: false
