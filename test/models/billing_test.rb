@@ -140,5 +140,21 @@ describe Billing do
       is_valid = b.valid?
       is_valid.must_equal false
     end
+    describe "relationship between" do
+      it "has an order"  do
+        b = Billing.new(
+          cc_name: "diane",
+          address: "Fake address st",
+          email: "dl@ada.edu",
+          cc_number:"fakenumber12345",
+          cc_exp: 2017-10-01,
+          cc_cvv: "444",
+          zip: "11111",
+          order: order
+        )
+
+        b.order.must_be_kind_of Order
+      end
+    end
   end
 end
