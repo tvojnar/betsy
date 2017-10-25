@@ -1,7 +1,10 @@
 require "test_helper"
 
 describe BillingsController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "new" do
+    it "returns a billing form" do
+      get new_billing_path
+      must_respond_with :success
+    end
+  end
 end
