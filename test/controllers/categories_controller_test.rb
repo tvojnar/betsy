@@ -1,8 +1,8 @@
 require "test_helper"
 
 describe CategoriesController do
-  describe "Guest users" do
-    it "can access the index" do
+  describe "Index" do
+    it "can access the index as guest" do
       get categories_path
       must_respond_with :success
     end
