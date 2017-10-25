@@ -1,7 +1,13 @@
 <h1>Order <%= @order.id %></h1>
 
+<h3>Customer billing info</h3>
+<p>Name: <%= @order.billing.cc_name %></p>
+<p>Email: <%= @order.billing.email %></p>
+<p>Address: <%= @order.billing.address%></p>
+<p>Credit Card #: <strong>Visa</strong> ending in <%= last_4(@order.billing.cc_number)%></p>
+<p>Expiration date: <%= readable_date(@order.billing.cc_exp) %></p>
 <h3>Products of yours in order <%= @order.id %></h3>
-
+  <p>Total earned in order <%= @order.id %>: <%= number_to_currency @order.calculate_total %></p>
 <table>
   <thead>
     <tr>
@@ -32,10 +38,9 @@
         <%= item.quantity %>
       </td>
       <td>
-        <%= number_to_currency (item.product.price * item.quantity) %>
+        <%= number_to_currency unit_cost(item) %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-  <p>Your Total: <%= number_to_currency @order.calculate_total %></p>
