@@ -6,7 +6,7 @@
 <p>Address: <%= @order.billing.address%></p>
 <p>Credit Card #: <strong>Visa</strong> ending in <%= last_4(@order.billing.cc_number)%></p>
 <p>Expiration date: <%= readable_date(@order.billing.cc_exp) %></p>
-<h3>Products of yours in order <%= @order.id %></h3>
+<h3> <%= @merchant.name %>'s products in order <%= @order.id %></h3>
   <p>Total earned in order <%= @order.id %>: <%= number_to_currency @order.calculate_total %></p>
 <table>
   <thead>
