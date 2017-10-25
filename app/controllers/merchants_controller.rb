@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-
+before_action :require_correct_merchant, only: [:show, :edit, :update]
   def show
     @merchant = Merchant.find_by(id: params[:id])
     if @merchant #!= nil
@@ -27,7 +27,7 @@ class MerchantsController < ApplicationController
     if @merchant != nil
       @merchant = Merchant.find_by(id: params[:id])
     else
-       render :show, status: :not_found
+      render :show, status: :not_found
     end
   end
 
@@ -48,45 +48,49 @@ class MerchantsController < ApplicationController
   end
 
   def login
-    auth_hash = request.env['omniauth.auth']
-    # if session[:merchant_id] = nil
-
-    if auth_hash['uid']
-      merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
-
-      if merchant.nil?
-        #user has not logged in before
-        #create a new record in the DB
-        merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
-        save_and_flash(merchant)
-      else
-        flash[:status] = :success
-        flash[:message] = "Succesfully logged in as returning merchant #{merchant.name}"
-      end # if/else
-
-      session[:merchant_id] = merchant.id
-
+    if session[:merchant_id] || session[:merchant_id] != nil
+      head :error
     else
-      flash[:status] = :failure
-      flash[:message] = "Could not create user from data provided by Github"
-    end # if/else
-  # end
-    redirect_to root_path
-  end
+      auth_hash = request.env['omniauth.auth']
+      # if session[:merchant_id] = nil
+
+      if auth_hash['uid']
+        merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
+
+        if merchant.nil?
+          #user has not logged in before
+          #create a new record in the DB
+          merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
+          save_and_flash(merchant)
+        else
+          flash[:status] = :success
+          flash[:message] = "Succesfully logged in as returning merchant #{merchant.name}"
+        end # if/else
+
+        session[:merchant_id] = merchant.id
+
+      else
+        flash[:status] = :failure
+        flash[:message] = "Could not create user from data provided by Github"
+      end # if/else
+      # end
+      redirect_to root_path
+    end # if session[:merchant_id]
+  end # login
 
 
   def logout
     session[:merchant_id] = nil
-    session[:order_id] = nil 
+    session[:order_id] = nil
     flash[:status] = :success
     flash[:message] = "You have successfully logged out"
     redirect_to root_path
   end
 
   private
-    def merchant_params
-      return params.require(:merchant).permit(:name, :email)
-    end
+  def merchant_params
+    return params.require(:merchant).permit(:name, :email)
+  end
 
 
 

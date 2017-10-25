@@ -230,37 +230,41 @@ describe ProductsController do
         delete product_path(product)
         must_respond_with :redirect
 
+        # NOTE: Why do you expect this to be nill when you're using an existing product (:spider_plant)?
+        puts "*" * 50
+        puts product.id
+        puts "*" * 50
         Product.find_by(id: product.id).must_be_nil
         Product.count.must_equal (start_count - 1)
       end
     end
 
-      it "will not allow a logged in merchant who is not the owner of the product to delete it" do
-        merchant = merchants(:kimberley)
-        login(merchant)
-        start_count = Product.count
-        product = products(:spider_plant)
+    it "will not allow a logged in merchant who is not the owner of the product to delete it" do
+      merchant = merchants(:kimberley)
+      login(merchant)
+      start_count = Product.count
+      product = products(:spider_plant)
 
-        product.merchant.wont_equal @merchant
+      product.merchant.wont_equal @merchant
 
-        delete product_path(product)
-        must_respond_with :redirect
-        must_redirect_to product_path(product.id)
+      delete product_path(product)
+      must_respond_with :redirect
+      must_redirect_to product_path(product.id)
 
-        Product.count.must_equal start_count
-      end
+      Product.count.must_equal start_count
+    end
 
     ## I don't think we really need this test. Should not be possible for a user to get to the point of delete if the product doesn't exist"
 
-      # it "returns not_found when given an invalid product ID" do
-      #   merchant = merchants(:kimberley)
-      #   login(merchant)
-      #   invalid_product_id = Product.last.id + 1
-      #   product_count = Product.count
-      #   delete product_path(invalid_product_id)
-      #   must_respond_with :not_found
-      #   Product.count.must_equal product_count
-      # end
+    # it "returns not_found when given an invalid product ID" do
+    #   merchant = merchants(:kimberley)
+    #   login(merchant)
+    #   invalid_product_id = Product.last.id + 1
+    #   product_count = Product.count
+    #   delete product_path(invalid_product_id)
+    #   must_respond_with :not_found
+    #   Product.count.must_equal product_count
+    # end
   end
 
   describe "visible" do

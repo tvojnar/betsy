@@ -1,0 +1,13 @@
+<h3> <%# "Review #{@product.name}" %> </h3>
+
+<%= form_for @review do |f| %>
+  <%= f.label :rating, "Rating (5 is the best!)" %>
+  <%= f.number_field :rating, in: 1.0..5.0%>
+
+  <%= f.label :description, "Review" %>
+  <%= f.text_field :description %>
+
+  <%= f.hidden_field :product_id %>
+
+  <%= f.submit %>
+<% end %>

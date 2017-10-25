@@ -12,7 +12,14 @@
 </section>
 <%= render partial: 'layouts/add_order_item_to_order' %>
 
+<div>
+  <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get %>
+</div>
 
+<div>
+  <%= button_to "Read Reviews", product_reviews_path(@product.id), method: :get %>
+
+</div>
 
 <div>
   <% if session[:merchant_id] == @product.merchant_id %>
