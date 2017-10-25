@@ -24,6 +24,17 @@ describe CategoriesController do
     end
   end
 
+  describe  "as a logged in merchant" do
+    before do
+      login(merchants(:nkiru))
+    end
+
+    it "retrieves a form to create a new category" do
+      get new_category_path
+      must_respond_with :success
+    end
+  end
+
   describe "create" do
     it "adds a category to the DB and redirects when the category data is valid" do
       category_data = {
