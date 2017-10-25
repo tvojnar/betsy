@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :find_merchant, only: [:new, :create]
+  before_action :require_login, only: [:new, :create]
 
   def index
     @categories = Category.all
