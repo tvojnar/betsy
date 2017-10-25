@@ -1,36 +1,24 @@
-<header>
-  <img src="http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png">
-</header>
 
-<h1>THIS IS THE ROOT HOMEPAGE </h1>
-<p>it should display all products</p>
 
 <main class = "row">
-  <section class = "row ">
-    <p>Products</p>
+  <section class = "row">
+
     <% if Product.all == [] %>
     <%= "Products Coming Soon!" %>
     <%else%>
 
+    <div class="list-products row small-up-1 medium-up-4 large-up-6">
     <% Product.all.each do |product| %>
-      <% if product.visible%>
-      <div>
-        Image will go here-ish
-        <%#= link_to image_tag(product.image_url), products_path(product.id)%>
+        <% if product.visible%>
+      <div class="column">
+        <%= link_to image_tag(product.image_url), products_path(product.id)%>
         <ul>
-          <li> Product: <%= product.name %>
-          </li>
-          <li> Price per unit: $<%=product.price%>
-          </li>
-          <li> Categories:
-            <% product.categories.each do |category|%>
-              <%=category.name%>
-            <% end %>
-          <li> Merchant: <%= Merchant.find_by(id: product.merchant_id).name %>
+          <li> <%= product.name %> $<%=product.price%>
           </li>
       </div>
+        <%end%>
       <%end%>
-      <%end%>
+    </div>
     <% end %>
     </section>
 </main>
