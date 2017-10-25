@@ -10,4 +10,8 @@ module ApplicationHelper
   def unit_cost(item)
     item.product.price * item.quantity
   end
+
+  def submitted(date)
+    ("<span class='date'>" + date.strftime("%b %d, %Y") + "</span>").html_safe
+  end
 end
