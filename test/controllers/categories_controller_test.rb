@@ -15,9 +15,12 @@ describe CategoriesController do
   end
 
   describe "new" do
-    it "retrieves a form to create a new category" do
-      get new_category_path
-      must_respond_with :success
+    describe "as a guest" do
+      it "cannot access form to create new category" do
+        get new_category_path
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
     end
   end
 
