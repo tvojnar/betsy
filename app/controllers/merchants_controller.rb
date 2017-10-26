@@ -14,23 +14,25 @@ class MerchantsController < ApplicationController
       @paid_number = @merchant.paid_number(@merchant)
       @shipped_number = @merchant.shipped_number(@merchant)
       @completed_number = @merchant.completed_number(@merchant)
-      @merchant_orders = @merchant.orders(@merchant)
-
+      # @merchant_orders = @merchant.orders(@merchant)
+      @merchant_orders = Order.filter_by_merchant(@merchant.id)
       if params != nil
-        # if params[:order] != nil
+        # @orders_by_status = @merchant_orders
+        if params[:Status] != nil
+          # @orders_by_status = @merchant_orders
           if params[:Status] == "paid"
-            @merchant_orders = Order.filter_by_status(@merchant_orders, "paid")
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "paid")
           elsif params[:Status] == "pending"
-            @merchant_orders = Order.filter_by_status(@merchant_orders, "pending")
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "pending")
           elsif params[:Status] == "cancled"
-            @merchant_orders = Order.filter_by_status(@merchant_orders, "cancled")
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "cancled")
           elsif params[:Status] == "shipped"
-            @merchant_orders = Order.filter_by_status(@merchant_orders, "shipped")
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "shipped")
           elsif params[:Status] == "all"
-            @merchant_orders = @merchant_orders
+            @orders_by_status = @merchant_orders
           end
         end
-      # end
+      end
     else
       render :show, status: :not_found
     end

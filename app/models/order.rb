@@ -3,6 +3,21 @@ class Order < ApplicationRecord
   has_many :products, through: :order_items
   has_one :billing
 
+  def self.filter_by_merchant(merchant_id)
+    m_o = []
+    all_orders = Order.all
+    all_orders.each do |order|
+      order.order_items.each do |oi|
+        if oi.product.merchant_id == merchant_id
+          if !(m_o.include?(order))
+            m_o << order
+          end
+        end # if
+      end  # .each
+    end  # .each
+    return m_o
+  end # self.filter_by_merchant
+
   def self.filter_by_status(o, status)
     by_status = []
     o.each do |item|
@@ -31,9 +46,7 @@ class Order < ApplicationRecord
     self.order_items.each do |item|
       total += item.product.price * item.quantity
     end
-    return total
-
-
+    return total.round(2)
   end # calculate_total
   #DL ADDED ^ 'RETURN TOTAL' TO CALC TOTAL METHOD FOR ORDER SUMMARY PAGE
 
