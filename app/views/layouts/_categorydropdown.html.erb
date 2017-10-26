@@ -1,6 +1,6 @@
 <section class="form">
   <%= form_tag products_path, method: :get do %>
     <%= collection_select(:category, :id, Category.all, :id, :name, {:prompt => 'Search by Category'}, class: "dropdown menu") %>
-    <%= submit_tag "GO" %>
+    <%= submit_tag ">"%>
   <%end%>
 </section>
