@@ -53,10 +53,10 @@ HERO
   height: 200px;
   width: 100%;
   background-color: black;
-  margin: 0 10;
+  margin: 0;
   color: white;
   box-sizing: content-box;
-  padding: 1% 5% 2% 3%
+  padding: 1% 5% 2% 5%
   /*width: 100%;*/
 }
 
@@ -81,14 +81,21 @@ background-color: black;
 margin-bottom: 50px;
 }
 
-.top-bar ul {
+nav.top-bar ul {
   background-color: black;
-  width: 100%
+  /*width: 100%;*/
+  margin: 0;
+  /*margin-bottom: 50px;*/
 }
 
-/*.top-bar-left .button {
-  border-color: black;
-}*/
+.nowrap {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 50px;
+  box-sizing: content-box;
+  padding: 1% 5% 1% 5%
+}
+
 
 .menu .button{
   display: inline-block;
@@ -122,6 +129,7 @@ margin-bottom: 50px;
 
 .ul .menu {
   background-color: black;
+  justify-content: center;
 }
 
 a.button {
