@@ -58,6 +58,10 @@ HERO
   color: white;
 }
 
+.hero a:hover {
+  color: rgb(129,143,42);
+}
+
 
 
 
@@ -88,7 +92,7 @@ margin-bottom: 50px;
 }
 
 .menu .button:hover {
-  background-color: rgb(44,9,81);
+  background-color: rgb(129,143,42);
 }
 
 .form select {
