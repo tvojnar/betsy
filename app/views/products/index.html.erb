@@ -11,7 +11,7 @@
     <% if @products == nil %>
     <h4> Sorry, there are not yet any products listed. </h4>
     <%else%>
-    <% Product.all.each do |product| %>
+    <% @products.each do |product| %>
         <% if product.visible%>
       <div class="column">
         <ul>
@@ -24,7 +24,6 @@
       </div>
         <%end%>
       <%end%>
-    </div>
     <%end%>
 </div>
 
