@@ -121,9 +121,8 @@ describe "checkout methods" do
 
     #
     describe "show" do
-
       it "returns success if the order exists" do
-        get order_path(Order.create!)
+        get order_path(Order.first.id)
         must_respond_with :success
       end
 
