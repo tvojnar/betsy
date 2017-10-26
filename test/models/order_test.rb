@@ -145,4 +145,16 @@ describe Order do
       result.must_be_empty
     end
   end # self.filter_by_status
+
+  describe "self.filter_by_merchant" do
+    it "will return a list of orders when there are orders with that perchants products" do
+      # TODO: how do I test this???
+    end
+
+    it "will return an empty array when there are no orders containing a given merchants products" do
+    end
+
+    it "will return an empty array when given a merchant_id that doesn't exist" do
+    end
+  end
 end
