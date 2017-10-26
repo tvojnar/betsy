@@ -6,11 +6,15 @@
 dark purple rgb(44,9,81)
 bright purple rgb(126,39,190)
 moss green rgb(129,143,42)
+very light purple accent: rgb(243,231,241)
 */
 
 /*****************/
 /* Account page  */
 /*****************/
+body {
+  font-family: 'Comfortaa', sans-serif;
+}
 
 .order-show h3 {
   color: black;
@@ -55,6 +59,7 @@ a:hover {
 
 .button {
   background-color: black;
+  border-radius: 5px;
 }
 
 .button:hover {

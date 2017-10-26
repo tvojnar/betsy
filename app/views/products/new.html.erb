@@ -1,33 +1,40 @@
-<div class="row">
+<div class="row new">
 <section class="new-product small-12 column">
-  <div>
-    <%= link_to "Add a New Category", new_category_path, class: "button" %>
-  </div>
   <% button_text ||= "Add Product" %>
   <% form_class ||= "" %>
   <% hide_placeholder_text ||= false %>
 
   <h3> Add a new product:</h3>
+<article class="new-form">
     <%= form_for @product do |f| %>
-    <%= f.label :name %>
+    <%= f.label :name, :class => 'bold' %>
     <%= f.text_field :name%>
 
-    <%= f.label :price %>
+    <%= f.label :price, :class => 'bold' %>
     <%= f.number_field :price, value: f.object.price.to_f, step: 0.01%>
 
-    <%= f.label :category %>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
 
-    <%= f.label :image_url %>
+    <%= f.label :category, :class => 'bold' %>
+    <span style=white-space: nowrap;>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    </span>
+    <div>
+      <%= link_to "Add a New Category", new_category_path, class: "button" %>
+    </div>
+
+    <%= f.label :image_url, :class => 'bold' %>
     <%= f.text_field :image_url %>
 
-    <%= f.label :inventory%>
+    <%= f.label :inventory, :class => 'bold'%>
     <%= f.number_field :inventory %>
 
-    <%= f.label :description %>
-    <%= f.text_field :description%>
+    <%= f.label :description, :class => 'bold' %>
+    <%= f.text_field :description, :class => 'bold'%>
 
-    <%= f.submit button_text %>
+    <div class="submit" >
+    <%= f.submit button_text, class: "button" %>
+    </div>
   <% end %>
+</article>
 </section>
 </div>
