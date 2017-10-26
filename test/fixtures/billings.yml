@@ -8,8 +8,8 @@ one:
   cc_exp: 2017-10-01
   cc_cvv: 444
   zip: 11111
-  order_id: 1
-# 
+  order: paid 
+#
 # two:
 #   email: MyString
 #   address: MyString
