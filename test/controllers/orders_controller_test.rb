@@ -33,10 +33,10 @@ describe OrdersController do
       must_respond_with :success
     end # index
   end # index
-
-  describe "current_order" do
-    # TODO: need to figure out how to access current_order in my tests before I can test this
-  end # current_order
+  #
+  # describe "current_order" do
+  #   # TODO: need to figure out how to access current_order in my tests before I can test this
+  # end # current_order
 
 describe "checkout methods" do
 
@@ -55,6 +55,9 @@ describe "checkout methods" do
         cc_number: "some_string",
         cc_exp: Date.today,
         cc_cvv: "some_string",
+        email: "something",
+        address: "somethi",
+        zip: "23"
       }
     }
 
@@ -65,25 +68,23 @@ describe "checkout methods" do
         get sure_order_path
         must_respond_with :success
       end
+    end
 
-#NOTE: SORT THIS OUT DL
-      # it "redirects to cart when passed a bogus order" do
+#TODO get this to pass
+      # it "redirects to cart when passed a nil order" do
       #   post order_items_path params: item_params
       #   post billings_path params: billing_params
-      #   get sure_order_path
       #   get order_current_path
-      #   or = get order_current_path(Order.last.id)
-      #   delete order_path(Order.last.id)
+      #   Order.find_by(id: session[:order_id]).destroy
+      #   get sure_order_path
       #   must_redirect_to order_current_path
-      #   #how would i even test this current is in the route??
       # end
 
 
-    end
 
     describe "submit" do
 
-      it "responds with success when passed a valid order id" do
+      it "redirects to confirm_order_path a valid order id" do
         post order_items_path params: item_params
         post billings_path params: billing_params
         get sure_order_path
@@ -91,10 +92,9 @@ describe "checkout methods" do
         must_redirect_to confirm_order_path(Order.last.id)
       end
 
-      it "sets order status to paid and redirects to order_summary_path if order items for the order is not nil" do
+      it "sets order status to paid and redirects to confirm_order_path if order items for the order is not nil" do
         post order_items_path params: item_params
         post billings_path params: billing_params
-        must_redirect_to sure_order_path
         get sure_order_path
         post order_submit_path
         must_redirect_to confirm_order_path(Order.last.id)
@@ -104,7 +104,6 @@ describe "checkout methods" do
       it "redirects to order_path if order items for the order is nil" do
         post order_items_path params: item_params
         post billings_path params: billing_params
-        must_redirect_to sure_order_path
         get sure_order_path
         Order.find_by(id: session[:order_id]).order_items[0].destroy
         post order_submit_path
@@ -118,9 +117,9 @@ describe "checkout methods" do
         post order_submit_path
         session[:order_id].must_equal nil
       end
-    end
+    end #submit
 
-
+    #
     describe "show" do
 
       it "returns success if the order exists" do
@@ -134,6 +133,32 @@ describe "checkout methods" do
       end
 
     end
+
+
+    describe "confirmation" do
+      it "responds with success when the order status is paid, the session[:order_id] is reset to nil, and date_submitted is not nil" do
+        post order_items_path params: item_params
+        post billings_path params: billing_params
+        get sure_order_path
+        post order_submit_path
+        o = Order.last.id
+        get confirm_order_path(Order.find_by(id: o))
+        must_respond_with :success
+      end
+
+#TODO: get this to pass
+      # it "redirects to cart when session[:order_id] is not nil " do
+      #   post order_items_path params: item_params
+      #   post billings_path params: billing_params
+      #   get sure_order_path
+      #   post order_submit_path
+      #   o = Order.last.id
+      #   session[:order_id]
+      #   get confirm_order_path(Order.find_by(id: o))
+      #   must_redirect_to order_current_path
+      # end
+
+    end #confirmation
 
   end # checkout methods
 

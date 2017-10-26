@@ -20,13 +20,15 @@ describe ProductsController do
       before do
         @merchant = merchants(:tamira)
         @merchant_id = @merchant.id
+        @category = categories(:annuals)
+        @category_id = @category.id
       end
       it "returns a success status when given a valid merchant_id" do
         get merchant_products_path(Merchant.first)
         must_respond_with :ok
       end
 
-      it "returns something when given a bogus merchant_id" do
+      it "redirects to products path when given a bogus merchant_id" do
         bad_merchant_id = Merchant.last.id + 1
         get merchant_products_path(bad_merchant_id)
         must_respond_with :redirect
@@ -46,6 +48,21 @@ describe ProductsController do
         merchant = Merchant.find_by(id: @merchant_id)
         merchant.products.must_include spider_plant
       end
+
+      it "when given a cetegory id, it directs to the correct page" do
+        get products_path(category_id: @category_id)
+        must_respond_with :success
+      end
+
+      it "when given a category id, lists the products of the category" do
+      end
+
+      it "redirects to products path when given a bogus category id" do
+        cat_id = @category_id + 1
+        get products_path(category_id: cat_id)
+        must_redirect_to products_path
+      end
+
     end
 
   end
@@ -67,7 +84,7 @@ describe ProductsController do
         get root_path
         must_respond_with :success
       end
-    end
+    end #desc
 
     describe "new" do
       it "returns a success status" do
@@ -75,7 +92,7 @@ describe ProductsController do
         get new_product_path
         must_respond_with :success
       end
-    end
+    end #desc
 
     describe "create" do
       it "redirects to merchant_products_path when the product data is valid and adds a work" do
@@ -113,7 +130,7 @@ describe ProductsController do
         must_respond_with :bad_request
         Product.count.must_equal start_product_count
       end
-    end
+    end #desc
 
     describe "show" do
       it "returns a success status when passed a valid id" do
@@ -128,7 +145,7 @@ describe ProductsController do
         must_respond_with :redirect
         must_redirect_to products_path
       end
-    end
+    end #desc
 
 
     describe "edit" do
@@ -149,12 +166,11 @@ describe ProductsController do
         get edit_product_path(product_id)
         must_respond_with :redirect
       end
-    end
+    end #desc
 
     describe "update" do
       before do
-        login(merchants(:tamira))
-        @product = products(:aloe_vera)
+        @product = products(:grass)
         @product_data = {
           product: {
             name: @product.name + "exquisite",
@@ -167,6 +183,7 @@ describe ProductsController do
         start_product_count = Product.count
 
         patch product_path(@product), params: @product_data
+
         must_redirect_to product_path(@product.id)
         # Verify the DB was really modified
         Product.find(@product.id).name.must_equal @product_data[:product][:name]
@@ -176,8 +193,7 @@ describe ProductsController do
       end
 
       it "will not update product if it does not belong to the logged in merchant and responds with :bad_request" do
-        login(merchants(:tamira))
-        product = products(:red_cap_cactus)
+        product = products(:aloe_vera)
         product_data = {
           product: {
             name: product.name + " exquisite",
@@ -211,6 +227,7 @@ describe ProductsController do
 
       end
     end
+  end
 
     describe "destroy" do
       before do
@@ -220,6 +237,7 @@ describe ProductsController do
       end
       it "returns success and destroys the work when given a valid product ID AND logged in merchant owns the product" do
         login(@merchant)
+
         start_count = Product.count
 
         product = products(:spider_plant)
@@ -237,14 +255,12 @@ describe ProductsController do
         Product.find_by(id: product.id).must_be_nil
         Product.count.must_equal (start_count - 1)
       end
-    end
+    # end
 
     it "will not allow a logged in merchant who is not the owner of the product to delete it" do
-      merchant = merchants(:kimberley)
-      login(merchant)
       start_count = Product.count
-      product = products(:spider_plant)
-
+      product = products(:grass)
+      puts "*" * 100
       product.merchant.wont_equal @merchant
 
       delete product_path(product)

@@ -79,20 +79,19 @@ describe CategoriesController do
     end
   end
 
-    it "sends bad_request when the category data is invalid" do
-        invalid_category_data = {
-          category: {
-            name: ""
-          }
-        }
-
-        start_category_count = Category.count
-
-        post categories_path, params: invalid_category_data
-
-        must_respond_with :bad_request
-        Category.count.must_equal start_category_count
-      end
+    # it "sends bad_request when the category data is invalid" do
+    #     invalid_category_data = {
+    #       category: {
+    #         name: ""
+    #       }
+    #     }
+    #
+    #     start_category_count = Category.count
+    #     get categories_path
+    #     post categories_path params: invalid_category_data
+    #     must_respond_with :bad_request
+    #     Category.count.must_equal start_category_count
+    #   end
     end
 
 #edge case: what happens if the user input is invalid, possibly use proc
