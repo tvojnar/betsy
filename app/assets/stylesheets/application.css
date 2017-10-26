@@ -15,3 +15,74 @@
  *= require foundation_and_overrides
 
  */
+
+*/*****************************************
+GENERAL
+******************************************* */
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  text-align: left;
+
+}
+
+.list-products a {
+  max-height: 50px;
+}
+
+.hero {
+  background: url("http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png")
+  no-repeat;
+  background-size: cover;
+  height: 400px;
+  background-color: red;
+}
+
+*/*****************************************
+NAVIGATION
+******************************************* */
+
+.top-bar {
+background-color: black;
+margin-bottom: 50px;
+}
+
+.top-bar ul {
+  background-color: black;
+}
+
+.top-bar-left .button {
+  border-color: black;
+}
+
+.menu .button{
+  display: inline-block;
+  float: right;
+  margin-right: 2px;
+  border-color: none;
+  background-color: black;
+
+}
+
+
+
+.form select {
+  width: 200px;
+  margin-right: 5px;
+  display: inline-block;
+  font-size: 12pt;
+}
+
+.form {
+  background-color: black;
+}
+
+.ul .menu {
+  background-color: black;
+}
+
+a.button {
+  border-bottom: none;
+}

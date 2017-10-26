@@ -13,40 +13,62 @@
   <body>
     <body>
         <header class="page-header row">
-          <h2 class="row" "small-12 columns">
-          <%= link_to "Vine & Bloom | ", root_path %>
-          <small> Buy your plants here! </small>
-        </h2>
-          <nav class="row">
-            <div class="large-8 small-12 columns button-group">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+          <h1>
+            <%= link_to "Vine & Bloom", root_path %>
+          </h1>
+
+        </section>
+
+        <!-- NAVIGATION -->
+          <nav class="top-bar">
+            <!-- "row" -->
+            <div class="top-bar-left row-button-group">
+            <!-- "large-8 small-12 columns button-group"> -->
+              <ul class="menu">
+                <li>
               <%= link_to "View All Products", products_path, class: "button" %>
-
-              <%= render partial: 'layouts/categorydropdown' %>
+                </li>
+                <li>
+                <%= render partial: 'layouts/categorydropdown' %>
+                </li>
+                <li>
               <%= render partial: 'layouts/merchantdropdown' %>
-
+              </li>
             </div>
 
 
-            <div class="float-right">
+            <div class="top-bar-right row-button-group">
+            <!-- "float-right"> -->
+              <ul class="menu">
               <% if session[:merchant_id] %>
 
-                  Logged in as
-                  <%= Merchant.find(session[:merchant_id]).name %>
-
-                  <%= link_to "Add a New Product", new_product_path, class: "button" %>
-
-                  <%= link_to "Account", merchant_path(session[:merchant_id]), class: "button"%>
-
+                  <li>
+                    <%= link_to "Add a New Product", new_product_path, class: "button" %>
+                  </li>
+                  <li>
+                    <%= link_to "My Account", merchant_path(session[:merchant_id]), class: "button"%>
+                  </li>
                   <% if session[:order_id] != nil %>
+                  <li>
                     <%= link_to "View cart", order_current_path, class: "button" %>
+                  </li>
                   <% end %>
+                  <li>
                   <%= link_to "Log out", logout_path, class: "button" %>
+                  </li>
               <% else %>
                 <% if session[:order_id] %>
-                  <%= link_to "View cart", order_current_path, class: "button" %>
+                  <li><%= link_to "View cart", order_current_path, class: "button" %>
+                  </li>
                 <% end %>
-                <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
+                  <li>
+                    <%= link_to "SignUp or Log in", '/auth/github', class: "button" %>
+                  </li>
               <% end %>
+            </ul>
             </div>
           </nav>
         </header>
