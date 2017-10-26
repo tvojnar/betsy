@@ -1,3 +1,30 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*****************/
+/* Add a product  */
+/*****************/
+body {
+  font-family: 'Comfortaa', sans-serif;
+}
+.new-product {
+  margin: 1% 5% 5% 5%;
+  width: 90%;
+}
+.submit .button {
+width: 100%;
+text-align: center;
+height: 40px;
+line-height: 15px;
+border-radius: 5px;
+}
+
+.new-form {
+  background-color: rgb(243,231,241);
+  padding: 2%;
+}
+
+.bold {
+  font-weight: bold;
+}
