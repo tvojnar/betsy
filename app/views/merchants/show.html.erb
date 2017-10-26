@@ -110,14 +110,20 @@
             <td>
               <% if order.date_submitted != nil %>
                 <%= submitted(oi.order.date_submitted) %>
+              <% else %>
+                Still pending
               <% end %>
             </td>
             <% if oi.order.status == "paid" || oi.order.status == "shipped"%>
-            <% if oi.shipped_status == true%>
-            <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
+              <% if oi.shipped_status == true%>
+                <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
+              <% else %>
+                <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
+                <% end %>
             <% else %>
-            <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
-            <% end %>
+              <td>
+                Not ready to ship
+              </td>
             <% end %>
             <td>
               <%= oi.order.status %>
