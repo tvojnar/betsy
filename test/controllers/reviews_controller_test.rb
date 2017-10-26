@@ -75,6 +75,21 @@ describe ReviewsController do
 
       end
 
+      it "must redirect to product_path when the product belongs to the logged in merchant" do
+        @product = products(:grass)
+        review_data = {
+          review: {
+            rating: 5,
+            description: "Loved it!",
+            product_id: @product.id
+          }
+        }
+
+        get new_product_review_path(@product)
+        post reviews_path(@product.id), params: review_data
+        must_redirect_to product_path(@product.id)
+      end
+
       it "must respond with bad request if the review cannot be saved" do
 
         invalid_review_data = {

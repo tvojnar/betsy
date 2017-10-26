@@ -24,6 +24,8 @@ class ReviewsController < ApplicationController
     product_merchant = Merchant.find_by(id: @product.merchant_id)
 
     if find_merchant
+      puts @login_merchant.id
+      puts @login_merchant.name
       if @login_merchant.id == product_merchant.id
         flash[:status] = :failure
         flash[:message] = "Sorry, you cannot review your own products."
@@ -38,6 +40,8 @@ class ReviewsController < ApplicationController
         redirect_to product_path(@review.product_id)
         return
       else
+        flash[:status] = :failure
+        flash[:message] = "Review did not save"
         render :new, status: :bad_request
         return
       end

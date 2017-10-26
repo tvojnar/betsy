@@ -40,11 +40,14 @@ describe BillingsController do
 
       post billings_path params: billing_data
 
+      start_billing_count = Billing.count
+      post billings_path params: billing_data
       must_respond_with :redirect
       must_redirect_to sure_order_path
 
       Billing.count.must_equal start_billing_count + 1
     end
+  end
 
     it "sends bad_request when the billing data is invalid" do
       invalid_billing_data = {
@@ -66,6 +69,14 @@ describe BillingsController do
       must_respond_with :bad_request
       Billing.count.must_equal start_billing_count
     end
+
+    describe "find billing" do
+      it "find a billing that exits" do
+        
+      end
+
+    end
+
   end
 
   # describe "edit" do
@@ -80,4 +91,4 @@ describe BillingsController do
   #     must_respond_with :not_found
   #   end
   # end
-end
+# end

@@ -36,11 +36,11 @@ def billing_params
   return params.require(:billing).permit(:cc_name, :email, :address, :zip, :cc_cvv, :cc_number, :cc_exp, :order_id)
 end
 
-def find_billing
-  @billing = Billing.find_by(id: params[:id])
-  unless @billing
-    head :not_found
-  end
-end
+# def find_billing
+#   @billing = Billing.find_by(id: params[:id])
+#   unless @billing
+#     head :not_found
+#   end
+# end
 
 end
