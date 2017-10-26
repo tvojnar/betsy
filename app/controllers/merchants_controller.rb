@@ -16,6 +16,7 @@ class MerchantsController < ApplicationController
       @completed_number = @merchant.completed_number(@merchant)
       # @merchant_orders = @merchant.orders(@merchant)
       @merchant_orders = Order.filter_by_merchant(@merchant.id)
+      @orders_by_status = @merchant_orders
       if params != nil
         # @orders_by_status = @merchant_orders
         if params[:Status] != nil
