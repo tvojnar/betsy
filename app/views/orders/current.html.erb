@@ -1,15 +1,31 @@
-<h1>Shopping cart</h1>
+<h3>Shopping cart</h3>
+
+<section class="order_items">
+
 <% if @order_items.any? %>
+
   <% @order_items.each do |item| %>
-    <p><%= item.product.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
-    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= render partial: "orders/update_quantity", locals: { item: item }%> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
-    <%# TODO: make calculating the total price a method! %>
+  <div class="item">
+    <h4><%= item.product.name %> | <span> <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}, class: 'button' %> </span> </h4>
+    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= render partial: "orders/update_quantity", locals: { item: item }%> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %> <%= image_tag((item.product.image_url))%>  </p>
+
+  </div>
   <% end %>
+
+
+
+<div class="total">
   <p>Your Total: <%= number_to_currency current_order.calculate_total %></p>
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>
+</div>
+
+<div class = "checkout">
 
 <% if current_order.status == "pending" %>
-<%= link_to "Check Out", new_billing_path %>
+<%= link_to "Check Out", new_billing_path, class: 'submit button'%>
 <% end %>
+
+</div>
+</section>

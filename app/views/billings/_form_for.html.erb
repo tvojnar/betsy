@@ -9,17 +9,16 @@
 <%= f.label :credit_card_number%>
 <%= f.text_field :cc_number, required: true  %>
 <%= f.label :credit_card_expiration%>
-<%= f.date_select :cc_exp, required: true   %>
+<%= f.date_select :cc_exp, start_year: 2017, use_month_numbers: true, discard_day: true, required: true %>
 <%= f.label :credit_card_cvv %>
 <%= f.text_field  :cc_cvv, required: true  %>
 <%= f.label :zipcode %>
 <%= f.text_field  :zip, required: true  %>
 <%= f.hidden_field :order_id, value: session[:order_id] %>
 <%#= f.hidden_field :inventory, value: @product.inventory - @order.order_item.quantity %>
-
 <!-- QUESTION: is this required: true enough of a safegaurd? why does order_params not ensure the presence of these? -->
 <!-- if I validate in the order model, a cart will not be started. -->
-<%= f.submit "Submit Order"%>
+<%= f.submit "Submit", class: "submit button"%>
 
 <% end %>
 

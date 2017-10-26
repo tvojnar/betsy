@@ -1,3 +1,88 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h3 {
+  text-align: center;
+}
+h4 span {
+  height: 10vw;
+}
+
+
+section.order_items {
+  width: 68%;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  // background-color: rgb(243,231,241)
+}
+
+
+div.item {
+  border-bottom: solid black 3px;
+  background-color: rgb(243,231,241)
+}
+
+
+// *************************************************** BUTTONS
+.button {
+  background-color: black;
+  width: 75px;
+  height: 10px;
+  margin-bottom: 0;
+  line-height: 0px;
+}
+
+
+.button:hover{
+  background-color: rgb(129,143,42);
+}
+
+.checkout a.button {
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 15px;
+
+}
+
+
+img {
+  height: 80px;
+  width: 80px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+}
+
+select#order_item_quantity {
+  width: 13vw;
+}
+
+
+div.item form  {
+  display: inline-block
+}
+
+
+div.item p  {
+  display: inline-block
+}
+
+.item .edit_order_item .button{
+  background-color: black;
+  height: 10px;
+  margin-bottom: 0
+
+}
+
+.item .edit_order_item .button:hover{
+  background-color: rgb(129,143,42);
+}
+
+.item .edit_order_item select{
+  height: 27px;
+}
+
+.total p {
+  text-align: right;
+}
