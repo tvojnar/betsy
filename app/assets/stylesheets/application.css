@@ -16,9 +16,28 @@
 
  */
 
+*/************
+font-family: 'Dancing Script', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Poiret One', cursive;
+font-family: 'Satisfy', cursive;
+font-family: 'Lobster Two', cursive;
+font-family: 'Marck Script', cursive;
+*/
 */*****************************************
 GENERAL
 ******************************************* */
+
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url('Comfortaa/Comfortaa-Bold.tff') format('truetype');
+  font-weight: bold;
+  font-style: bold;
+}
+
+
+
 ul {
   list-style-type: none;
 }
@@ -69,6 +88,7 @@ HERO
 
 .hero a {
   color: white;
+  font-family: 'Dancing Script', cursive;
 }
 
 .hero a:hover {
@@ -93,6 +113,7 @@ nav.top-bar ul {
   margin: 0;
   /*margin-bottom: 50px;*/
   /*padding: 0 3% 0 3%*/
+  font-family: 'Comfortaa', cursive;
 }
 
 div.top-bar-left {
