@@ -6,15 +6,17 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
+    <%= stylesheet_link_tag 'application', "https://fonts.googleapis.com/css?family=Comfortaa|Dancing+Script|Lobster+Two|Marck+Script|Poiret+One|Satisfy" %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <body>
-        <header class="page-header row">
+        <header class="page-header">
 
         <!-- HERO SECTION -->
+
         <section class="hero">
           <h1>
             <%= link_to "Vine & Bloom", root_path %>
@@ -23,7 +25,7 @@
         </section>
 
         <!-- NAVIGATION -->
-          <nav class="top-bar">
+          <nav class="top-bar nowrap">
             <!-- "row" -->
             <div class="top-bar-left row-button-group">
             <!-- "large-8 small-12 columns button-group"> -->
@@ -37,6 +39,7 @@
                 <li>
               <%= render partial: 'layouts/merchantdropdown' %>
               </li>
+              </ul>
             </div>
 
 

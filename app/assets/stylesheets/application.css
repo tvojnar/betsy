@@ -16,29 +16,79 @@
 
  */
 
+*/************
+font-family: 'Dancing Script', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Poiret One', cursive;
+font-family: 'Satisfy', cursive;
+font-family: 'Lobster Two', cursive;
+font-family: 'Marck Script', cursive;
+*/
 */*****************************************
 GENERAL
 ******************************************* */
+
+
+
 ul {
   list-style-type: none;
 }
 
+.list-products img {
+  height: 150px;
+  width: 300px;
+  max-width: 100%;
+}
+
 h1 {
   text-align: left;
+  color: white;
 
+}
+
+h3 {
+  color: rgb(129,143,42);
 }
 
 .list-products a {
   max-height: 50px;
 }
 
+header.page-header.row {
+  background-color: black;
+  width: 100%;
+}
+
+*/*****************************************
+HERO
+******************************************* */
+
 .hero {
   background: url("http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png")
   no-repeat;
   background-size: cover;
-  height: 400px;
-  background-color: red;
+  height: 200px;
+  width: 100%;
+  background-color: black;
+  margin: 0;
+  color: white;
+  box-sizing: content-box;
+  padding: 1% 5% 2% 5%
+  /*width: 100%;*/
 }
+
+
+.hero a {
+  color: white;
+  font-family: 'Dancing Script', cursive;
+}
+
+.hero a:hover {
+  color: rgb(129,143,42);
+}
+
+
+
 
 */*****************************************
 NAVIGATION
@@ -49,13 +99,36 @@ background-color: black;
 margin-bottom: 50px;
 }
 
-.top-bar ul {
+nav.top-bar ul {
   background-color: black;
+  /*width: 100%;*/
+  margin: 0;
+  /*margin-bottom: 50px;*/
+  /*padding: 0 3% 0 3%*/
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14pt;
+  /*font-weight: bold;*/
 }
 
-.top-bar-left .button {
-  border-color: black;
+div.top-bar-left {
+  padding-left: 1%
 }
+div.top-bar-right {
+  float: right;
+  width: 40%;
+  display: inline-block;
+  /*padding-right: 1%;*/
+  /*padding-left: 5%;*/
+}
+
+.nowrap {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 50px;
+  box-sizing: content-box;
+  padding: 0.5% 5% 0.5% 5%
+}
+
 
 .menu .button{
   display: inline-block;
@@ -63,24 +136,49 @@ margin-bottom: 50px;
   margin-right: 2px;
   border-color: none;
   background-color: black;
-
+  border-radius: 5px;
 }
 
+.menu .button:hover {
+  background-color: rgb(129,143,42);
+}
 
+*/***********
+DROP DOWN Boxes are .form
+**************/
 
 .form select {
   width: 200px;
   margin-right: 5px;
   display: inline-block;
   font-size: 12pt;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.form select:hover {
+  background-color: rgb(129,143,42);
 }
 
 .form {
   background-color: black;
 }
 
+.form input {
+  background-color: black;
+  border-radius: 40%;
+  color: white;
+  font-weight: bold;
+}
+
+.form input:hover {
+  color: rgb(129,143,42);
+}
+
 .ul .menu {
   background-color: black;
+  justify-content: center;
 }
 
 a.button {

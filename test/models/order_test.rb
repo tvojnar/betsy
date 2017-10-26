@@ -119,4 +119,41 @@ describe Order do
 
     end # print out the correct order items
   end # find_merchants_oi_in_order
+
+  describe "self.filter_by_status" do
+
+    it "will return only orders with a pending status and given a list of orders with different statuses" do
+      list_of_orders = [orders(:pending), orders(:paid), orders(:shipped), orders(:cancled)]
+      result = Order.filter_by_status(list_of_orders, "paid")
+      result.must_be_kind_of Array
+      result.must_include orders(:paid)
+      result.wont_include orders(:pending)
+    end
+
+    it "will return an empty array if no orders have status of paid" do
+      list_of_orders = [orders(:pending), orders(:shipped), orders(:cancled)]
+      result = Order.filter_by_status(list_of_orders, "paid")
+      result.must_be_kind_of Array
+      result.must_be_empty
+    end
+
+    it "will return an empty array when passed an empty array" do
+      list_of_orders = []
+      result = Order.filter_by_status(list_of_orders, "paid")
+      result.must_be_kind_of Array
+      result.must_be_empty
+    end
+  end # self.filter_by_status
+
+  describe "self.filter_by_merchant" do
+    it "will return a list of orders when there are orders with that perchants products" do
+      # TODO: how do I test this???
+    end
+
+    it "will return an empty array when there are no orders containing a given merchants products" do
+    end
+
+    it "will return an empty array when given a merchant_id that doesn't exist" do
+    end
+  end
 end

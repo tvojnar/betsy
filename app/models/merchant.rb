@@ -3,6 +3,8 @@ class Merchant < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
+  
+
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
     merchant.provider = provider
@@ -85,7 +87,7 @@ class Merchant < ApplicationRecord
     return pending_num
   end
 
-  
+
 
   def paid_number(merchant)
     paid_num = 0

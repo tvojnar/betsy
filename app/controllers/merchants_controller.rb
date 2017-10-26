@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-before_action :require_correct_merchant, only: [:show, :edit, :update]
+  before_action :require_correct_merchant, only: [:show, :edit, :update]
   def show
     @merchant = Merchant.find_by(id: params[:id])
     if @merchant #!= nil
@@ -10,11 +10,30 @@ before_action :require_correct_merchant, only: [:show, :edit, :update]
       @paid_revenue = @merchant.paid_revenue(@merchant)
       @shipped_revenue = @merchant.shipped_revenue(@merchant)
       @completed_revenue = @merchant.completed_revenue(@merchant)
-      @merchant_orders = @merchant.orders(@merchant)
       @pending_number = @merchant.pending_number(@merchant)
       @paid_number = @merchant.paid_number(@merchant)
       @shipped_number = @merchant.shipped_number(@merchant)
       @completed_number = @merchant.completed_number(@merchant)
+      # @merchant_orders = @merchant.orders(@merchant)
+      @merchant_orders = Order.filter_by_merchant(@merchant.id)
+      @orders_by_status = @merchant_orders
+      if params != nil
+        # @orders_by_status = @merchant_orders
+        if params[:Status] != nil
+          # @orders_by_status = @merchant_orders
+          if params[:Status] == "paid"
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "paid")
+          elsif params[:Status] == "pending"
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "pending")
+          elsif params[:Status] == "cancled"
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "cancled")
+          elsif params[:Status] == "shipped"
+            @orders_by_status = Order.filter_by_status(@merchant_orders, "shipped")
+          elsif params[:Status] == "all"
+            @orders_by_status = @merchant_orders
+          end
+        end
+      end
     else
       render :show, status: :not_found
     end
