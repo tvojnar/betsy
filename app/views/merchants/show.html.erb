@@ -108,7 +108,9 @@
               <%= oi.quantity * oi.product.price%>
             </td>
             <td>
-              <%= submitted(oi.order.date_submitted) %>
+              <% if order.date_submitted != nil %>
+                <%= submitted(oi.order.date_submitted) %>
+              <% end %>
             </td>
             <% if oi.order.status == "paid" || oi.order.status == "shipped"%>
             <% if oi.shipped_status == true%>
