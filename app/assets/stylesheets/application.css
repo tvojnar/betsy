@@ -29,14 +29,6 @@ GENERAL
 ******************************************* */
 
 
-@font-face {
-  font-family: "Comfortaa";
-  src: url('Comfortaa/Comfortaa-Bold.tff') format('truetype');
-  font-weight: bold;
-  font-style: bold;
-}
-
-
 
 ul {
   list-style-type: none;
@@ -144,6 +136,7 @@ div.top-bar-right {
   margin-right: 2px;
   border-color: none;
   background-color: black;
+  border-radius: 5px;
 }
 
 .menu .button:hover {
@@ -176,6 +169,7 @@ DROP DOWN Boxes are .form
   background-color: black;
   border-radius: 40%;
   color: white;
+  font-weight: bold;
 }
 
 .form input:hover {
