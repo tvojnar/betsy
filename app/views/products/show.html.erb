@@ -1,24 +1,30 @@
-<section>
-
-  <h3>Product: <%= @product.name %></h3>
-
-  <%= image_tag(@product.image_url) %>
-  <h3>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h3>
-  <h3><%= @product.description %></h3>
-  <h3><%= @product.inventory %> in stock</h3>
-  <h3> Categories: <% @product.categories.each do |category| %>
-    <%= link_to category.name, category_products_path(category_id: category.id)%>
-    <% end%>
+<section class="product-image">
+  <div class="row">
+  <h3 id="product-name">Product: <%= @product.name %></h3>
+<section class="small-6 column">
+  <%= image_tag(@product.image_url, class: "img-size") %>
 </section>
-<%= render partial: 'layouts/add_order_item_to_order' %>
 
-<div>
-  <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get %>
+  <section class="product-info small-6 column verticalLine">
+    <h3>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h3>
+    <h3><%= @product.description %></h3>
+    <h3><%= @product.inventory %> in stock</h3>
+    <h3> Categories: <% @product.categories.each do |category| %>
+      <%= link_to category.name, category_products_path(category_id: category.id)%>
+      <% end%>
+  </section>
+    </div>
+
+  <section class="product-info small-6 column">
+    <%= render partial: 'layouts/add_order_item_to_order'%>
+  </section>
+
+<div class="small-6 column">
+  <%= button_to "Add Review",  new_product_review_path(@product.id), method: :get, class: "button"%>
 </div>
 
-<div>
-  <%= button_to "Read Reviews", product_reviews_path(@product.id), method: :get %>
-
+<div class="small-6 column">
+  <%= button_to "Read Review", product_reviews_path(@product.id), method: :get, class: "button"%>
 </div>
 
 <div>
@@ -30,8 +36,10 @@
     <%= "Inactive" %>
     <%end%>
   </p>
-  <%= button_to "Edit", edit_product_path(@product.id), method: :get %>
 
-  <%= button_to "Delete", product_path(@product.id), method: :delete %>
+
+  <%= button_to "Edit", edit_product_path(@product.id), method: :get, class: "button" %>
+
+  <%= button_to "Delete", product_path(@product.id), method: :delete, class: "button" %>
   <% end %>
 </div>
