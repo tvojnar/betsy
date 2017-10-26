@@ -1,123 +1,135 @@
-<h1><%= @merchant.name%>'s account info</h1>
-<h3>Total Revenue: $<%= @total_revenue %> </h3>
-<h5>Total Revenue by Category: </h5>
-<table>
-  <thead>
-    <tr>
-      <th>
-        Status
-      </th>
-      <th>
-        Number of orders
-      </th>
-      <th>
-        Revenue
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Pending
-      </td>
-      <td>
-        <%= @pending_number %>
-      </td>
-      <td>
-        $<%= @pending_revenue %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Paid
-      </td>
-      <td>
-        <%= @paid_number %>
-      </td>
-      <td>
-        $<%= @paid_revenue %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Shipped
-      </td>
-      <td>
-        <%= @shipped_number %>
-      </td>
-      <td>
-       $<%= @shipped_revenue %>
-      </td>
-    </tr>
+<section class="order-show">
 
-  </tbody>
-</table>
+  <section class="row merchant-name">
+    <div class="row">
+      <h2 class="small-11 medium-11 large-11 column wrap"><%= @merchant.name%>'s account info</h2>
+    </div>
+  </section>
 
+  <section class="row revenue ">
+    <h3 class="small-12 column ">Total Revenue: $<%= @total_revenue %> </h3>
+    <h5 class="small-12 column ">Total Revenue by Category: </h5>
+    <table class="small-12 column ">
+      <thead>
+        <tr>
+          <th>
+            Status
+          </th>
+          <th>
+            Number of orders
+          </th>
+          <th>
+            Revenue
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Pending
+          </td>
+          <td>
+            <%= @pending_number %>
+          </td>
+          <td>
+            $<%= @pending_revenue %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Paid
+          </td>
+          <td>
+            <%= @paid_number %>
+          </td>
+          <td>
+            $<%= @paid_revenue %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Shipped
+          </td>
+          <td>
+            <%= @shipped_number %>
+          </td>
+          <td>
+            $<%= @shipped_revenue %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-<h3>Orders containing your products: </h3>
-<% if @merchant_orders.empty? %>
-<h4>No Orders placed with you yet</h4>
-<% end %>
-
-
-<%= render partial: "orders/filter_by_status" %>
-<% if @orders_by_status.empty? %>
-<h4>You have no orders of that stutus</h4>
-<% end  %>
-<% @orders_by_status.each do |order| %>
-<h4>Order <%= order.id %></h4>
-<p>
-  You earned $<%= order.calculate_total %> in order <%= order.id %>
-</p>
-<table>
-  <thead>
-    <tr>
-      <th>Order ID</th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
-      <th>Order Placed</th>
-      <th>Mark as Shipped</th>
-      <th>Order Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% order.order_items.each do |oi| %>
-    <% if oi.product.merchant_id == session[:merchant_id]%>
-    <tr>
-      <td>
-        <%= link_to oi.order.id, order_path(oi.order.id) %>
-      </td>
-      <td>
-        <%= link_to oi.product.name, product_path(oi.product.id) %>
-      </td>
-      <td>
-        <%= oi.quantity %>
-      </td>
-      <td>
-        <%= oi.quantity * oi.product.price%>
-      </td>
-      <td>
-        <%= submitted(oi.order.date_submitted) %>
-      </td>
-      <% if oi.order.status == "paid" || oi.order.status == "shipped"%>
-      <% if oi.shipped_status == true%>
-      <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
-      <% else %>
-      <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
-      <% end %>
-      <% end %>
-      <td>
-        <%= oi.order.status %>
-      </td>
-    </tr>
+  <section class="row orders-by-status">
+    <h3 class="small-12 column">Orders containing your products: </h3>
+    <% if @merchant_orders.empty? %>
+    <h4 class="small-12 column">No Orders placed with you yet</h4>
     <% end %>
+
+    <div class="filter-form small-2">
+      <%= render partial: "orders/filter_by_status" %>
+    </div>
+    <% if @orders_by_status.empty? %>
+    <h4 class="small-12 column">You have no orders of that stutus</h4>
+    <% end  %>
+    <% @orders_by_status.each do |order| %>
+    <h4>Order <%= order.id %></h4>
+    <p>
+      You earned $<%= order.calculate_total %> in order <%= order.id %>
+    </p>
+    <div class="row small-up-1 large-up-1">
+      <table class="column">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Order Placed</th>
+            <th>Mark as Shipped</th>
+            <th>Order Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.order_items.each do |oi| %>
+          <% if oi.product.merchant_id == session[:merchant_id]%>
+          <tr>
+            <td>
+              <%= link_to oi.order.id, order_path(oi.order.id) %>
+            </td>
+            <td>
+              <%= link_to oi.product.name, product_path(oi.product.id) %>
+            </td>
+            <td>
+              <%= oi.quantity %>
+            </td>
+            <td>
+              <%= oi.quantity * oi.product.price%>
+            </td>
+            <td>
+              <%= submitted(oi.order.date_submitted) %>
+            </td>
+            <% if oi.order.status == "paid" || oi.order.status == "shipped"%>
+            <% if oi.shipped_status == true%>
+            <td>shipped <%= link_to "Unmark", mark_order_item_path(oi.id), method: :patch%></td>
+            <% else %>
+            <td> <%= link_to "Mark As Shipped", mark_order_item_path(oi.id), method: :patch %> </td>
+            <% end %>
+            <% end %>
+            <td>
+              <%= oi.order.status %>
+            </td>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <% end %>
-  </tbody>
-</table>
-<% end %>
+  </section>
 
-
-<%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
-<%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
-<%= link_to "Add a Category", new_category_path, class: "button"%>
+  <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
+  <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
+  <%= link_to "Add a Category", new_category_path, class: "button"%>
+</section>
