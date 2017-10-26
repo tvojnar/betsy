@@ -37,6 +37,11 @@ h3 {
   max-height: 50px;
 }
 
+header.page-header.row {
+  background-color: black;
+  width: 100%;
+}
+
 */*****************************************
 HERO
 ******************************************* */
@@ -45,14 +50,16 @@ HERO
   background: url("http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png")
   no-repeat;
   background-size: cover;
-  height: 400px;
+  height: 200px;
+  width: 100%;
   background-color: black;
-  margin: 0;
+  margin: 0 10;
   color: white;
   box-sizing: content-box;
-  padding: 5%;
+  padding: 1% 5% 2% 3%
   /*width: 100%;*/
 }
+
 
 .hero a {
   color: white;
@@ -100,6 +107,13 @@ margin-bottom: 50px;
   margin-right: 5px;
   display: inline-block;
   font-size: 12pt;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.form select:hover {
+  color: rgb(129,143,42);
 }
 
 .form {
