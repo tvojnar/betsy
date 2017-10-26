@@ -60,3 +60,7 @@ shipped:
 empty:
   status: pending
   date_submitted:
+
+cancled:
+  status: cancled
+  date_submitted:
