@@ -84,7 +84,20 @@ describe Merchant do
 
     describe "total revenue" do
       it "returns total revenue regardless of order status for a given merchant" do
-        merchant.total_revenue(merchant).must_equal 1099.0
+        items = []
+        all_oi = OrderItem.all
+        all_oi.each do |oi|
+          if oi.product.merchant_id == merchant.id
+            items << oi
+          end
+        end
+
+        total = 0
+        items.each do |oi|
+          total += oi.quantity * oi.product.price
+        end
+
+        merchant.total_revenue(merchant).must_equal total
       end
       it "returns 0 when there are no orders for the given merchant" do
         OrderItem.destroy_all
