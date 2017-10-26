@@ -24,3 +24,9 @@ nkiru:
   email: nk@ada.edu
   uid: 4444444444444444
   provider: github
+
+no_orders:
+  name: Merchant with no orders
+  email: no@ada.edu
+  uid: 555555555555
+  provider: github

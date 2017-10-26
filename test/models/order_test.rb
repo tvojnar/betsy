@@ -68,33 +68,37 @@ describe Order do
       o.status.must_equal "paid"
     end
 
-    # it "changes order status back to paid if one or more order items are unmarked as shipped" do
-    #   #TODO: Diane fix this test a la Jaimie
-    #   o = Order.new(status: "paid")
-    #   oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
-    #   oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
-    #   oi.shipped_status = true
-    #   oi.save
-    #   oi2.shipped_status = true
-    #   oi2.save
-    #   o.status.must_equal "paid"
-    #   o.update_status
-    #   o.status.must_equal "shipped"
-    #
-    #   oi3= OrderItem.find_by(id: oi2.id)
-    #   oi3.shipped_status = false
-    #   oi3.save
-    #   puts "OI2.SHIPPED_STATUS #{oi3.shipped_status}"
-    #   o.update_status
-    #   Order.find_by(id: o.id).status.must_equal "paid"
-    # end
+    it "changes order status back to paid if one or more order items are unmarked as shipped" do
+      #TODO: Diane fix this test a la Jaimie
+      o = Order.new(status: "paid")
+      oi = OrderItem.create!(product_id: Product.first.id, quantity: 1, order: o)
+      oi2 = OrderItem.create!(product_id: Product.last.id, quantity: 5, order: o)
+      oi.shipped_status = true
+      oi.save
+      oi2.shipped_status = true
+      oi2.save
+      o.status.must_equal "paid"
+      o.update_status
+      o.status.must_equal "shipped"
+      oi2.shipped_status = false
+      oi2.save!
+      puts "OI2.SHIPPED_STATUS #{oi2.shipped_status}"
+      o.update_status
+      o2 = Order.find(o.id)
+      # require 'pry'
+      # binding.pry
+      Order.find(o2.id).status.must_equal "paid"
+    end
   end
 
 
   describe "calculate_total" do
     it "will calculate the total when there are items in the order" do
       o = orders(:pending)
-      total = 67.75
+      total = 0
+      o.order_items.each do |oi|
+        total += oi.product.price * oi.quantity
+      end
       o.calculate_total.must_equal total
     end # works when there are items in the cart
 
@@ -147,13 +151,25 @@ describe Order do
 
   describe "self.filter_by_merchant" do
     it "will return a list of orders when there are orders with that perchants products" do
-      # TODO: how do I test this???
+      merchant = merchants(:tamira)
+      result = Order.filter_by_merchant(merchant.id)
+      result.must_be_kind_of Array
+      result.must_include orders(:pending)
+      result.wont_include orders(:shipped)
     end
 
     it "will return an empty array when there are no orders containing a given merchants products" do
+      merchant = merchants(:no_orders)
+      result = Order.filter_by_merchant(merchant.id)
+      result.must_be_kind_of Array
+      result.must_be_empty
     end
 
     it "will return an empty array when given a merchant_id that doesn't exist" do
+      merchant_id = Merchant.last.id + 1
+      result = Order.filter_by_merchant(merchant_id)
+      result.must_be_kind_of Array
+      result.must_be_empty
     end
   end
 end
