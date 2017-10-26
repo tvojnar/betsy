@@ -15,7 +15,7 @@ describe Merchant do
       m.must_respond_to :products
     end
   end
-  
+
   describe "validations" do
     it "will create a new Merchant when all fields are provided" do
       merchant.must_be :valid?
@@ -84,7 +84,20 @@ describe Merchant do
 
     describe "total revenue" do
       it "returns total revenue regardless of order status for a given merchant" do
-        merchant.total_revenue(merchant).must_equal 1099.0
+        items = []
+        all_oi = OrderItem.all
+        all_oi.each do |oi|
+          if oi.product.merchant_id == merchant.id
+            items << oi
+          end
+        end
+
+        total = 0
+        items.each do |oi|
+          total += oi.quantity * oi.product.price
+        end
+
+        merchant.total_revenue(merchant).must_equal total
       end
       it "returns 0 when there are no orders for the given merchant" do
         OrderItem.destroy_all
@@ -99,7 +112,17 @@ describe Merchant do
 
     describe "pending revenue" do
       it "returns the correct pending revenue for a merchant with many order statuses" do
-        merchant.pending_revenue(merchant).must_equal 36.0
+        orders = Order.where(status: "pending")
+        total = 0
+        orders.each do |o|
+          o.order_items.each do |oi|
+            if oi.product.merchant_id == merchant.id
+              total += oi.product.price * oi.quantity
+            end
+          end
+        end
+
+        merchant.pending_revenue(merchant).must_equal total
       end
 
       it "returns the 0 for a merchant with no pending revenue" do
@@ -145,7 +168,7 @@ describe Merchant do
 
     describe "pending number" do
       it "returns the correct number of order items that belong to a certain merchant and a pending order" do
-        merchant.pending_number(merchant).must_equal 1
+        merchant.pending_number(merchant).must_equal 2
       end
 
       it "returns 0 if a merchant has no order items that belong to a pending order" do
