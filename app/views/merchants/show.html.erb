@@ -46,6 +46,7 @@ Name: <%= @merchant.name %>
 
 <table>
   <h3>Orders:</h3>
+  <%= render partial: "orders/filter_by_status" %>
 <thead>
   <tr>
     <th>Order ID</th>
@@ -58,11 +59,17 @@ Name: <%= @merchant.name %>
   </tr>
 </thead>
 
+<% @merchant_orders.each do |o| %>
+  <p>
+    <%= o.status %>
+    <%= o.id %>
+  </p>
+<% end %>
+
 <tbody>
-  <% if @merchant_order_items == [] %>
+  <% if @merchant_orders == [] %>
   <h4>No Orders placed with you yet</h4>
   <% else %>
-  <%= render partial: "orders/filter_by_status" %>
   <% @merchant_order_items.each do |oi|%>
   <tr>
     <td><%= link_to oi.order.id, order_path(oi.order.id) %> </td>

@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-before_action :require_correct_merchant, only: [:show, :edit, :update]
+  before_action :require_correct_merchant, only: [:show, :edit, :update]
   def show
     @merchant = Merchant.find_by(id: params[:id])
     if @merchant #!= nil
@@ -15,9 +15,22 @@ before_action :require_correct_merchant, only: [:show, :edit, :update]
       @shipped_number = @merchant.shipped_number(@merchant)
       @completed_number = @merchant.completed_number(@merchant)
       @merchant_orders = @merchant.orders(@merchant)
-      if params[:order][:status] == "paid"
-        @merchant_orders = Order.filter_by_status(@merchant_orders, "paid")
-      end
+
+      if params != nil
+        # if params[:order] != nil
+          if params[:Status] == "paid"
+            @merchant_orders = Order.filter_by_status(@merchant_orders, "paid")
+          elsif params[:Status] == "pending"
+            @merchant_orders = Order.filter_by_status(@merchant_orders, "pending")
+          elsif params[:Status] == "cancled"
+            @merchant_orders = Order.filter_by_status(@merchant_orders, "cancled")
+          elsif params[:Status] == "shipped"
+            @merchant_orders = Order.filter_by_status(@merchant_orders, "shipped")
+          elsif params[:Status] == "all"
+            @merchant_orders = @merchant_orders
+          end
+        end
+      # end
     else
       render :show, status: :not_found
     end

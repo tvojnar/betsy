@@ -7,10 +7,12 @@ class Order < ApplicationRecord
     by_status = []
     o.each do |item|
       if item.status == status
-        by_status << item
+        if !(by_status.include?(item))
+          by_status << item
+        end
       end
     end
-    return by_status 
+    return by_status
   end
 
 
@@ -33,7 +35,7 @@ class Order < ApplicationRecord
 
 
   end # calculate_total
-#DL ADDED ^ 'RETURN TOTAL' TO CALC TOTAL METHOD FOR ORDER SUMMARY PAGE
+  #DL ADDED ^ 'RETURN TOTAL' TO CALC TOTAL METHOD FOR ORDER SUMMARY PAGE
 
   #DL WORKING ON THIS METHOD
   def update_status
