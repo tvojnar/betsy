@@ -148,13 +148,26 @@ describe Order do
 
   describe "self.filter_by_merchant" do
     it "will return a list of orders when there are orders with that perchants products" do
-      # TODO: how do I test this???
+      merchant = merchants(:tamira)
+      result = Order.filter_by_merchant(merchant.id)
+      result.must_be_kind_of Array
+      result.must_include orders(:pending)
+      result.wont_include orders(:shipped)
     end
 
     it "will return an empty array when there are no orders containing a given merchants products" do
+      merchant = merchants(:no_orders)
+      result = Order.filter_by_merchant(merchant.id)
+      result.must_be_kind_of Array
+      result.must_be_empty
     end
 
     it "will return an empty array when given a merchant_id that doesn't exist" do
+      merchant_id = Merchant.last.id + 1
+      result = Order.filter_by_merchant(merchant_id)
+      result.must_be_kind_of Array
+      result.must_be_empty
+
     end
   end
 end

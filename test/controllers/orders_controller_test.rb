@@ -38,27 +38,35 @@ describe OrdersController do
     # TODO: need to figure out how to access current_order in my tests before I can test this
   end # current_order
 
-describe "checkout methods" do
+  describe "checkout methods" do
+    before do
+      id = Product.first.id
 
-    id = Product.first.id
-
-    item_params = {
-      order_item: {
-        quantity: 1,
-        product_id: id
+      item_params = {
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
       }
-    }
 
-    billing_params = {
-      billing: {
-        cc_name: "some_string",
-        cc_number: "some_string",
-        cc_exp: Date.today,
-        cc_cvv: "some_string",
+      billing_params = {
+        billing: {
+          cc_name: "some_string",
+          cc_number: "some_string",
+          cc_exp: Date.today,
+          cc_cvv: "some_string",
+        }
       }
-    }
-
+    end
     describe "sure" do
+      before do
+        item_params = {
+          order_item: {
+            quantity: 1,
+            product_id: id
+          }
+        }
+      end 
       it "responds with success when passed a valid order that is the current order" do
         post order_items_path params: item_params
         post billings_path params: billing_params
@@ -66,7 +74,7 @@ describe "checkout methods" do
         must_respond_with :success
       end
 
-#NOTE: SORT THIS OUT DL
+      #NOTE: SORT THIS OUT DL
       # it "redirects to cart when passed a bogus order" do
       #   post order_items_path params: item_params
       #   post billings_path params: billing_params
