@@ -37,6 +37,10 @@ h3 {
   max-height: 50px;
 }
 
+*/*****************************************
+HERO
+******************************************* */
+
 .hero {
   background: url("http://rforchids.com/wp-content/uploads/2011/11/slide3-resized.png")
   no-repeat;
@@ -47,12 +51,15 @@ h3 {
   color: white;
   box-sizing: content-box;
   padding: 5%;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .hero a {
   color: white;
 }
+
+
+
 
 */*****************************************
 NAVIGATION
@@ -68,9 +75,9 @@ margin-bottom: 50px;
   width: 100%
 }
 
-.top-bar-left .button {
+/*.top-bar-left .button {
   border-color: black;
-}
+}*/
 
 .menu .button{
   display: inline-block;
@@ -78,10 +85,11 @@ margin-bottom: 50px;
   margin-right: 2px;
   border-color: none;
   background-color: black;
-
 }
 
-
+.menu .button:hover {
+  background-color: rgb(44,9,81);
+}
 
 .form select {
   width: 200px;
