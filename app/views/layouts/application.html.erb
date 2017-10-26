@@ -6,6 +6,7 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
+    <%= stylesheet_link_tag 'application', "https://fonts.googleapis.com/css?family=Comfortaa|Dancing+Script|Lobster+Two|Marck+Script|Poiret+One|Satisfy" %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>

@@ -113,7 +113,9 @@ nav.top-bar ul {
   margin: 0;
   /*margin-bottom: 50px;*/
   /*padding: 0 3% 0 3%*/
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14pt;
+  /*font-weight: bold;*/
 }
 
 div.top-bar-left {
@@ -148,6 +150,10 @@ div.top-bar-right {
   background-color: rgb(129,143,42);
 }
 
+*/***********
+DROP DOWN Boxes are .form
+**************/
+
 .form select {
   width: 200px;
   margin-right: 5px;
@@ -159,11 +165,21 @@ div.top-bar-right {
 }
 
 .form select:hover {
-  color: rgb(129,143,42);
+  background-color: rgb(129,143,42);
 }
 
 .form {
   background-color: black;
+}
+
+.form input {
+  background-color: black;
+  border-radius: 40%;
+  color: white;
+}
+
+.form input:hover {
+  color: rgb(129,143,42);
 }
 
 .ul .menu {
