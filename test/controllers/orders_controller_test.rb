@@ -122,7 +122,10 @@ describe "checkout methods" do
     #
     describe "show" do
       it "returns success if the order exists" do
-        get order_path(Order.first.id)
+        merchant = merchants(:tamira)
+        login(merchant)
+        order = orders(:paid)
+        get order_path(order.id)
         must_respond_with :success
       end
 
