@@ -86,6 +86,18 @@ nav.top-bar ul {
   /*width: 100%;*/
   margin: 0;
   /*margin-bottom: 50px;*/
+  /*padding: 0 3% 0 3%*/
+}
+
+div.top-bar-left {
+  padding-left: 1%
+}
+div.top-bar-right {
+  float: right;
+  width: 40%;
+  display: inline-block;
+  /*padding-right: 1%;*/
+  /*padding-left: 5%;*/
 }
 
 .nowrap {
@@ -93,7 +105,7 @@ nav.top-bar ul {
   margin: 0;
   margin-bottom: 50px;
   box-sizing: content-box;
-  padding: 1% 5% 1% 5%
+  padding: 0.5% 5% 0.5% 5%
 }
 
 
