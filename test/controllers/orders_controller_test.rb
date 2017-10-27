@@ -1,8 +1,8 @@
 require "test_helper"
 
 describe OrdersController do
-  describe "current" do
 
+  describe "current" do
     it "will succeed if session[:order_id] has been set" do
       # Arrange
       # set session[:order_id]
@@ -20,7 +20,6 @@ describe OrdersController do
 
       # Assert
       must_respond_with :success
-
     end # works if session[:order_id] has been set
 
     it "won't work if no order has been created yet for the session" do
@@ -35,68 +34,52 @@ describe OrdersController do
       must_respond_with :success
     end # index
   end # index
-  #
-  # describe "current_order" do
-  #   # TODO: need to figure out how to access current_order in my tests before I can test this
-  # end # current_order
 
-describe "checkout methods" do
-  before do
-    id = Product.first.id
 
-    item_params = {
-      order_item: {
-        quantity: 1,
-        product_id: id
-      }
-    }
+  describe "checkout methods" do
 
-    billing_params = {
-      billing: {
-        cc_name: "some_string",
-        cc_number: "some_string",
-        cc_exp: Date.today,
-        cc_cvv: "some_string",
-        email: "something",
-        address: "somethi",
-        zip: "23"
-      }
-    }
-  end
+      let(:id) {Product.first.id}
+
+      let(:item_params) { {
+        order_item: {
+          quantity: 1,
+          product_id: id
+        }
+      }}
+
+      let(:billing_params)  {{
+        billing: {
+          cc_name: "some_string",
+          cc_number: "some_string",
+          cc_exp: Date.today,
+          cc_cvv: "some_string",
+          email: "something",
+          address: "somethi",
+          zip: "23"
+        }
+      }}
+
 
     describe "sure" do
-
       it "responds with success when passed a valid order that is the current order" do
         post order_items_path params: item_params
         post billings_path params: billing_params
         get sure_order_path
         must_respond_with :success
-      end
-    end
+      end # it
+    end #sure
 
-#TODO get this to pass
-      # it "redirects to cart when passed a nil order" do
-      #   post order_items_path params: item_params
-      #   post billings_path params: billing_params
-      #   get order_current_path
-      #   Order.find_by(id: session[:order_id]).destroy
-      #   get sure_order_path
-      #   must_redirect_to order_current_path
-      # end
-
-
+    #TODO get this to pass
+    # it "redirects to cart when passed a nil order" do
+    #   post order_items_path params: item_params
+    #   post billings_path params: billing_params
+    #   get order_current_path
+    #   Order.find_by(id: session[:order_id]).destroy
+    #   get sure_order_path
+    #   must_redirect_to order_current_path
+    # end
 
     describe "submit" do
-
-      before do
-        item_params = {
-          order_item: {
-            quantity: 1,
-            product_id: id
-          }
-        }
-      end
-      
       it "redirects to confirm_order_path a valid order id" do
         post order_items_path params: item_params
         post billings_path params: billing_params
@@ -146,8 +129,7 @@ describe "checkout methods" do
         get order_path(Order.last.id + 1)
         must_respond_with :not_found
       end
-
-    end
+    end # show
 
 
     describe "confirmation" do
@@ -161,7 +143,7 @@ describe "checkout methods" do
         must_respond_with :success
       end
 
-#TODO: get this to pass
+      #TODO: get this to pass
       # it "redirects to cart when session[:order_id] is not nil " do
       #   post order_items_path params: item_params
       #   post billings_path params: billing_params
@@ -172,9 +154,7 @@ describe "checkout methods" do
       #   get confirm_order_path(Order.find_by(id: o))
       #   must_redirect_to order_current_path
       # end
-
     end #confirmation
-
   end # checkout methods
 
 end # OrdersController
