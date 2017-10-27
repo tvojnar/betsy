@@ -2,5 +2,5 @@
   <%= label_tag "Filter by order status" %>
   <%# collection_select(:order, :status, Order.all, :status, :status) %>
   <%= select_tag "Status", options_for_select(['All', 'Pending', 'Paid', 'Shipped', 'Canceled'])  %>
-  <%= submit_tag "Filter" %>
+  <%= submit_tag ">" %>
 <% end %>

@@ -60,21 +60,27 @@ a:hover {
   margin: 0 5%;
 }
 
-.merchant-name h2 {
-  border-bottom: solid 5px rgb(201,242,108)  ;
-  margin-bottom: 5%;
-  color: rgb(126,39,190);
-  display: inline-block;
-  float: left;
-  clear: right;
-  width: 40%;
-  margin: 0;
-  padding: 0
-}
+// .merchant-name h2 {
+//   border-bottom: solid 5px rgb(201,242,108)  ;
+//   margin-bottom: 5%;
+//   color: rgb(126,39,190);
+//   display: inline-block;
+//   float: left;
+//   clear: right;
+//   width: 40%;
+//   margin: 0;
+//   padding: 0;
+//
+// }
+
 
 .orders-by-status th {
   background-color: rgb(44,9,81);
   color: white;
+}
+
+.orders-by-status {
+  text-align: left;
 }
 
 .revenue th {
@@ -105,6 +111,9 @@ a:hover {
 
 }
 
-label{
-  width: 500px;
-}
+// .merchant-nav {
+//   display: inline-block;
+//   float: right;
+//
+//
+// }

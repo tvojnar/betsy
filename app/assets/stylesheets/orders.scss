@@ -113,6 +113,8 @@ div.item p  {
 
 .filter_form {
   width: 500px;
+  margin-left: 10%;
+  font-weight: bold;
 }
 
 .filter_form select:hover, .filter_form input:hover {
@@ -130,19 +132,20 @@ div.item p  {
   box-sizing: inherit;
   line-height: 1.15;
   border: none;
-  margin-left: 2%;
+  margin-left: 0;
 }
 
 .filter_form input {
   background-color: black;
   color: white;
-  padding: 2%;
+  padding: 1%;
   font-weight: bold;
+  font-family: 'Comfortaa', sans-serif;
   display: inline-block;
-  width: 15%;
-  height: 39px;
+  width: 8%;
+  height: 35px;
   margin-right: 0;
   margin-left: 2%;
-  border-radius: 5px;
-  border: none;
+  border-radius: 40%;
+
 }

@@ -72,6 +72,10 @@ td, th {
 th {
   font-size: 1.15em;
 }
+.button {
+  font-weight: bold;
+  }
+
 
 */*****************************************
 HERO
@@ -197,4 +201,12 @@ DROP DOWN Boxes are .form
 
 a.button {
   border-bottom: none;
+}
+
+
+*/*****************************************
+footer
+******************************************* */
+footer {
+  margin-bottom: 100px;
 }
