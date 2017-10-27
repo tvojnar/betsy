@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
+
 h3 {
   text-align: center;
 }
@@ -161,4 +164,42 @@ div.confirmation p.notify {
   margin-left: 2%;
   border-radius: 40%;
 
+}
+
+
+
+/*****************/
+/* Show page  */
+/*****************/
+.go-left {
+  text-align: left;
+  background-color: rgb(243,231,241);
+  padding: 1%;
+}
+
+.order-articles {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.color {
+  background-color: black;
+  color: white;
+}
+
+.order-show-a {
+  color: rgb(129,143,42);
+}
+
+.order-show-a:hover {
+  color: black;
+}
+
+.order-id {
+  border-bottom: solid;
+}
+
+.total-earned {
+  text-align: center;
+  margin-top: 3%;
 }

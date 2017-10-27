@@ -1,6 +1,8 @@
 <section class="row">
-  <h3>Order <%= "#{@order.id}: Merchant #{@merchant.name}" %></h2>
-  <h3>Total earned: <%= number_to_currency @order.calculate_total %></h3>
+  <h3 class="order-id">Order <%= "#{@order.id}: Merchant #{@merchant.name}" %></h2>
+  <div class="total-earned">
+    <h4>Total earned: <%= number_to_currency @order.calculate_total %></h4>
+  </div>
   <div class="order-articles">
     <article class="small-12 large-6 column">
       <h4 class="go-left">Customer billing info</h4>
@@ -40,7 +42,7 @@
           <% @order_items.each do |item| %>
           <tr>
             <td>
-              <%= link_to item.product.name, product_path(item.product) %>
+              <%= link_to item.product.name, product_path(item.product), class: "order-show-a" %>
             </td>
             <td>
               <%= number_to_currency item.product.price %>
