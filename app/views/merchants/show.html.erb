@@ -1,10 +1,7 @@
 <section class="order-show">
 
-  <section class="row merchant-name">
+    <h3> Merchant Account: <%= @merchant.name%></h3>
 
-      <h3> Merchant Account: <%= @merchant.name%></h3>
-
-  <div class="merchant-nav">
   <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
   <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
   <%= link_to "Add a Category", new_category_path, class: "button"%>

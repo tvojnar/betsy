@@ -26,6 +26,7 @@ very light purple accent: rgb(243,231,241)
 .color {
   background-color: black;
   color: white;
+
 }
 
 /*****************/
@@ -37,6 +38,11 @@ body {
 
 .order-show h3 {
   color: black;
+  float: left;
+  width: 50%;
+  margin-left: 0;
+  padding: 0;
+
 }
 
 .order-show h4 {
@@ -50,14 +56,22 @@ a {
 a:hover {
   color: rgb(126,39,190);
 }
+
 .wrap {
   width: 90%;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.order-show {
-  margin: 0 5%;
+// .order-show {
+//   // margin: 0 5%;
+//   text-align: center;
+//   width: cover;
+// }
+
+.order-show a {
+  // float: right;
+  // margin: 0 5%;
 }
 
 // .merchant-name h2 {
