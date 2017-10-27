@@ -2,11 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/* TODO: make this a more specific h3*/
-h3 {
+div.sure h3, div.confirmation h3, div.current h3, div.new-billing h3 {
   text-align: center;
 }
-h4 span {
+.item h4 span {
   height: 10vw;
 }
 
@@ -68,8 +67,8 @@ section.confirmation .order_items {
 
 
 img.cart {
-  height: 80px;
-  width: 80px;
+  max-height: 80px;
+  max-width: 80px;
   margin-bottom: 10px;
   margin-left: 5%;
 }
@@ -109,7 +108,8 @@ div.confirmation p.notify {
 .item .edit_order_item .button{
   background-color: black;
   height: 10px;
-  margin-bottom: 0
+  margin-bottom: 0;
+  line-height: 0;
 
 }
 
@@ -162,4 +162,42 @@ div.confirmation p.notify {
   margin-left: 2%;
   border-radius: 40%;
 
+}
+
+
+
+/*****************/
+/* Show page  */
+/*****************/
+.go-left {
+  text-align: left;
+  background-color: rgb(243,231,241);
+  padding: 1%;
+}
+
+.order-articles {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.color {
+  background-color: black;
+  color: white;
+}
+
+.order-show-a {
+  color: rgb(129,143,42);
+}
+
+.order-show-a:hover {
+  color: black;
+}
+
+.order-id {
+  border-bottom: solid;
+}
+
+.total-earned {
+  text-align: center;
+  margin-top: 3%;
 }
