@@ -1,16 +1,48 @@
-<h2>Confirmation</h2>
+<div class="confirmation">
 
-<% if @order_items.any? %>
+
+<h3>Congratulations!</h3>
+<p class= "notify">you will be notified when your order is shipped</p>
+
+<div class = "billing">
+  <div class="smaller">
+
+
+<p>Billing Name:  <%=@order.billing.cc_name %> </p>
+<p>Email: <%= @order.billing.email %> </p>
+<p>Credit Card Number: <strong>Visa</strong> ******** <%= @order.billing.cc_number[-4..-1] %> </p>
+<p>Address: <%= @order.billing.address %> </p>
+<p>Zipcode: <%= @order.billing.zip %> </p>
+</div>
+
+</div>
+<!--
+<div class="sure">
+
+</div> -->
+
+
+<h3>Order</h3>
+
+<section class="order_items">
+
+
   <% @order_items.each do |item| %>
-    <p><%= item.product.name %> | %></p>
-    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
-    <%# TODO: make calculating the total price a method! %>
-    <p> Date Placed: <%= item.order.date_submitted %></p>
+  <div class="item">
+    <h4><%= item.product.name %>  </h4>
+    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %>  </p> <%= image_tag((item.product.image_url), class: "cart")%>
+
+  </div>
   <% end %>
-  <p>Your Total: <%= number_to_currency current_order.calculate_total %></p>
-<% else %>
-<% end %>
 
 
 
-can add image later if we choose to
+<div class="total">
+  <p>Total Paid: <%= number_to_currency current_order.calculate_total %></p>
+
+</div>
+
+
+</section>
+
+</div>
