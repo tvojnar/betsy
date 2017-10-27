@@ -10,6 +10,20 @@ very light purple accent: rgb(243,231,241)
 */
 
 /*****************/
+/* Show page  */
+/*****************/
+.go-left {
+  text-align: left;
+}
+
+.info {
+  // margin-top: 5%;
+}
+
+.centered-column {
+  @include grid-column-position(center);
+}
+/*****************/
 /* Account page  */
 /*****************/
 body {
