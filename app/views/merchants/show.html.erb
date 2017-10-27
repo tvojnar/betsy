@@ -1,14 +1,17 @@
 <section class="order-show">
 
-  <section class="row merchant-name">
-    <div class="row">
-      <h2 class="small-11 medium-11 large-11 column wrap"><%= @merchant.name%>'s account info</h2>
-    </div>
-  </section>
+    <h3> Merchant Account: <%= @merchant.name%></h3>
 
+  <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
+  <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
+  <%= link_to "Add a Category", new_category_path, class: "button"%>
+</div>
+</section>
+
+  <div class="merchant-background">
   <section class="row revenue ">
-    <h3 class="small-12 column ">Total Revenue: $<%= @total_revenue %> </h3>
-    <h5 class="small-12 column ">Total Revenue by Category: </h5>
+    <h4 class="total-revenue">Total Revenue: <%= number_to_currency @total_revenue %> </h4>
+    <h4>Total Revenue by Category: </h4>
     <table class="small-12 column ">
       <thead>
         <tr>
@@ -32,7 +35,7 @@
             <%= @pending_number %>
           </td>
           <td>
-            $<%= @pending_revenue.round(2) %>
+            <%= number_to_currency @pending_revenue %>
           </td>
         </tr>
         <tr>
@@ -43,7 +46,7 @@
             <%= @paid_number %>
           </td>
           <td>
-            $<%= @paid_revenue.round(2) %>
+            <%= number_to_currency @paid_revenue.round %>
           </td>
         </tr>
         <tr>
@@ -54,7 +57,7 @@
             <%= @shipped_number %>
           </td>
           <td>
-            $<%= @shipped_revenue.round(2) %>
+            <%= number_to_currency @shipped_revenue.round %>
           </td>
         </tr>
       </tbody>
@@ -71,12 +74,12 @@
       <%= render partial: "orders/filter_by_status" %>
     </div>
     <% if @orders_by_status.empty? %>
-    <h4 class="small-12 column">You have no orders of that stutus</h4>
+    <h4 class="small-12 column">You have no orders of that status</h4>
     <% end  %>
     <% @orders_by_status.each do |order| %>
     <h4>Order <%= order.id %></h4>
     <p>
-      You earned $<%= order.calculate_total %> in order <%= order.id %>
+      You earned <%=number_to_currency order.calculate_total %> in order <%= order.id %>
     </p>
     <div class="row small-up-1 large-up-1">
       <table class="column">
@@ -105,7 +108,7 @@
               <%= oi.quantity %>
             </td>
             <td>
-              <%= (oi.quantity * oi.product.price).round(2)%>
+              <%= number_to_currency (oi.quantity * oi.product.price)%>
             </td>
             <td>
               <% if order.date_submitted != nil %>
@@ -131,7 +134,5 @@
     <% end %>
   </section>
 
-  <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
-  <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
-  <%= link_to "Add a Category", new_category_path, class: "button"%>
+</div>
 </section>

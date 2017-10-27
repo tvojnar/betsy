@@ -27,9 +27,7 @@ font-family: 'Marck Script', cursive;
 */*****************************************
 GENERAL
 ******************************************* */
-body {
-  font-family: 'Comfortaa', sans-serif;
-}
+
 
 
 ul {
@@ -74,6 +72,10 @@ td, th {
 th {
   font-size: 1.15em;
 }
+.button {
+  font-weight: bold;
+  }
+
 
 */*****************************************
 HERO
@@ -199,4 +201,12 @@ DROP DOWN Boxes are .form
 
 a.button {
   border-bottom: none;
+}
+
+
+*/*****************************************
+footer
+******************************************* */
+footer {
+  margin-bottom: 100px;
 }

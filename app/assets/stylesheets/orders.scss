@@ -45,6 +45,10 @@ section.order_items a.delete.button:hover {
   background-color: rgb(129,143,42);
 }
 
+section.confirmation .order_items {
+  width: 68%;
+}
+
 .button:hover{
   background-color: rgb(129,143,42);
 }
@@ -92,6 +96,15 @@ div.item p  {
   display: inline-block
 }
 
+div.confirmation {
+  background-color: rgb(243,231,241);
+}
+
+div.confirmation p.notify {
+  text-align: center;
+  border-bottom: solid black 3px;
+}
+
 .item .edit_order_item .button{
   background-color: black;
   height: 10px;
@@ -109,4 +122,43 @@ div.item p  {
 
 .total p {
   text-align: right;
+}
+
+.filter_form {
+  width: 500px;
+  margin-left: 10%;
+  font-weight: bold;
+}
+
+.filter_form select:hover, .filter_form input:hover {
+  background-color: rgb(129,143,42);
+}
+
+.filter_form select {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  float: left;
+  width: 40%;
+  margin-right: 2%;
+  box-sizing: inherit;
+  line-height: 1.15;
+  border: none;
+  margin-left: 0;
+}
+
+.filter_form input {
+  background-color: black;
+  color: white;
+  padding: 1%;
+  font-weight: bold;
+  font-family: 'Comfortaa', sans-serif;
+  display: inline-block;
+  width: 8%;
+  height: 35px;
+  margin-right: 0;
+  margin-left: 2%;
+  border-radius: 40%;
+
 }
