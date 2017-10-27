@@ -5,26 +5,28 @@
   <%= image_tag(@product.image_url, class: "img-size") %>
 </section>
 
-  <section class="product-info small-6 column verticalLine">
+  <section class="product-info small-6 column">
     <h3>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h3>
     <h3><%= @product.description %></h3>
     <h3><%= @product.inventory %> in stock</h3>
+    <h3> Price: <%=  number_to_currency @product.price %> </h3>
     <h3> Categories: <% @product.categories.each do |category| %>
       <%= link_to category.name, category_products_path(category_id: category.id)%>
       <% end%>
+      <%= render partial: 'layouts/add_order_item_to_order'%>
   </section>
     </div>
 
-  <section class="product-info small-6 column">
-    <%= render partial: 'layouts/add_order_item_to_order'%>
-  </section>
 
-<div class="small-6 column">
-  <%= button_to "Add Review",  new_product_review_path(@product.id), method: :get, class: "button"%>
-</div>
 
-<div class="small-6 column">
-  <%= button_to "Read Review", product_reviews_path(@product.id), method: :get, class: "button"%>
+<div class="row review-buttons">
+  <div class="small-3 column">
+    <%= button_to "Add Review",  new_product_review_path(@product.id), method: :get, class: "button"%>
+  </div>
+
+  <div class="small-3 column">
+    <%= button_to "Read Review", product_reviews_path(@product.id), method: :get, class: "button"%>
+  </div>
 </div>
 
 <div>
