@@ -8,9 +8,11 @@ class Order < ApplicationRecord
     all_orders = Order.all
     all_orders.each do |order|
       order.order_items.each do |oi|
-        if oi.product.merchant_id == merchant_id
-          if !(m_o.include?(order))
-            m_o << order
+        if oi.product
+          if oi.product.merchant_id == merchant_id
+            if !(m_o.include?(order))
+              m_o << order
+            end
           end
         end # if
       end  # .each
