@@ -16,6 +16,7 @@ class CategoriesController < ApplicationController
       flash[:status] = :success
       flash[:message] = "#{@category.name} successfully created"
 
+      # redirect_back(fallback_location: root_path)
       redirect_to merchant_products_path(@login_merchant)
 
     else

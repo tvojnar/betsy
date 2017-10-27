@@ -5,6 +5,8 @@ class BillingsController < ApplicationController
 
   def create
     @billing = Billing.new(billing_params)
+    # require 'pry'
+    # binding.pry
     if save_and_flash(@billing)
       redirect_to sure_order_path
       return
