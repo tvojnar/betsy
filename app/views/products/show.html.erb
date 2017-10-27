@@ -1,32 +1,32 @@
 <section class="product-image">
   <div class="row">
-  <h3 id="product-name">Product: <%= @product.name %></h3>
+  <h4 id="product-name">Product: <%= @product.name %></h4>
 <section class="small-6 column">
   <%= image_tag(@product.image_url, class: "img-size") %>
 </section>
 
   <section class="product-info small-6 column">
-    <h3>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h3>
-    <h3><%= @product.description %></h3>
-    <h3><%= @product.inventory %> in stock</h3>
-    <h3> Price: <%=  number_to_currency @product.price %> </h3>
-    <h3> Categories: <% @product.categories.each do |category| %>
-      <%= link_to category.name, category_products_path(category_id: category.id)%>
+    <h4>Merchant: <%= link_to @product.merchant.name, merchant_products_path(merchant_id: @product.merchant_id) %></h4>
+    <p><%= @product.description %></p>
+    <p><%= @product.inventory %> in stock</p>
+    <p> Price: <%=  number_to_currency @product.price %> </p>
+        Categories: <% @product.categories.each do |category| %>
+      <p><%= link_to category.name, category_products_path(category_id: category.id)%></p>
       <% end%>
       <%= render partial: 'layouts/add_order_item_to_order'%>
   </section>
     </div>
 
 
-
 <div class="row review-buttons">
-  <div class="small-3 column">
+  <div class="small-9 columns add-review">
     <%= button_to "Add Review",  new_product_review_path(@product.id), method: :get, class: "button"%>
-  </div>
 
-  <div class="small-9 column">
     <%= button_to "Read Review", product_reviews_path(@product.id), method: :get, class: "button"%>
   </div>
+</div>
+
+
 </div>
 
 <div>
@@ -39,9 +39,11 @@
     <%end%>
   </p>
 
-
+<div class="row review-buttons">
+<div class="small-9 columns add-review">
   <%= button_to "Edit", edit_product_path(@product.id), method: :get, class: "button" %>
 
   <%= button_to "Delete", product_path(@product.id), method: :delete, class: "button" %>
   <% end %>
+  </div>
 </div>

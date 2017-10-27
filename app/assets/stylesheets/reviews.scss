@@ -1,3 +1,50 @@
 // Place all the styles related to the reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*****************/
+/* Add Review  */
+/*****************/
+
+body {
+  font-family: 'Comfortaa', sans-serif;
+}
+.new-product {
+  margin: 1% 5% 5% 5%;
+  width: 90%;
+}
+.submit .button {
+width: 100%;
+text-align: center;
+height: 40px;
+line-height: 15px;
+border-radius: 5px;
+}
+
+.new-form {
+  background-color: rgb(243,231,241);
+  padding: 2%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+/*****************/
+/* Read Review  */
+/*****************/

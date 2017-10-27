@@ -1,13 +1,15 @@
 <h3> <%= link_to @product.name, product_path(@product.id) %> Reviews </h3>
 
+  <div class="list-products row small-up-1 medium-up-4 large-up-6">
 <% if @product.reviews.count == 0 %>
-  <%= "This product has not been reviewed yet! Be the first to review?" %>
-<% end %>
+  <h4><%= "This product has not been reviewed yet! Be the first to review?" %></h4>
 
+
+<div class="column">
 <div>
-  <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get %>
+  <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get, class: "button" %>
 </div>
-
+<%else%>
 <ul>
 <% @product.reviews.each do |review| %>
     <li> Rating: <%= review.rating %>
@@ -15,3 +17,4 @@
     </li>
 <% end %>
 </ul>
+<% end %>
