@@ -1,7 +1,24 @@
+<h3>Confirm Information</h3>
+
+<div class = "billing">
+  <div class="smaller">
+
+
 <p>Billing Name:  <%=@order.billing.cc_name %> </p>
-<p>Credit Card Number: ******** <%= @order.billing.cc_number[-4..-1] %> </p>
+<p>Email: <%= @order.billing.email %> </p>
+<p>Credit Card Number: <strong>Visa</strong> ******** <%= @order.billing.cc_number[-4..-1] %> </p>
+<p>Address: <%= @order.billing.address %> </p>
+<p>Zipcode: <%= @order.billing.zip %> </p>
+</div>
+
+</div>
+
+<div class="sure">
+
+<p> Are you sure you want to place this order? </p>
+</div>
 <%#= link_to "Confirm", order_submit_path, method: :ps %>
-<%= link_to "Submit", order_submit_path, method: :post%>
+<%= link_to "Submit", order_submit_path, method: :post, class: "submit button"%>
 
 <%#= link_to "Edit Billing Info", edit_billing_path(@order.billing.id) %>
 
