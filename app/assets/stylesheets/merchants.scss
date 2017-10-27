@@ -14,15 +14,20 @@ very light purple accent: rgb(243,231,241)
 /*****************/
 .go-left {
   text-align: left;
+  background-color: rgb(243,231,241);
+  padding: 1%;
 }
 
-.info {
-  // margin-top: 5%;
+.order-articles {
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-.centered-column {
-  @include grid-column-position(center);
+.color {
+  background-color: black;
+  color: white;
 }
+
 /*****************/
 /* Account page  */
 /*****************/
