@@ -47,7 +47,7 @@ describe BillingsController do
 
       Billing.count.must_equal start_billing_count + 1
     end
-  end
+  end #create
 
     it "sends bad_request when the billing data is invalid" do
       invalid_billing_data = {
@@ -72,7 +72,7 @@ describe BillingsController do
 
     describe "find billing" do
       it "find a billing that exits" do
-        
+
       end
 
     end
