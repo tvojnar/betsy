@@ -22,8 +22,8 @@ class ProductsController < ApplicationController
       @invisible_products = @merchant.products.where(visible: false)
 
     elsif category_id != nil && category_id != ""
-      category = Category.find_by(id: category_id)
-      @products = category.products
+      @category = Category.find_by(id: category_id)
+      @products = @category.products
     end
 
     return @products
