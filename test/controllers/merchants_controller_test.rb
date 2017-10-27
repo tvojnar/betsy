@@ -196,11 +196,10 @@ describe MerchantsController do
         puts "*" * 50
         # QUESTION: why is it changing the name to nil??
         # NOTE: not going to worry about this too much since this isn't required
-        merchant.name.must_equal start_name
 
         # Check that the change went through
         merchant.reload
-        merchant.name.wont_equal merchant_data[:merchant][:name]
+        merchant.name.must_equal start_name
       end
     end # logged in merchant
     describe "guest user" do

@@ -42,7 +42,6 @@ describe OrdersController do
 
 describe "checkout methods" do
   before do
-
     id = Product.first.id
 
     item_params = {
@@ -64,9 +63,9 @@ describe "checkout methods" do
       }
     }
   end
-    
 
     describe "sure" do
+
       it "responds with success when passed a valid order that is the current order" do
         post order_items_path params: item_params
         post billings_path params: billing_params
@@ -89,6 +88,15 @@ describe "checkout methods" do
 
     describe "submit" do
 
+      before do
+        item_params = {
+          order_item: {
+            quantity: 1,
+            product_id: id
+          }
+        }
+      end
+      
       it "redirects to confirm_order_path a valid order id" do
         post order_items_path params: item_params
         post billings_path params: billing_params
