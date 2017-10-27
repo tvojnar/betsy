@@ -1,4 +1,4 @@
-<section class="order-show">
+<section class="order-show small-up-2 medium-up-4 large-up-6">
 
     <h3 class="text-align-left"> Merchant Account: <%= @merchant.name%></h3>
 
@@ -6,7 +6,7 @@
   <%= link_to "Edit Account Information", edit_merchant_path, class: "button"%>
   <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
   <%= link_to "Add a Category", new_category_path, class: "button"%>
-</div>
+
 </section>
 
   <div class="merchant-background">
@@ -65,13 +65,13 @@
     </table>
   </section>
 
-  <section class="row orders-by-status">
-    <h3 class="small-12 column go-left">Orders containing your products: </h3>
+  <section class="row orders-by-status small-up-1 medium-up-4 large-up-6">
+    <h3 class="go-left">Orders containing your products: </h3>
     <% if @merchant_orders.empty? %>
     <h4 class="small-12 column">No Orders placed with you yet</h4>
     <% end %>
 
-    <div class="filter-form small-2">
+    <div class="filter-form row small-up-1 medium-up-4 large-up-6">
       <%= render partial: "orders/filter_by_status" %>
     </div>
     <% if @orders_by_status.empty? %>
@@ -82,8 +82,8 @@
     <p>
       You earned <%=number_to_currency order.calculate_total %> in order <%= order.id %>
     </p>
-    <div class="row small-up-1 large-up-1">
-      <table class="column">
+    <div class="row small-up-1 medium-up-4 large-up-6">
+      <table>
         <thead>
           <tr>
             <th>Order ID</th>
@@ -98,6 +98,7 @@
         <tbody>
           <% order.order_items.each do |oi| %>
           <% if oi.product.merchant_id == session[:merchant_id]%>
+          <div class="row small-up-1 medium-up-4 large-up-6">
           <tr>
             <td>
               <%= link_to oi.order.id, order_path(oi.order.id) %>
@@ -127,6 +128,7 @@
               <%= oi.order.status %>
             </td>
           </tr>
+        </div>
           <% end %>
           <% end %>
         </tbody>
