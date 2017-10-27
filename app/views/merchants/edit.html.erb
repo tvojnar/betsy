@@ -1,8 +1,16 @@
-<%= form_for @merchant do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.label :email%>
-<%= f.text_field :email%>
-<%= f.submit "Edit merchant"%>
-
-<% end %>
+<section class="row add-product">
+  <div class="new-product sma11-12 small-centered column">
+    <h3> Edit merchant info: </h3>
+    <article class="new-form">
+    <%= form_for @merchant do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.label :email%>
+      <%= f.text_field :email%>
+      <div class="submit">
+      <%= f.submit "Edit merchant", class: "button"%>
+      </div>
+    <% end %>
+    </article>
+  </div>
+</section>

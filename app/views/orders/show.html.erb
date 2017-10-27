@@ -1,51 +1,59 @@
-<h1>Order <%= @order.id %></h1>
-<h3>Customer billing info</h3>
-<% if @order.billing %>
-  <p>Name: <%= @order.billing.cc_name %></p>
-  <p>Email: <%= @order.billing.email %></p>
-  <p>Address: <%= @order.billing.address%></p>
-  <p>Credit Card #: <strong>Visa</strong> ending in <%= last_4(@order.billing.cc_number)%></p>
-  <p>Expiration date: <%= readable_date(@order.billing.cc_exp) %></p>
-<% else %>
-  <p>
-    No customer info: order has not been purchased yet. 
-  </p>
-<% end %>
-<h3> <%= @merchant.name %>'s products in order <%= @order.id %></h3>
-  <p>Total earned in order <%= @order.id %>: <%= number_to_currency @order.calculate_total %></p>
-<table>
-  <thead>
-    <tr>
-      <th>
-        Product
-      </th>
-      <th>
-        Product price
-      </th>
-      <th>
-        Quantity
-      </th>
-      <th>
-        Total cost
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_items.each do |item| %>
-    <tr>
-      <td>
-        <p><%= item.product.name %> </p>
-      </td>
-      <td>
-        <%= number_to_currency item.product.price %>
-      </td>
-      <td>
-        <%= item.quantity %>
-      </td>
-      <td>
-        <%= number_to_currency unit_cost(item) %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<section class="order-show row">
+  <h2>Order <%= @order.id %></h2>
+  <div class="order-articles">
+    <article class="small-12 large-6 column">
+      <h3 class="go-left">Customer billing info</h3>
+      <% if @order.billing %>
+        <p><strong>Name :</strong> <%= @order.billing.cc_name %></p>
+        <p><strong>Email :</strong> <%= @order.billing.email %></p>
+        <p><strong>Address :</strong> <%= @order.billing.address%></p>
+        <p><strong>Credit Card # :</strong> Visa</strong> ending in <%= last_4(@order.billing.cc_number)%></p>
+        <p><strong>Expiration date :</strong> <%= readable_date(@order.billing.cc_exp) %></p>
+      <% else %>
+        <p>
+          No customer info: order has not been purchased yet.
+        </p>
+      <% end %>
+    </article>
+    <article class="small-12 large-6 column">
+      <h3 class="go-left"> <%= @merchant.name %>'s products in order <%= @order.id %></h3>
+        <p>Total earned in order <%= @order.id %>: <%= number_to_currency @order.calculate_total %></p>
+      <table>
+        <thead class="color">
+          <tr>
+            <th>
+              Product
+            </th>
+            <th>
+              Product price
+            </th>
+            <th>
+              Quantity
+            </th>
+            <th>
+              Total cost
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |item| %>
+          <tr>
+            <td>
+              <p><%= link_to item.product.name, product_path(item.product) %> </p>
+            </td>
+            <td>
+              <%= number_to_currency item.product.price %>
+            </td>
+            <td>
+              <%= item.quantity %>
+            </td>
+            <td>
+              <%= number_to_currency unit_cost(item) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>`
+    </div>
+  </article>
+</section>
