@@ -68,7 +68,7 @@
   <section class="row orders-by-status small-up-1 medium-up-4 large-up-6">
     <h3 class="go-left">Orders containing your products: </h3>
     <% if @merchant_orders.empty? %>
-    <h4 class="small-12 column">No Orders placed with you yet</h4>
+    <h4 class="small-12 column"> No Orders placed with you yet</h4>
     <% end %>
 
     <div class="filter-form row small-up-1 medium-up-4 large-up-6">
@@ -83,7 +83,7 @@
       You earned <%=number_to_currency order.calculate_total %> in order <%= order.id %>
     </p>
     <div class="row small-up-1 medium-up-4 large-up-6">
-      <table>
+      <table id="orders-filtered">
         <thead>
           <tr>
             <th>Order ID</th>
