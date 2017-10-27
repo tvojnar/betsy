@@ -29,10 +29,10 @@
   // padding-left: 50px;
 }
 
-.button.read-review {
-  float: right;
-  clear: right;
-}
+// .button.read-review {
+//   float: right;
+//   clear: right;
+// }
 
 // .review-buttons {
 //   padding-top: 10px;
@@ -93,6 +93,28 @@ line-height: 15px;
 border-radius: 5px;
 }
 
+div ul li #edit {
+
+width: 10%;
+text-align: center;
+height: 40px;
+line-height: 15px;
+border-radius: 5px;
+display: inline-block;
+clear: right;
+}
+
+div ul li #delete {
+  width:10%;
+  text-align: center;
+  height: 40px;
+  line-height: 15px;
+  border-radius: 5px;
+  display: inline-block;
+  clear: left;
+  // float: right;
+}
+
 .new-form {
   background-color: rgb(243,231,241);
   padding: 2%;
@@ -104,4 +126,16 @@ border-radius: 5px;
 
 .cust-review {
   margin-top: 40px;
+}
+
+.add-edit {
+  display: inline-block;
+}
+
+.add-edit ul:first-child {
+  display: inline-block;
+}
+
+.add-edit ul:nth-child(2) {
+  display: inline-block;
 }

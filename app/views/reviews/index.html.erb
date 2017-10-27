@@ -1,4 +1,8 @@
-<h3> <%= link_to @product.name, product_path(@product.id) %> Reviews </h3>
+<div class="reviews">
+
+<h3>Reviews for <span><%= link_to @product.name, product_path(@product.id) %> </span>   <%= image_tag((@product.image_url), id: "image-review")%>
+</h3>
+<h4>Merchant: <%= @product.merchant.name %>  </h4>
 
   <div class="list-products row small-up-1 medium-up-4 large-up-6">
 <% if @product.reviews.count == 0 %>
@@ -10,11 +14,17 @@
   <%= button_to "Add a Review",  new_product_review_path(@product.id), method: :get, class: "button" %>
 </div>
 <%else%>
-<ul>
+<ul class = "reading-review">
 <% @product.reviews.each do |review| %>
+
     <li> Rating: <%= review.rating %>
-      <p> Description: <%= review.description %> </p>
+      <p> <%= review.description %> </p>
+
+
     </li>
 <% end %>
 </ul>
 <% end %>
+<!-- <div class="review-img"> -->
+<!-- </div> -->
+</div>
