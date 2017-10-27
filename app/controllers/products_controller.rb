@@ -16,12 +16,12 @@ class ProductsController < ApplicationController
       flash[:message] = "Sorry, that category was not found."
       redirect_to products_path
 
-    elsif merchant_id != nil
+    elsif merchant_id != nil && merchant_id != ""
       @merchant = Merchant.find_by(id: merchant_id)
       @products = @merchant.products.where(visible:true)
       @invisible_products = @merchant.products.where(visible: false)
 
-    elsif category_id != nil
+    elsif category_id != nil && category_id != ""
       category = Category.find_by(id: category_id)
       @products = category.products
     end
