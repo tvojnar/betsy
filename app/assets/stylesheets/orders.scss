@@ -45,6 +45,10 @@ section.order_items a.delete.button:hover {
   background-color: rgb(129,143,42);
 }
 
+section.confirmation .order_items {
+  width: 68%;
+}
+
 .button:hover{
   background-color: rgb(129,143,42);
 }
@@ -90,6 +94,15 @@ div.item form  {
 
 div.item p  {
   display: inline-block
+}
+
+div.confirmation {
+  background-color: rgb(243,231,241);
+}
+
+div.confirmation p.notify {
+  text-align: center;
+  border-bottom: solid black 3px;
 }
 
 .item .edit_order_item .button{
