@@ -1,16 +1,15 @@
 <section class="row add-product">
-
   <div class="new-product sma11-12 small-centered column">
     <h3> Create a new category: </h3>
-  <article class="new-form">
-    <%= form_for @category do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      <div class="submit">
-      <%= f.submit "Add Category", class: "button" %>
-      </div>
-    <% end %>
-  </article>
+    <article class="new-form">
+      <%= form_for @category do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <div class="submit">
+        <%= f.submit "Add Category", class: "button" %>
+        </div>
+      <% end %>
+    </article>
   </div>
 
 </section>
