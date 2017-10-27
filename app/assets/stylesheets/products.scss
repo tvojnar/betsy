@@ -24,9 +24,13 @@
 }
 
 #product-name {
-  padding-left: 30px;
   text-align: left;
-  padding-left: 100px;
+  padding-left: 50px;
+}
+
+.button.read-review {
+  float: right;
+  clear: right;
 }
 
 // .review-buttons {
@@ -38,19 +42,31 @@
   width: 15%
 }
 
-.add-review {
-  margin-left: 30px;
-  display: inline-block;
-  clear: both;
-  padding-top: 10px;
-}
+// .row.review {
+//   text-align: center;
+//   margin-top: 30px;
+//   display: inline-block;
+//   // position: absolute;
+//   top: 50%;
+//   left: 50%;
+// }
 
-.read-review {
-  display: inline-block;
-  // float: left;
-  // clear: left;
-  padding-bottom: 200px;
-}
+//
+// .review.add-review {
+//   margin-right: 40%;
+//   display: inline;
+//   // float: left;
+//   // clear: left;
+//   // padding: 0.85em 1em;
+// }
+
+// .review.read-review {
+//   display: inline;
+//   // margin-right: 10%;
+//   // float: right;
+//   // clear: right;
+//   // padding: 0.85em 1em;
+// }
 
 .img-size {
   max-width: 100%;

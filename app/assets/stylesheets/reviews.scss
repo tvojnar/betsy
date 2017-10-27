@@ -45,6 +45,37 @@ border-radius: 5px;
    position: absolute;
 }
 
+ul.reading-review:nth-child(even) {
+  background-color: rgb(243,231,241);
+
+}
+
+
+
+div.reviews a {
+  color: rgb(129,143,42);
+}
+
+div.reviews h3 {
+  border-bottom: solid black 3px
+}
+
+div.reviews {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#image-review {
+  padding-left: 3%;
+  padding-bottom: 3%;
+  max-width: 80px;
+  max-height: 80px;
+  justify-content: right;
+}
+
+ul.reading-review li {
+  background-color: rgb(243,231,241);
+}
 /*****************/
 /* Read Review  */
 /*****************/

@@ -1,4 +1,4 @@
-<%= form_tag({controller: "merchants", action: "show"}, method: "get", class: "filter_form") do %>
+<%= form_tag({controller: "merchants", action: "show"}, method: "get", class: "filter_form order-status") do %>
   <%= label_tag "Filter by order status" %>
   <%# collection_select(:order, :status, Order.all, :status, :status) %>
   <%= select_tag "Status", options_for_select(['All', 'Pending', 'Paid', 'Shipped', 'Canceled']) %>

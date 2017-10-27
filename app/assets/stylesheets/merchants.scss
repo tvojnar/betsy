@@ -33,13 +33,23 @@ body {
   color: rgb(129,143,42);
 }
 
+
+#orders-filtered {
+  max-width: 96%;
+  margin-left: 2%;
+  background-color: red;
+
+}
+
 .orders-by-status th {
-  background-color: rgb(44,9,81);
+  background-color: black;
   color: white;
 }
 
 .orders-by-status {
   text-align: left;
+  max-width: 90%;
+  margin: 0 50%;
 }
 
 .revenue th {
