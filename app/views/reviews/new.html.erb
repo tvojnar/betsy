@@ -1,13 +1,29 @@
-<h3> <%# "Review #{@product.name}" %> </h3>
+ <%# "Review #{@product.name}" %>
+<div class="row new">
+  <section class="new-product small-12 column">
+    <% button_text ||= "Add a Review" %>
+    <% form_class ||= "" %>
+    <% hide_placeholder_text ||= false %>
 
-<%= form_for @review do |f| %>
-  <%= f.label :rating, "Rating (5 is the best!)" %>
-  <%= f.number_field :rating, in: 1.0..5.0%>
+  <h3> Write a review: </h3>
+  <article class="new-form">
+    <%= form_for @review do |f| %>
+      <%= f.label :rating, "Rating (5 is the best!)", :class => 'bold' %>
+      <%= f.number_field :rating, in: 1.0..5.0%>
 
-  <%= f.label :description, "Review" %>
-  <%= f.text_field :description %>
+      <div class="rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+      </div>
 
-  <%= f.hidden_field :product_id %>
+      <%= f.label :description, "Review", :class => 'bold' %>
+      <%= f.text_field :description %>
 
-  <%= f.submit %>
-<% end %>
+      <%= f.hidden_field :product_id, :class => 'bold' %>
+
+    <div class="submit" >
+    <%= f.submit button_text, class: "button" %>
+    </div>
+  <% end %>
+  </article>
+ </section>
+</div>
