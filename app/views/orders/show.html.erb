@@ -1,8 +1,9 @@
-<section class="order-show row">
-  <h2>Order <%= @order.id %></h2>
+<section class="row">
+  <h3>Order <%= "#{@order.id}: Merchant #{@merchant.name}" %></h2>
+  <h3>Total earned: <%= number_to_currency @order.calculate_total %></h3>
   <div class="order-articles">
     <article class="small-12 large-6 column">
-      <h3 class="go-left">Customer billing info</h3>
+      <h4 class="go-left">Customer billing info</h4>
       <% if @order.billing %>
         <p><strong>Name :</strong> <%= @order.billing.cc_name %></p>
         <p><strong>Email :</strong> <%= @order.billing.email %></p>
@@ -16,8 +17,8 @@
       <% end %>
     </article>
     <article class="small-12 large-6 column">
-      <h3 class="go-left"> <%= @merchant.name %>'s products in order <%= @order.id %></h3>
-        <p>Total earned in order <%= @order.id %>: <%= number_to_currency @order.calculate_total %></p>
+      <h4 class="go-left"> Your products in this order </h4>
+
       <table>
         <thead class="color">
           <tr>
@@ -39,7 +40,7 @@
           <% @order_items.each do |item| %>
           <tr>
             <td>
-              <p><%= link_to item.product.name, product_path(item.product) %> </p>
+              <%= link_to item.product.name, product_path(item.product) %>
             </td>
             <td>
               <%= number_to_currency item.product.price %>
@@ -53,7 +54,7 @@
           </tr>
           <% end %>
         </tbody>
-      </table>`
+      </table>
     </div>
   </article>
 </section>
