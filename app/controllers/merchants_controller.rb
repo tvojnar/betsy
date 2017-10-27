@@ -21,15 +21,15 @@ class MerchantsController < ApplicationController
         # @orders_by_status = @merchant_orders
         if params[:Status] != nil
           # @orders_by_status = @merchant_orders
-          if params[:Status] == "paid"
+          if params[:Status] == "Paid"
             @orders_by_status = Order.filter_by_status(@merchant_orders, "paid")
-          elsif params[:Status] == "pending"
+          elsif params[:Status] == "Pending"
             @orders_by_status = Order.filter_by_status(@merchant_orders, "pending")
-          elsif params[:Status] == "cancled"
+          elsif params[:Status] == "Cancled"
             @orders_by_status = Order.filter_by_status(@merchant_orders, "cancled")
-          elsif params[:Status] == "shipped"
+          elsif params[:Status] == "Shipped"
             @orders_by_status = Order.filter_by_status(@merchant_orders, "shipped")
-          elsif params[:Status] == "all"
+          elsif params[:Status] == "All"
             @orders_by_status = @merchant_orders
           end
         end

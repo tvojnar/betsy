@@ -10,30 +10,14 @@ very light purple accent: rgb(243,231,241)
 */
 
 /*****************/
-/* Show page  */
-/*****************/
-.go-left {
-  text-align: left;
-  background-color: rgb(243,231,241);
-  padding: 1%;
-}
-
-.order-articles {
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
-.color {
-  background-color: black;
-  color: white;
-
-}
-
-/*****************/
 /* Account page  */
 /*****************/
 body {
   font-family: 'Comfortaa', sans-serif;
+}
+
+.text-align-left {
+  text-align: left;
 }
 
 .order-show h3 {
@@ -50,15 +34,22 @@ body {
 }
 
 
+#orders-filtered {
+  max-width: 96%;
+  margin-left: 2%;
+  background-color: red;
 
+}
 
 .orders-by-status th {
-  background-color: rgb(44,9,81);
+  background-color: black;
   color: white;
 }
 
 .orders-by-status {
   text-align: left;
+  max-width: 90%;
+  margin: 0 50%;
 }
 
 .revenue th {
