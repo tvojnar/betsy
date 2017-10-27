@@ -2,6 +2,7 @@ require "test_helper"
 
 describe OrdersController do
   describe "current" do
+
     it "will succeed if session[:order_id] has been set" do
       # Arrange
       # set session[:order_id]
@@ -19,6 +20,7 @@ describe OrdersController do
 
       # Assert
       must_respond_with :success
+
     end # works if session[:order_id] has been set
 
     it "won't work if no order has been created yet for the session" do
@@ -39,6 +41,7 @@ describe OrdersController do
   # end # current_order
 
 describe "checkout methods" do
+  before do
 
     id = Product.first.id
 
@@ -60,6 +63,8 @@ describe "checkout methods" do
         zip: "23"
       }
     }
+  end
+    
 
     describe "sure" do
       it "responds with success when passed a valid order that is the current order" do

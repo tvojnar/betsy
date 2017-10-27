@@ -1,3 +1,23 @@
 // Place all the styles related to the Billings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.submit.button {
+width: 100%;
+text-align: center;
+height: 40px;
+line-height: 15px;
+}
+
+div.info {
+  width: 80%;
+   margin: 0 auto;
+   margin-bottom: 60px;
+}
+
+div.billing  {
+  background-color: rgb(243,231,241);
+  width: 90%;
+  margin: 0 auto;
+}

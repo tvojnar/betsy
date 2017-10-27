@@ -32,7 +32,7 @@
             <%= @pending_number %>
           </td>
           <td>
-            $<%= @pending_revenue %>
+            $<%= @pending_revenue.round(2) %>
           </td>
         </tr>
         <tr>
@@ -43,7 +43,7 @@
             <%= @paid_number %>
           </td>
           <td>
-            $<%= @paid_revenue %>
+            $<%= @paid_revenue.round(2) %>
           </td>
         </tr>
         <tr>
@@ -54,7 +54,7 @@
             <%= @shipped_number %>
           </td>
           <td>
-            $<%= @shipped_revenue %>
+            $<%= @shipped_revenue.round(2) %>
           </td>
         </tr>
       </tbody>
@@ -105,7 +105,7 @@
               <%= oi.quantity %>
             </td>
             <td>
-              <%= oi.quantity * oi.product.price%>
+              <%= (oi.quantity * oi.product.price).round(2)%>
             </td>
             <td>
               <% if order.date_submitted != nil %>

@@ -3,7 +3,7 @@ class Merchant < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  
+
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
@@ -23,7 +23,7 @@ class Merchant < ApplicationRecord
     moi.each do |item|
       total += item.product.price * item.quantity
     end
-    return total
+    return total.round(2)
   end
 
   def merchant_order_items(merchant)
