@@ -2,6 +2,63 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+/****************/
+/* Show a product */
+/***************/
+
+.product-image {
+  float: left;
+  clear: left;
+  text-align: left;
+  height: auto;
+  margin: 0 0 10px 10px;
+  display: inline-block;
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-price {
+  float: right;
+}
+
+#product-name {
+  padding-left: 30px;
+  text-align: left;
+  padding-left: 100px;
+}
+
+// .review-buttons {
+//   padding-top: 10px;
+//   display: inline-block;
+// }
+
+.update-quantity select {
+  width: 15%
+}
+
+.add-review {
+  margin-left: 30px;
+  display: inline-block;
+  clear: both;
+  padding-top: 10px;
+}
+
+.read-review {
+  display: inline-block;
+  // float: left;
+  // clear: left;
+  padding-bottom: 200px;
+}
+
+.img-size {
+  max-width: 100%;
+  height: 400px;
+}
+
+
 /*****************/
 /* Add a product  */
 /*****************/
@@ -27,4 +84,8 @@ border-radius: 5px;
 
 .bold {
   font-weight: bold;
+}
+
+.cust-review {
+  margin-top: 40px;
 }
