@@ -110,3 +110,39 @@ div.item p  {
 .total p {
   text-align: right;
 }
+
+.filter_form {
+  width: 500px;
+}
+
+.filter_form select:hover, .filter_form input:hover {
+  background-color: rgb(129,143,42);
+}
+
+.filter_form select {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  float: left;
+  width: 40%;
+  margin-right: 2%;
+  box-sizing: inherit;
+  line-height: 1.15;
+  border: none;
+  margin-left: 2%;
+}
+
+.filter_form input {
+  background-color: black;
+  color: white;
+  padding: 2%;
+  font-weight: bold;
+  display: inline-block;
+  width: 15%;
+  height: 39px;
+  margin-right: 0;
+  margin-left: 2%;
+  border-radius: 5px;
+  border: none;
+}

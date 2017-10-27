@@ -1,14 +1,15 @@
 <section class="order-show">
 
   <section class="row merchant-name">
-    <div class="row">
-      <h2 class="small-11 medium-11 large-11 column wrap"><%= @merchant.name%>'s account info</h2>
-    </div>
+    <!-- <div class="row"> -->
+      <h3> Merchant Account: <%= @merchant.name%></h3>
+    <!-- </div> -->
   </section>
 
+  <div class="merchant-background">
   <section class="row revenue ">
-    <h3 class="small-12 column ">Total Revenue: $<%= @total_revenue %> </h3>
-    <h5 class="small-12 column ">Total Revenue by Category: </h5>
+    <h4 class="total-revenue">Total Revenue: $<%= @total_revenue %> </h4>
+    <h5>Total Revenue by Category: </h5>
     <table class="small-12 column ">
       <thead>
         <tr>
@@ -71,7 +72,7 @@
       <%= render partial: "orders/filter_by_status" %>
     </div>
     <% if @orders_by_status.empty? %>
-    <h4 class="small-12 column">You have no orders of that stutus</h4>
+    <h4 class="small-12 column">You have no orders of that status</h4>
     <% end  %>
     <% @orders_by_status.each do |order| %>
     <h4>Order <%= order.id %></h4>
@@ -135,3 +136,4 @@
   <%= link_to "View and Edit Products", merchant_products_path(merchant_id: params[:id]), class: "button"%>
   <%= link_to "Add a Category", new_category_path, class: "button"%>
 </section>
+</div>

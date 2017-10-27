@@ -44,7 +44,13 @@ a:hover {
 .merchant-name h2 {
   border-bottom: solid 5px rgb(201,242,108)  ;
   margin-bottom: 5%;
-  color: rgb(126,39,190) ;
+  color: rgb(126,39,190);
+  display: inline-block;
+  float: left;
+  clear: right;
+  width: 40%;
+  margin: 0;
+  padding: 0
 }
 
 .orders-by-status th {
@@ -64,4 +70,22 @@ a:hover {
 
 .button:hover {
   background-color: rgb(129,143,42);
+}
+
+.merchant-background {
+  background-color: rgb(243,231,241);
+  padding: 2%;
+
+}
+
+.total-revenue {
+  display: inline-block;
+  float: right;
+  margin: 0;
+  padding: 0
+
+}
+
+label{
+  width: 500px;
 }
