@@ -8,13 +8,12 @@
 <% if @order_items.any? %>
 
   <% @order_items.each do |item| %>
-<<<<<<< HEAD
-  <div class="item small-up-1 medium-up-4 large-up-6">
-    <h4><%= item.product.name %> | <span> <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}, class: 'delete button' %> </span> </h4>
-=======
+
+  <!-- <div class="item small-up-1 medium-up-4 large-up-6">
+    <h4><%= item.product.name %> | <span> <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}, class: 'delete button' %> </span> </h4> -->
+
   <div class="item">
     <h4> <span> <%= item.product.name %> </span>| <span> <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}, class: 'delete button' %> </span> </h4>
->>>>>>> a2f4470e43de1cd027302e312983ba18ba3ad262
     <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= render partial: "orders/update_quantity", locals: { item: item }%> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %> <%= image_tag((item.product.image_url), class: "cart")%>  </p>
 
   </div>
