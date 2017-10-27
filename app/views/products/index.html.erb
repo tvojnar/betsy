@@ -5,8 +5,13 @@
     <%# submit_tag("GO") %>
 <%# end %>
 
-
-  <h3> Products </h3>
+  <% if @merchant != nil %>
+    <h3> <%= @merchant.name%>'s plants </h3>
+  <% elsif @category != nil %>
+    <h3> <%= @category.name%></h3>
+  <% else %>
+    <h3> All plants </h3>
+  <% end %>
   <div class="list-products row small-up-1 medium-up-4 large-up-6">
     <% if @products == nil %>
     <h4> Sorry, there are not yet any products listed. </h4>
