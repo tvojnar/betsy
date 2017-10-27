@@ -1,6 +1,6 @@
- 
+
  <p>
- <%= form_for @order_items, html: {class: "update-quantity"} do |f| %>
+ <%= form_for @order_items, html: {id: "update-quantity"} do |f| %>
    <%= f.hidden_field :product_id, value: @product.id %>
 
    <%= f.select :quantity, (1..@product.inventory) %>

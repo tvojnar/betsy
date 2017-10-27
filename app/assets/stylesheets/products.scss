@@ -25,7 +25,8 @@
 
 #product-name {
   text-align: left;
-  padding-left: 50px;
+  margin-left: 2%
+  // padding-left: 50px;
 }
 
 .button.read-review {
@@ -38,7 +39,7 @@
 //   display: inline-block;
 // }
 
-.update-quantity select {
+#update-quantity select {
   width: 15%
 }
 

@@ -1,6 +1,6 @@
 <section class="product-image">
   <div class="row">
-  <h4 id="product-name">Product: <%= @product.name %></h4>
+  <h4 id="product-name"> Product: <%= @product.name %></h4>
 <section class="small-6 column">
   <%= image_tag(@product.image_url, class: "img-size") %>
 </section>
@@ -23,13 +23,13 @@
 
 <div>
   <% if session[:merchant_id] == @product.merchant_id %>
-  <p> Active Status:
+  <h5> Active Status:
     <% if @product.visible %>
     <%= "Active" %>
     <%else%>
     <%= "Inactive" %>
     <%end%>
-  </p>
+  </h5>
 
 
   <%= button_to "Edit", edit_product_path(@product.id), method: :get, class: "button" %>

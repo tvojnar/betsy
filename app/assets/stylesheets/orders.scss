@@ -83,9 +83,12 @@ div.smaller {
 }
 
 select#order_item_quantity {
-  width: 13vw;
+  width: 4vw;
 }
 
+div.item {
+  max-width: 100%;
+}
 
 div.item form  {
   display: inline-block
