@@ -25,7 +25,15 @@ div.item {
 
 
 // *************************************************** BUTTONS
-.button {
+// div.item.button, div.total.button {
+//   background-color: black;
+//   width: 75px;
+//   height: 10px;
+//   margin-bottom: 0;
+//   line-height: 10px;
+// }
+
+section.order_items a.delete.button {
   background-color: black;
   width: 75px;
   height: 10px;
@@ -33,6 +41,9 @@ div.item {
   line-height: 0px;
 }
 
+section.order_items a.delete.button:hover {
+  background-color: rgb(129,143,42);
+}
 
 .button:hover{
   background-color: rgb(129,143,42);
@@ -44,6 +55,10 @@ div.item {
   height: 40px;
   line-height: 15px;
 
+}
+
+.checkout a.button:hover {
+  background-color: rgb(129,143,42);
 }
 
 

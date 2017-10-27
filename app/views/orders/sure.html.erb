@@ -1,5 +1,5 @@
 <p>Billing Name:  <%=@order.billing.cc_name %> </p>
-<p>Credit Card Number: <%= @order.billing.cc_number[-4..-1] %> </p>
+<p>Credit Card Number: ******** <%= @order.billing.cc_number[-4..-1] %> </p>
 <%#= link_to "Confirm", order_submit_path, method: :ps %>
 <%= link_to "Submit", order_submit_path, method: :post%>
 

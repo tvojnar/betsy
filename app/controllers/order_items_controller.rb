@@ -71,11 +71,11 @@ class OrderItemsController < ApplicationController
           if @order_item.save
             flash[:status] = :success
             flash[:message] = "Updated the quantity of #{@order_item.product.name} to #{@order_item.quantity}"
-            redirect_to order_path(session[:order_id])
+            redirect_to order_current_path
           else
             flash[:status] = :failure
             flash[:message] = "Could not update the quantiy for @order_item.product.name"
-            redirect_to order_path(session[:order_id])
+            redirect_to order_current_path
           end # if/else saved
         else
           head :bad_request
