@@ -2,7 +2,7 @@
 ## Summary 
 bEtsy was a two week long, four person group project assigned at Ada Developers Academy. Each group made a commerce site (based on Etsy) that sold a product of their choice. My group made a retail site for plants called vine&bloom. 
 
-Check out the [live site](https://vineandbloom.herokuapp.com/) of vine&bloom or a [video demo]()
+Check out the [live site](https://vineandbloom.herokuapp.com/) or [video demo](https://drive.google.com/file/d/15zhNrISNaKRT_DholNDifh3qeTboW26k/view)of vine&bloom!
 
 ## Assignment specifications
 [b]Etsy will be an online store where a wide variety of products can be listed and sold by any user. In this project we will focus on reinforcing the major components of Rails, Model Validation, as well as introducing some more complex logic such as user authentication.
