@@ -3,7 +3,7 @@
 
 This is a [Stage 3](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) project requiring you to expand upon what you have learned in class.
 
-## Project Learning Goals
+### Project Learning Goals
 - Core comprehension of:
   - Routes
   - Controllers
@@ -15,13 +15,13 @@ This is a [Stage 3](https://github.com/Ada-Developers-Academy/pedagogy/blob/mast
 - Feature branch management with Git
 - Group project ownership
 
-## Guidelines
+### Guidelines
 - Groups of three or four will collaborate in pairs or individually and will report to their assigned Project Manager (one of the instructors)
 - Use a task manager like [Trello](http://trello.com) to track your team's efforts
 - Build a logical user-flow that moves across multiple controllers and models
 - Use HTML/CSS and Foundation to style your website
 
-## Getting Started
+### Getting Started
 1. As a group decide on an app name (this may help lead the aesthetic)
 1. As a group decide on a team name (this will amuse your instructors)
 1. Have one person on your team fork/clone the project master as per usual
@@ -35,18 +35,18 @@ This is a [Stage 3](https://github.com/Ada-Developers-Academy/pedagogy/blob/mast
 1. Review the User Stories below and create Trello tasks to represent them
 1. Slack your team name, app name, and link to your trello board to your Project Manager
 
-## Expectations
+### Expectations
 Build an online system for listing, selling, reviewing, and buying a wide variety of products listed by multiple merchants.
 
-### General Requirements
+#### General Requirements
 - Unit tests and/or specs for
   - Controllers
   - Models
 - Test code coverage (using SimpleCov - remember me!)
   - 90% for all controller and model classes
 
-### User Stories
-#### Guest User (Unauthenticated)
+#### User Stories
+##### Guest User (Unauthenticated)
 As a guest to the website (not signed in) I **can**:
 
 - Browse all products
@@ -87,7 +87,7 @@ As a guest I **cannot**:
 - View any link or page to manage any products
 - View any of the account pages
 
-#### Authenticated Users
+##### Authenticated Users
 As a signed-in user, I **can**:
 
 - Do everything a guest user can do except for sign up and sign in
@@ -128,16 +128,16 @@ As a signed-in user, I **cannot**:
 - View order items from a shared order that belong to another merchant
 - View another users private data (i.e. order fulfillment or product management)
 
-### Model Validations
+#### Model Validations
 Many of our models will have attributes that are required for our application to use and display data consistently. Each model will have attributes with requirements for a valid record. The requirements are summarized below:
 
-#### Merchant
+##### Merchant
 - Username must be present
 - Username must be unique
 - Email Address must be present
 - Email Address must be unique
 
-#### Product
+##### Product
 - Name must be present
 - Name must be unique
 - Price must be present
@@ -145,25 +145,25 @@ Many of our models will have attributes that are required for our application to
 - Price must be greater than 0
 - Product must belong to a User
 
-#### Order
+##### Order
 - An Order must have one or more Order Items
 
-#### OrderItem
+##### OrderItem
 - Must belong to a Product
 - Must belong to an Order
 - Quantity must be present
 - Quantity must be an integer
 - Quantity must be greater than 0
 
-#### Review
+##### Review
 - Rating must be present
 - Rating must be an integer
 - Rating must be between 1 and 5
 
-## Submission Guidelines
+### Submission Guidelines
 Your final project must be deployed to [Heroku](http://heroku.com). Your team will open a single pull request for the entire project. There are comprehension  questions to answer with your submission that you should complete together as a group. Remember, you can submit a PR and still make some final changes to your code, so don't wait until the last minute.
 
-## Team Leaders
+### Team Leaders
 Each team will have team leaders who are responsible for keeping track of each team member's contributions. Rotate leader roles at the beginning of the second week; every team member should be in at least one leader role during the project.
 
 - **Stand Up Leader**
@@ -179,7 +179,7 @@ Each team will have team leaders who are responsible for keeping track of each t
       - Ability
   - Ensures the task list stays up to date
 
-## Stand Up Meetings
+### Stand Up Meetings
 The Stand Up Leader should determine the daily time for your stand up meeting with the team. Once you come up with a time, confirm with your PM that this time will work for them.
 
 At the end of each day, your team's assigned Project Manager will review the Trello board to ensure it captures the updates that your team has made throughout the day.
