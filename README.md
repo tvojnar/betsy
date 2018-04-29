@@ -1,4 +1,4 @@
-# bEtsy
+# Vine&Bloom
 ## Summary 
 bEtsy was a two week long, four person group project assigned at Ada Developers Academy. Each group made a commerce site (based on Etsy) that sold a product of their choice. My group made a retail site for plants called vine&bloom. 
 
